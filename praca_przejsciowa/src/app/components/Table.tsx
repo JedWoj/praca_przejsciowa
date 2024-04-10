@@ -1,9 +1,11 @@
 "use client";
 import type { Item } from "../utils/types";
 import {
+  SortingState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useState, useRef } from "react";
@@ -38,7 +40,8 @@ const columns = [
 ];
 
 export function Table() {
-  const [data, _setData] = useState(() => [...defaultData]);
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [data] = useState(() => [...defaultData]);
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
@@ -46,6 +49,11 @@ export function Table() {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
   });
 
   const { rows } = table.getRowModel();
@@ -96,6 +104,7 @@ export function Table() {
                         display: "flex",
                         width: header.getSize(),
                       }}
+                      onClick={header.column.getToggleSortingHandler()}
                     >
                       <div
                         {...{
