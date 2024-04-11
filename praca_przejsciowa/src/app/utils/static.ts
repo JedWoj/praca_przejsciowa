@@ -7,6 +7,7 @@ export const defaultData: Item[] = [
     price: 0.5,
     lastOrder: "2022-01-01",
     location: "A1",
+    severity: 2,
   },
   {
     name: "Nakrętka M8",
@@ -14,6 +15,7 @@ export const defaultData: Item[] = [
     price: 0.1,
     lastOrder: "2022-01-01",
     location: "A2",
+    severity: 3,
   },
   {
     name: "Podkładka M8",
@@ -21,6 +23,7 @@ export const defaultData: Item[] = [
     price: 0.2,
     lastOrder: "2022-01-01",
     location: "A3",
+    severity: 1,
   },
   {
     name: "Śruba M8x30",
@@ -28,6 +31,7 @@ export const defaultData: Item[] = [
     price: 0.6,
     lastOrder: "2022-01-01",
     location: "A4",
+    severity: 1,
   },
   {
     name: "Śruba M8x40",
@@ -35,6 +39,7 @@ export const defaultData: Item[] = [
     price: 0.7,
     lastOrder: "2022-01-01",
     location: "A7",
+    severity: 1,
   },
   {
     name: "Śruba M8x50",
@@ -42,6 +47,7 @@ export const defaultData: Item[] = [
     price: 0.8,
     lastOrder: "2022-01-01",
     location: "A10",
+    severity: 1,
   },
   {
     name: "Śruba M10x20",
@@ -49,6 +55,7 @@ export const defaultData: Item[] = [
     price: 0.7,
     lastOrder: "2022-01-01",
     location: "A11",
+    severity: 1,
   },
   {
     name: "Nakrętka M10",
@@ -56,6 +63,7 @@ export const defaultData: Item[] = [
     price: 0.2,
     lastOrder: "2022-01-01",
     location: "A12",
+    severity: 3,
   },
   {
     name: "Podkładka M10",
@@ -63,6 +71,7 @@ export const defaultData: Item[] = [
     price: 0.3,
     lastOrder: "2022-01-01",
     location: "A13",
+    severity: 3,
   },
   {
     name: "Śruba M10x30",
@@ -70,6 +79,7 @@ export const defaultData: Item[] = [
     price: 0.8,
     lastOrder: "2022-01-01",
     location: "A14",
+    severity: 2,
   },
   {
     name: "Śruba M10x40",
@@ -77,6 +87,7 @@ export const defaultData: Item[] = [
     price: 0.9,
     lastOrder: "2022-01-01",
     location: "A17",
+    severity: 1,
   },
   {
     name: "Śruba M10x50",
@@ -84,6 +95,7 @@ export const defaultData: Item[] = [
     price: 1.0,
     lastOrder: "2022-01-01",
     location: "A20",
+    severity: 1,
   },
   {
     name: "Śruba M12x20",
@@ -91,6 +103,7 @@ export const defaultData: Item[] = [
     price: 0.9,
     lastOrder: "2022-01-01",
     location: "A21",
+    severity: 1,
   },
   {
     name: "Nakrętka M12",
@@ -98,6 +111,7 @@ export const defaultData: Item[] = [
     price: 0.3,
     lastOrder: "2022-01-01",
     location: "A22",
+    severity: 1,
   },
   {
     name: "Podkładka M12",
@@ -105,6 +119,7 @@ export const defaultData: Item[] = [
     price: 0.4,
     lastOrder: "2022-01-01",
     location: "A23",
+    severity: 1,
   },
   {
     name: "Śruba M12x30",
@@ -112,6 +127,7 @@ export const defaultData: Item[] = [
     price: 0.9,
     lastOrder: "2022-01-01",
     location: "A24",
+    severity: 1,
   },
   {
     name: "Śruba M12x40",
@@ -119,6 +135,7 @@ export const defaultData: Item[] = [
     price: 1.0,
     lastOrder: "2022-01-01",
     location: "A27",
+    severity: 1,
   },
   {
     name: "Śruba M12x50",
@@ -126,6 +143,7 @@ export const defaultData: Item[] = [
     price: 1.1,
     lastOrder: "2022-01-01",
     location: "A30",
+    severity: 1,
   },
   {
     name: "Śruba M14x20",
@@ -133,6 +151,7 @@ export const defaultData: Item[] = [
     price: 1.1,
     lastOrder: "2022-01-01",
     location: "A31",
+    severity: 1,
   },
   {
     name: "Nakrętka M14",
@@ -140,6 +159,7 @@ export const defaultData: Item[] = [
     price: 0.4,
     lastOrder: "2022-01-01",
     location: "A32",
+    severity: 1,
   },
   {
     name: "Podkładka M14",
@@ -147,6 +167,7 @@ export const defaultData: Item[] = [
     price: 0.5,
     lastOrder: "2022-01-01",
     location: "A33",
+    severity: 0,
   },
   {
     name: "Śruba M14x30",
@@ -154,6 +175,7 @@ export const defaultData: Item[] = [
     price: 1.0,
     lastOrder: "2022-01-01",
     location: "A34",
+    severity: 0,
   },
   {
     name: "Śruba M14x40",
@@ -161,6 +183,7 @@ export const defaultData: Item[] = [
     price: 1.1,
     lastOrder: "2022-01-01",
     location: "A37",
+    severity: 0,
   },
   {
     name: "Śruba M14x50",
@@ -168,6 +191,7 @@ export const defaultData: Item[] = [
     price: 1.2,
     lastOrder: "2022-01-01",
     location: "A40",
+    severity: 0,
   },
   {
     name: "Śruba M16x20",
@@ -175,6 +199,7 @@ export const defaultData: Item[] = [
     price: 1.3,
     lastOrder: "2022-01-01",
     location: "A41",
+    severity: 0,
   },
   {
     name: "Nakrętka M16",
@@ -182,6 +207,7 @@ export const defaultData: Item[] = [
     price: 0.5,
     lastOrder: "2022-01-01",
     location: "A42",
+    severity: 0,
   },
   {
     name: "Podkładka M16",
@@ -189,6 +215,7 @@ export const defaultData: Item[] = [
     price: 0.6,
     lastOrder: "2022-01-01",
     location: "A43",
+    severity: 0,
   },
   {
     name: "Śruba M16x30",
@@ -196,6 +223,7 @@ export const defaultData: Item[] = [
     price: 1.1,
     lastOrder: "2022-01-01",
     location: "A44",
+    severity: 0,
   },
   {
     name: "Śruba M16x40",
@@ -203,6 +231,7 @@ export const defaultData: Item[] = [
     price: 1.2,
     lastOrder: "2022-01-01",
     location: "A47",
+    severity: 0,
   },
   {
     name: "Śruba M16x50",
@@ -210,6 +239,7 @@ export const defaultData: Item[] = [
     price: 1.3,
     lastOrder: "2022-01-01",
     location: "A50",
+    severity: 0,
   },
   {
     name: "Śruba M18x20",
@@ -217,6 +247,7 @@ export const defaultData: Item[] = [
     price: 1.4,
     lastOrder: "2022-01-01",
     location: "A51",
+    severity: 0,
   },
   {
     name: "Nakrętka M18",
@@ -224,6 +255,7 @@ export const defaultData: Item[] = [
     price: 0.6,
     lastOrder: "2022-01-01",
     location: "A52",
+    severity: 0,
   },
   {
     name: "Podkładka M18",
@@ -231,6 +263,7 @@ export const defaultData: Item[] = [
     price: 0.7,
     lastOrder: "2022-01-01",
     location: "A53",
+    severity: 2,
   },
   {
     name: "Śruba M18x30",
@@ -238,6 +271,7 @@ export const defaultData: Item[] = [
     price: 1.2,
     lastOrder: "2022-01-01",
     location: "A54",
+    severity: 2,
   },
   {
     name: "Śruba M18x40",
@@ -245,6 +279,7 @@ export const defaultData: Item[] = [
     price: 1.3,
     lastOrder: "2022-01-01",
     location: "A57",
+    severity: 2,
   },
   {
     name: "Śruba M18x50",
@@ -252,6 +287,7 @@ export const defaultData: Item[] = [
     price: 1.4,
     lastOrder: "2022-01-01",
     location: "A60",
+    severity: 2,
   },
   {
     name: "Śruba M20x20",
@@ -259,6 +295,7 @@ export const defaultData: Item[] = [
     price: 1.5,
     lastOrder: "2022-01-01",
     location: "A61",
+    severity: 2,
   },
   ////////////////////////////////////////////////////////////
   {
@@ -267,6 +304,7 @@ export const defaultData: Item[] = [
     price: 0.5,
     lastOrder: "2022-01-01",
     location: "A1",
+    severity: 2,
   },
   {
     name: "Nakrętka M8",
@@ -274,6 +312,7 @@ export const defaultData: Item[] = [
     price: 0.1,
     lastOrder: "2022-01-01",
     location: "A2",
+    severity: 2,
   },
   {
     name: "Podkładka M8",
@@ -281,6 +320,7 @@ export const defaultData: Item[] = [
     price: 0.2,
     lastOrder: "2022-01-01",
     location: "A3",
+    severity: 2,
   },
   {
     name: "Śruba M8x30",
@@ -288,6 +328,7 @@ export const defaultData: Item[] = [
     price: 0.6,
     lastOrder: "2022-01-01",
     location: "A4",
+    severity: 2,
   },
   {
     name: "Śruba M8x40",
@@ -295,6 +336,7 @@ export const defaultData: Item[] = [
     price: 0.7,
     lastOrder: "2022-01-01",
     location: "A7",
+    severity: 2,
   },
   {
     name: "Śruba M8x50",
@@ -302,6 +344,7 @@ export const defaultData: Item[] = [
     price: 0.8,
     lastOrder: "2022-01-01",
     location: "A10",
+    severity: 2,
   },
   {
     name: "Śruba M10x20",
@@ -309,6 +352,7 @@ export const defaultData: Item[] = [
     price: 0.7,
     lastOrder: "2022-01-01",
     location: "A11",
+    severity: 2,
   },
   {
     name: "Nakrętka M10",
@@ -316,6 +360,7 @@ export const defaultData: Item[] = [
     price: 0.2,
     lastOrder: "2022-01-01",
     location: "A12",
+    severity: 2,
   },
   {
     name: "Podkładka M10",
@@ -323,6 +368,7 @@ export const defaultData: Item[] = [
     price: 0.3,
     lastOrder: "2022-01-01",
     location: "A13",
+    severity: 2,
   },
   {
     name: "Śruba M10x30",
@@ -330,6 +376,7 @@ export const defaultData: Item[] = [
     price: 0.8,
     lastOrder: "2022-01-01",
     location: "A14",
+    severity: 2,
   },
   {
     name: "Śruba M10x40",
@@ -337,6 +384,7 @@ export const defaultData: Item[] = [
     price: 0.9,
     lastOrder: "2022-01-01",
     location: "A17",
+    severity: 3,
   },
   {
     name: "Śruba M10x50",
@@ -344,6 +392,7 @@ export const defaultData: Item[] = [
     price: 1.0,
     lastOrder: "2022-01-01",
     location: "A20",
+    severity: 3,
   },
   {
     name: "Śruba M12x20",
@@ -351,6 +400,7 @@ export const defaultData: Item[] = [
     price: 0.9,
     lastOrder: "2022-01-01",
     location: "A21",
+    severity: 3,
   },
   {
     name: "Nakrętka M12",
@@ -358,6 +408,7 @@ export const defaultData: Item[] = [
     price: 0.3,
     lastOrder: "2022-01-01",
     location: "A22",
+    severity: 3,
   },
   {
     name: "Podkładka M12",
@@ -365,6 +416,7 @@ export const defaultData: Item[] = [
     price: 0.4,
     lastOrder: "2022-01-01",
     location: "A23",
+    severity: 3,
   },
   {
     name: "Śruba M12x30",
@@ -372,6 +424,7 @@ export const defaultData: Item[] = [
     price: 0.9,
     lastOrder: "2022-01-01",
     location: "A24",
+    severity: 3,
   },
   {
     name: "Śruba M12x40",
@@ -379,6 +432,7 @@ export const defaultData: Item[] = [
     price: 1.0,
     lastOrder: "2022-01-01",
     location: "A27",
+    severity: 3,
   },
   {
     name: "Śruba M12x50",
@@ -386,6 +440,7 @@ export const defaultData: Item[] = [
     price: 1.1,
     lastOrder: "2022-01-01",
     location: "A30",
+    severity: 3,
   },
   {
     name: "Śruba M14x20",
@@ -393,6 +448,7 @@ export const defaultData: Item[] = [
     price: 1.1,
     lastOrder: "2022-01-01",
     location: "A31",
+    severity: 3,
   },
   {
     name: "Nakrętka M14",
@@ -400,6 +456,7 @@ export const defaultData: Item[] = [
     price: 0.4,
     lastOrder: "2022-01-01",
     location: "A32",
+    severity: 3,
   },
   {
     name: "Podkładka M14",
@@ -407,6 +464,7 @@ export const defaultData: Item[] = [
     price: 0.5,
     lastOrder: "2022-01-01",
     location: "A33",
+    severity: 3,
   },
   {
     name: "Śruba M14x30",
@@ -414,6 +472,7 @@ export const defaultData: Item[] = [
     price: 1.0,
     lastOrder: "2022-01-01",
     location: "A34",
+    severity: 3,
   },
   {
     name: "Śruba M14x40",
@@ -421,6 +480,7 @@ export const defaultData: Item[] = [
     price: 1.1,
     lastOrder: "2022-01-01",
     location: "A37",
+    severity: 3,
   },
   {
     name: "Śruba M14x50",
@@ -428,6 +488,7 @@ export const defaultData: Item[] = [
     price: 1.2,
     lastOrder: "2022-01-01",
     location: "A40",
+    severity: 3,
   },
   {
     name: "Śruba M16x20",
@@ -435,6 +496,7 @@ export const defaultData: Item[] = [
     price: 1.3,
     lastOrder: "2022-01-01",
     location: "A41",
+    severity: 3,
   },
   {
     name: "Nakrętka M16",
@@ -442,6 +504,7 @@ export const defaultData: Item[] = [
     price: 0.5,
     lastOrder: "2022-01-01",
     location: "A42",
+    severity: 3,
   },
   {
     name: "Podkładka M16",
@@ -449,6 +512,7 @@ export const defaultData: Item[] = [
     price: 0.6,
     lastOrder: "2022-01-01",
     location: "A43",
+    severity: 3,
   },
   {
     name: "Śruba M16x30",
@@ -456,6 +520,7 @@ export const defaultData: Item[] = [
     price: 1.1,
     lastOrder: "2022-01-01",
     location: "A44",
+    severity: 3,
   },
   {
     name: "Śruba M16x40",
@@ -463,6 +528,7 @@ export const defaultData: Item[] = [
     price: 1.2,
     lastOrder: "2022-01-01",
     location: "A47",
+    severity: 3,
   },
   {
     name: "Śruba M16x50",
@@ -470,6 +536,7 @@ export const defaultData: Item[] = [
     price: 1.3,
     lastOrder: "2022-01-01",
     location: "A50",
+    severity: 3,
   },
   {
     name: "Śruba M18x20",
@@ -477,6 +544,7 @@ export const defaultData: Item[] = [
     price: 1.4,
     lastOrder: "2022-01-01",
     location: "A51",
+    severity: 3,
   },
   {
     name: "Nakrętka M18",
@@ -484,6 +552,7 @@ export const defaultData: Item[] = [
     price: 0.6,
     lastOrder: "2022-01-01",
     location: "A52",
+    severity: 3,
   },
   {
     name: "Podkładka M18",
@@ -491,6 +560,7 @@ export const defaultData: Item[] = [
     price: 0.7,
     lastOrder: "2022-01-01",
     location: "A53",
+    severity: 3,
   },
   {
     name: "Śruba M18x30",
@@ -498,6 +568,7 @@ export const defaultData: Item[] = [
     price: 1.2,
     lastOrder: "2022-01-01",
     location: "A54",
+    severity: 3,
   },
   {
     name: "Śruba M18x40",
@@ -505,6 +576,7 @@ export const defaultData: Item[] = [
     price: 1.3,
     lastOrder: "2022-01-01",
     location: "A57",
+    severity: 3,
   },
   {
     name: "Śruba M18x50",
@@ -512,6 +584,7 @@ export const defaultData: Item[] = [
     price: 1.4,
     lastOrder: "2022-01-01",
     location: "A60",
+    severity: 0,
   },
   {
     name: "Śruba M20x20",
@@ -519,5 +592,6 @@ export const defaultData: Item[] = [
     price: 1.5,
     lastOrder: "2022-01-01",
     location: "A61",
+    severity: 0,
   },
 ];

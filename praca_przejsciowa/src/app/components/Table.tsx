@@ -1,7 +1,8 @@
 "use client";
 import type { Item } from "../utils/types";
 import {
-  SortingState,
+  type RowSelectionState,
+  type SortingState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
@@ -37,10 +38,14 @@ const columns = [
   columnHelper.accessor("location", {
     header: "Location",
   }),
+  columnHelper.accessor("severity", {
+    header: "Severity",
+  }),
 ];
 
 export function Table() {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [data] = useState(() => [...defaultData]);
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -51,8 +56,10 @@ export function Table() {
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
+      rowSelection,
     },
   });
 
@@ -74,7 +81,7 @@ export function Table() {
   return (
     <MenuContext>
       <div
-        className="table-container"
+        className="table-container text-xl"
         ref={tableContainerRef}
         style={{
           overflow: "auto", //our scrollable table container
@@ -92,10 +99,7 @@ export function Table() {
             }}
           >
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr
-                key={headerGroup.id}
-                style={{ display: "flex", width: "100%" }}
-              >
+              <tr key={headerGroup.id} className="flex w-full py-2">
                 {headerGroup.headers.map((header) => {
                   return (
                     <th
@@ -140,6 +144,7 @@ export function Table() {
               const row = rows[virtualRow.index];
               return (
                 <TableRow
+                  table={table}
                   row={row}
                   rowVirtualizer={rowVirtualizer}
                   virtualRow={virtualRow}

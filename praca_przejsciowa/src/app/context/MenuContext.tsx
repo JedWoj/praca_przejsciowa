@@ -7,7 +7,7 @@ import {
   type SetStateAction,
   type Dispatch,
 } from "react";
-import { ContextMenu } from "../components/ContextMenu";
+import { ContextMenu, ContextMenuItem } from "../components/ContextMenu";
 
 export type MenuContextType = {
   set: Dispatch<SetStateAction<MenuContextStateType>>;
@@ -55,7 +55,12 @@ const MenuContext = ({
   return (
     <Context.Provider value={value}>
       {children}
-      <ContextMenu {...value} />
+      <ContextMenu {...value}>
+        <ContextMenuItem>Remove Item</ContextMenuItem>
+        <ContextMenuItem>Change Value</ContextMenuItem>
+        <ContextMenuItem>Change Severity</ContextMenuItem>
+        <ContextMenuItem>To be Determined</ContextMenuItem>
+      </ContextMenu>
     </Context.Provider>
   );
 };
