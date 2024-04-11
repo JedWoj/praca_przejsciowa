@@ -1,4 +1,4 @@
-import { type Row, flexRender } from "@tanstack/react-table";
+import { type Row, flexRender, Table } from "@tanstack/react-table";
 import type { VirtualItem, Virtualizer } from "@tanstack/react-virtual";
 import type { Item } from "../utils/types";
 import type { MouseEvent } from "react";
@@ -8,14 +8,53 @@ type TableRowProps = {
   virtualRow: VirtualItem;
   rowVirtualizer: Virtualizer<HTMLDivElement, Element>;
   row: Row<Item>;
+  table: Table<Item>;
 };
 
-export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
+export function TableRow({
+  virtualRow,
+  rowVirtualizer,
+  row,
+  table,
+}: TableRowProps) {
   const { set } = useMenuContext();
 
   const handleContextMenu = (e: MouseEvent<HTMLTableRowElement>) => {
+    handleRowSelection();
     e.preventDefault();
     set({ isVisible: true, cords: { x: e.clientX, y: e.clientY } });
+  };
+
+  const handleRowSelection = () => {
+    table.resetRowSelection();
+    row.toggleSelected();
+  };
+
+  const getRowColor = (row: Row<Item>) => {
+    if (row.getIsSelected()) {
+      return "bg-slate-50";
+    }
+
+    let color;
+    switch (row.original.severity) {
+      case 0:
+        color = "bg-lime-600";
+        break;
+      case 1:
+        color = "bg-amber-300";
+        break;
+      case 2:
+        color = "bg-amber-700";
+        break;
+      case 3:
+        color = "bg-red-700";
+        break;
+      default:
+        color = "bg-lime-600";
+        break;
+    }
+
+    return color;
   };
 
   return (
@@ -26,7 +65,8 @@ export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
       style={{
         transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
       }}
-      className="flex absolute w-full"
+      onClick={handleRowSelection}
+      className={`flex absolute w-full hover:bg-zinc-300 ${getRowColor(row)}`}
       onContextMenu={handleContextMenu}
     >
       {row.getVisibleCells().map((cell) => {

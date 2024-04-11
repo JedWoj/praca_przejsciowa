@@ -4,4 +4,5 @@ export type Item = {
   price: number;
   lastOrder: string;
   location: string;
+  severity: 0 | 1 | 2 | 3 | 4;
 };
