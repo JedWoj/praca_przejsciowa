@@ -14,14 +14,13 @@ import {
   useState,
   type PropsWithChildren,
 } from "react";
-import { defaultData } from "../utils/static";
 import type { Item } from "../utils/types";
 
 export type TableContextType = {
   table: Table<Item>;
 };
 
-type TableContextProps = PropsWithChildren;
+type TableContextProps = PropsWithChildren<{ items: Item[] }>;
 
 const Context = createContext<TableContextType | null>(null);
 
@@ -52,11 +51,11 @@ const columns = [
   }),
 ];
 
-const TableContext = ({ children }: TableContextProps) => {
+const TableContext = ({ children, items }: TableContextProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-  const [data] = useState(() => [...defaultData]);
+  const [data, setData] = useState<Item[]>(() => items);
 
   const table = useReactTable({
     data,

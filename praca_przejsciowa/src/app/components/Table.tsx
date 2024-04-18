@@ -1,11 +1,6 @@
 "use client";
-import {
-  type RowSelectionState,
-  type SortingState,
-  flexRender,
-} from "@tanstack/react-table";
-import { useState, useRef } from "react";
-import { defaultData } from "../utils/static";
+import { flexRender } from "@tanstack/react-table";
+import { useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import "./index.css";
 import { TableRow } from "./TableRow";
@@ -14,9 +9,6 @@ import { useTableContext } from "../context/TableContext";
 
 export function Table() {
   const { table } = useTableContext();
-
-  console.log(table.getState());
-
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
   const { rows } = table.getRowModel();
