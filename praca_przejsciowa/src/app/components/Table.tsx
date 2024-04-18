@@ -1,13 +1,8 @@
 "use client";
-import type { Item } from "../utils/types";
 import {
   type RowSelectionState,
   type SortingState,
-  createColumnHelper,
   flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
 } from "@tanstack/react-table";
 import { useState, useRef } from "react";
 import { defaultData } from "../utils/static";
@@ -15,53 +10,14 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import "./index.css";
 import { TableRow } from "./TableRow";
 import { MenuContext } from "../context/MenuContext";
-
-const columnHelper = createColumnHelper<Item>();
-
-const columns = [
-  columnHelper.accessor("name", {
-    cell: (info) => info.getValue(),
-    header: () => <span>Name</span>,
-  }),
-  columnHelper.accessor((row) => row.currentStock, {
-    id: "currentStock",
-    cell: (info) => <i>{info.getValue()}</i>,
-    header: () => <span>Current Stock</span>,
-  }),
-  columnHelper.accessor("price", {
-    header: () => "Price",
-    cell: (info) => info.renderValue(),
-  }),
-  columnHelper.accessor("lastOrder", {
-    header: () => <span>Last Order</span>,
-  }),
-  columnHelper.accessor("location", {
-    header: "Location",
-  }),
-  columnHelper.accessor("severity", {
-    header: "Severity",
-  }),
-];
+import { useTableContext } from "../context/TableContext";
 
 export function Table() {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-  const [data] = useState(() => [...defaultData]);
+  const { table } = useTableContext();
+
+  console.log(table.getState());
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
-
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      rowSelection,
-    },
-  });
 
   const { rows } = table.getRowModel();
 
@@ -144,7 +100,6 @@ export function Table() {
               const row = rows[virtualRow.index];
               return (
                 <TableRow
-                  table={table}
                   row={row}
                   rowVirtualizer={rowVirtualizer}
                   virtualRow={virtualRow}
