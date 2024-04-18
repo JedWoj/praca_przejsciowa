@@ -8,7 +8,6 @@ export function UserControll() {
 
   return (
     <section>
-      <button>Show Critical</button>
       <input
         value={filter}
         onChange={(e) => {
