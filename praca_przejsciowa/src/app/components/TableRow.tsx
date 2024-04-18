@@ -3,21 +3,17 @@ import type { VirtualItem, Virtualizer } from "@tanstack/react-virtual";
 import type { Item } from "../utils/types";
 import type { MouseEvent } from "react";
 import { useMenuContext } from "../context/MenuContext";
+import { useTableContext } from "../context/TableContext";
 
 type TableRowProps = {
   virtualRow: VirtualItem;
   rowVirtualizer: Virtualizer<HTMLDivElement, Element>;
   row: Row<Item>;
-  table: Table<Item>;
 };
 
-export function TableRow({
-  virtualRow,
-  rowVirtualizer,
-  row,
-  table,
-}: TableRowProps) {
+export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
   const { set } = useMenuContext();
+  const { table } = useTableContext();
 
   const handleContextMenu = (e: MouseEvent<HTMLTableRowElement>) => {
     handleRowSelection();
