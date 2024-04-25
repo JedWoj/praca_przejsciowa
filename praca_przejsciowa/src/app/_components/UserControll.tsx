@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useTableContext } from "../context/TableContext";
+import { useTableContext } from "../_context/TableContext";
 
 export function UserControll() {
   const [filter, setFilter] = useState<string>("");
