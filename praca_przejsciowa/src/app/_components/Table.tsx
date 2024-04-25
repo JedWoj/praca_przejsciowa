@@ -4,14 +4,14 @@ import { useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import "./index.css";
 import { TableRow } from "./TableRow";
-import { MenuContext } from "../context/MenuContext";
-import { useTableContext } from "../context/TableContext";
+import { MenuContext } from "../_context/MenuContext";
+import { useTableContext } from "../_context/TableContext";
 
 export function Table() {
   const { table } = useTableContext();
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
-  const { rows } = table.getRowModel();
+  const rows = table.getRowModel().rows;
 
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
@@ -34,7 +34,7 @@ export function Table() {
         style={{
           overflow: "auto", //our scrollable table container
           position: "relative", //needed for sticky header
-          height: "100vh", //should be a fixed height
+          height: "calc(100vh - 21px)", //should be a fixed height
         }}
       >
         <table className="grid overflow-hidden">

@@ -1,3 +1,4 @@
+"use client";
 import {
   RowSelectionState,
   SortingState,
@@ -55,7 +56,7 @@ const TableContext = ({ children, items }: TableContextProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-  const [data, setData] = useState<Item[]>(() => items);
+  const [data, setData] = useState<Item[]>(items);
 
   const table = useReactTable({
     data,
@@ -76,6 +77,7 @@ const TableContext = ({ children, items }: TableContextProps) => {
 
   const value = {
     table,
+    setData,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
-import { getDataFromDB } from "./api/db-actions";
-import ControlPanel from "./components/ControlPanel";
+import { getDataFromDB } from "./_actions/db-actions";
+import ControlPanel from "./_components/ControlPanel";
+import ModalContext from "./_context/ModalContext";
+import Modal from "./_components/Modal";
+import ChangeItemValue from "./_components/RemoveItemModal";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_KEY,
@@ -12,14 +15,32 @@ const firebaseConfig = {
   appId: process.env.APP_ID,
 };
 
-initializeApp(firebaseConfig);
+// initializeApp(firebaseConfig);
 
 export default async function Home() {
-  const data = await getDataFromDB("/items");
+  // const data = await getDataFromDB("/items");
 
   return (
     <main className="h-screen overflow-hidden">
-      <ControlPanel data={data.val()} />
+      <ModalContext>
+        <ControlPanel
+          data={[
+            {
+              currentStock: 100,
+              id: 1,
+              lastOrder: "2123",
+              location: "1221",
+              name: "212",
+              price: 2,
+              severity: 1,
+            },
+          ]}
+        >
+          <Modal>
+            <ChangeItemValue />
+          </Modal>
+        </ControlPanel>
+      </ModalContext>
     </main>
   );
 }

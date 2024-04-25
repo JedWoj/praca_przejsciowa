@@ -1,3 +1,4 @@
+"use client";
 import {
   createContext,
   useContext,
@@ -7,7 +8,10 @@ import {
   type SetStateAction,
   type Dispatch,
 } from "react";
-import { ContextMenu, ContextMenuItem } from "../components/ContextMenu";
+import { ContextMenu } from "../_components/ContextMenu";
+import { ContextMenuItem } from "../_components/ContextMenuItem";
+import { useTableContext } from "./TableContext";
+import { useModalContext } from "./ModalContext";
 
 export type MenuContextType = {
   set: Dispatch<SetStateAction<MenuContextStateType>>;
@@ -41,6 +45,10 @@ const MenuContext = ({
   initialState = initial_state,
 }: MenuContextProps) => {
   const [state, setState] = useState<MenuContextStateType>(initialState);
+  const { table } = useTableContext();
+  const { toggle } = useModalContext();
+
+  const selectedItem = table.getSelectedRowModel().rows.at(0);
 
   const value = useMemo(() => {
     return {
@@ -56,10 +64,16 @@ const MenuContext = ({
     <Context.Provider value={value}>
       {children}
       <ContextMenu {...value}>
-        <ContextMenuItem>Remove Item</ContextMenuItem>
-        <ContextMenuItem>Change Value</ContextMenuItem>
-        <ContextMenuItem>Change Severity</ContextMenuItem>
-        <ContextMenuItem>To be Determined</ContextMenuItem>
+        <ContextMenuItem action={toggle}>Remove Item</ContextMenuItem>
+        <ContextMenuItem action={() => console.log(selectedItem)}>
+          Change Value
+        </ContextMenuItem>
+        <ContextMenuItem action={() => console.log(selectedItem)}>
+          Change Severity
+        </ContextMenuItem>
+        <ContextMenuItem action={() => console.log(selectedItem)}>
+          To be Determined
+        </ContextMenuItem>
       </ContextMenu>
     </Context.Provider>
   );

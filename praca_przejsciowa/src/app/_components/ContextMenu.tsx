@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import type { MenuContextType } from "../context/MenuContext";
+import type { MenuContextType } from "../_context/MenuContext";
 import { useClickOutside } from "../hooks/useClickOutside";
 
 export function ContextMenu({
@@ -24,15 +24,5 @@ export function ContextMenu({
     >
       {children}
     </ul>
-  );
-}
-
-type ContextMenuItemProps = PropsWithChildren<{}>;
-
-export function ContextMenuItem({ children }: ContextMenuItemProps) {
-  return (
-    <li className="p-4 border-b-2 hover:bg-slate-400 cursor-pointer">
-      {children}
-    </li>
   );
 }
