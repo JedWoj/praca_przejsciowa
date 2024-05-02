@@ -9,7 +9,6 @@ export const writeDataToDB = (path: string, item: Item) => {
 };
 
 export const removeDataFromDB = async (path: string) => {
-  console.log(path);
   const db = getDatabase();
   const reference = ref(db, path);
   return await remove(reference);

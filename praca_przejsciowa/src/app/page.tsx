@@ -15,27 +15,15 @@ const firebaseConfig = {
   appId: process.env.APP_ID,
 };
 
-// initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 export default async function Home() {
-  // const data = await getDataFromDB("/items");
+  const data = await getDataFromDB("/items");
 
   return (
     <main className="h-screen overflow-hidden">
       <ModalContext>
-        <ControlPanel
-          data={[
-            {
-              currentStock: 100,
-              id: 1,
-              lastOrder: "2123",
-              location: "1221",
-              name: "212",
-              price: 2,
-              severity: 1,
-            },
-          ]}
-        >
+        <ControlPanel data={data.val()}>
           <Modal>
             <ChangeItemValue />
           </Modal>
