@@ -46,7 +46,7 @@ const MenuContext = ({
 }: MenuContextProps) => {
   const [state, setState] = useState<MenuContextStateType>(initialState);
   const { table } = useTableContext();
-  const { toggle } = useModalContext();
+  const { displayModal } = useModalContext();
 
   const selectedItem = table.getSelectedRowModel().rows.at(0);
 
@@ -64,8 +64,10 @@ const MenuContext = ({
     <Context.Provider value={value}>
       {children}
       <ContextMenu {...value}>
-        <ContextMenuItem action={toggle}>Remove Item</ContextMenuItem>
-        <ContextMenuItem action={() => console.log(selectedItem)}>
+        <ContextMenuItem action={() => displayModal("remove_item")}>
+          Remove Item
+        </ContextMenuItem>
+        <ContextMenuItem action={() => displayModal("change_value")}>
           Change Value
         </ContextMenuItem>
         <ContextMenuItem action={() => console.log(selectedItem)}>

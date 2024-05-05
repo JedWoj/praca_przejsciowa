@@ -12,16 +12,31 @@ import {
 import {
   createContext,
   useContext,
+  useEffect,
   useState,
   type PropsWithChildren,
 } from "react";
 import type { Item } from "../utils/types";
+import { getDatabase, onValue, ref } from "firebase/database";
+import { initializeApp } from "firebase/app";
 
 export type TableContextType = {
   table: Table<Item>;
 };
 
-type TableContextProps = PropsWithChildren<{ items: Item[] }>;
+type TableContextProps = PropsWithChildren;
+
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+};
+
+initializeApp(firebaseConfig);
 
 const Context = createContext<TableContextType | null>(null);
 
@@ -52,11 +67,32 @@ const columns = [
   }),
 ];
 
-const TableContext = ({ children, items }: TableContextProps) => {
+const TableContext = ({ children }: TableContextProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-  const [data, setData] = useState<Item[]>(items);
+  const [data, setData] = useState<Item[]>([]);
+
+  useEffect(() => {
+    const db = getDatabase();
+    const userDataRef = ref(db, "/items");
+
+    const subscription = onValue(userDataRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+
+      if (data) {
+        console.log(data, 111);
+        setData(Object.values(data));
+      } else {
+        setData([]);
+      }
+    });
+
+    () => subscription();
+  }, []);
+
+  console.log(data);
 
   const table = useReactTable({
     data,
