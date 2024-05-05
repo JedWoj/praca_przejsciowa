@@ -1,25 +1,41 @@
 "use client";
-import { PropsWithChildren, createContext, useContext, useMemo } from "react";
-import { useToggle } from "../hooks/useToggle";
+import {
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 
 type ModalContextType = {
-  toggle: () => void;
-  isVisible: boolean;
+  hide: () => void;
+  displayModal: Dispatch<SetStateAction<ModalName | null>>;
+  modal: ModalName | null;
 };
+
+type ModalName = "change_value" | "remove_item" | "add_item";
 
 type ModalContextProps = PropsWithChildren;
 
 const Context = createContext<ModalContextType | null>(null);
 
 export default function ModalContext({ children }: ModalContextProps) {
-  const [isVisible, toggle] = useToggle(false);
+  const [displayedModal, setDisplayedModal] = useState<ModalName | null>(null);
 
-  const value = useMemo(
+  const hide = useCallback(() => {
+    setDisplayedModal(null);
+  }, [setDisplayedModal]);
+
+  const value = useMemo<ModalContextType>(
     () => ({
-      isVisible,
-      toggle,
+      modal: displayedModal,
+      displayModal: setDisplayedModal,
+      hide,
     }),
-    [isVisible, toggle]
+    [hide, setDisplayedModal, displayedModal]
   );
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

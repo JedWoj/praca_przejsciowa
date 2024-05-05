@@ -5,5 +5,5 @@ export type Item = {
   lastOrder: string;
   location: string;
   severity: 0 | 1 | 2 | 3 | 4;
-  id: number;
+  id: string;
 };
