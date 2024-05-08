@@ -8,8 +8,6 @@ import AddItemModal from "./AddItemModal";
 export default function DisplayedModal() {
   const { modal } = useModalContext();
 
-  console.log(modal);
-
   if (!modal) {
     return modal;
   }

@@ -23,7 +23,9 @@ export default function ChangeItemValueModal() {
     location: selectedItem?.location,
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setValues((prevValues) => ({
       ...prevValues,
       [e.target.name]: e.target.value,
@@ -35,12 +37,12 @@ export default function ChangeItemValueModal() {
       <h2 className="text-2xl">Change Value</h2>
       <form action={FormAction}>
         <section className="flex flex-col pb-2">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="item-name">Name</label>
           <input
             onChange={handleChange}
             value={values.name}
             className="text-black rounded-sm"
-            name="name"
+            name="item-name"
           />
           <label htmlFor="stock">Stock</label>
           <input
@@ -64,24 +66,20 @@ export default function ChangeItemValueModal() {
             type="number"
             value={values.price}
           />
-          <label htmlFor="location">Location</label>
-          <input
-            onChange={handleChange}
-            className="text-black rounded-sm"
-            name="location"
-            type="text"
-            value={values.location}
-          />
-          <fieldset>
-            <label htmlFor="severity">Severity</label>
-            <input name="severity" type="radio" value={0} />
-            <label htmlFor="severity">Severity</label>
-            <input name="severity" type="radio" value={1} />
-            <label htmlFor="severity">Severity</label>
-            <input name="severity" type="radio" value={2} />
-            <label htmlFor="severity">Severity</label>
-            <input name="severity" type="radio" value={3} />
-          </fieldset>
+          <div className="flex flex-col mb-4">
+            <label htmlFor="location">Location</label>
+            <select
+              value={values.location}
+              onChange={handleChange}
+              className="text-black"
+              name="location"
+              id="location"
+            >
+              <option value="A1">A1</option>
+              <option value="A2">A2</option>
+              <option value="B1">B1</option>
+            </select>
+          </div>
         </section>
         <div className="flex justify-around w-full">
           <Button buttonProps={{ type: "submit" }} handleClick={() => {}}>

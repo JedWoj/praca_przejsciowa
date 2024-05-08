@@ -10,7 +10,6 @@ import {
 } from "react";
 import { ContextMenu } from "../_components/ContextMenu";
 import { ContextMenuItem } from "../_components/ContextMenuItem";
-import { useTableContext } from "./TableContext";
 import { useModalContext } from "./ModalContext";
 
 export type MenuContextType = {
@@ -45,10 +44,7 @@ const MenuContext = ({
   initialState = initial_state,
 }: MenuContextProps) => {
   const [state, setState] = useState<MenuContextStateType>(initialState);
-  const { table } = useTableContext();
   const { displayModal } = useModalContext();
-
-  const selectedItem = table.getSelectedRowModel().rows.at(0);
 
   const value = useMemo(() => {
     return {
@@ -69,12 +65,6 @@ const MenuContext = ({
         </ContextMenuItem>
         <ContextMenuItem action={() => displayModal("change_value")}>
           Change Value
-        </ContextMenuItem>
-        <ContextMenuItem action={() => console.log(selectedItem)}>
-          Change Severity
-        </ContextMenuItem>
-        <ContextMenuItem action={() => console.log(selectedItem)}>
-          To be Determined
         </ContextMenuItem>
       </ContextMenu>
     </Context.Provider>

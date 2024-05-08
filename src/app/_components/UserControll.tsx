@@ -10,15 +10,28 @@ export function UserControll() {
   const { displayModal } = useModalContext();
 
   return (
-    <section className="flex justify-around p-4">
+    <section className="flex p-4 gap-4">
       <input
         value={filter}
+        placeholder="Filter items"
         onChange={(e) => {
           table.setGlobalFilter(e.target.value);
           setFilter(e.target.value);
         }}
       />
-      <Button handleClick={() => displayModal("add_item")}>+ Add</Button>
+      <Button handleClick={() => displayModal("add_item")}>Add Item</Button>
+      <Button
+        handleClick={() => displayModal("remove_item")}
+        buttonProps={{ disabled: !table.getIsSomeRowsSelected() }}
+      >
+        Remove Item
+      </Button>
+      <Button
+        handleClick={() => displayModal("change_value")}
+        buttonProps={{ disabled: !table.getIsSomeRowsSelected() }}
+      >
+        Change Item
+      </Button>
     </section>
   );
 }

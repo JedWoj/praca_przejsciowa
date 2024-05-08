@@ -1,4 +1,4 @@
-import { type Row, flexRender, Table } from "@tanstack/react-table";
+import { type Row, flexRender } from "@tanstack/react-table";
 import type { VirtualItem, Virtualizer } from "@tanstack/react-virtual";
 import type { Item } from "../utils/types";
 import type { MouseEvent } from "react";
@@ -22,8 +22,10 @@ export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
   };
 
   const handleRowSelection = () => {
-    table.resetRowSelection();
-    row.toggleSelected();
+    if (!row.getIsSelected()) {
+      table.resetRowSelection();
+      row.toggleSelected();
+    }
   };
 
   const getRowColor = (row: Row<Item>) => {
@@ -31,26 +33,18 @@ export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
       return "bg-slate-50";
     }
 
-    let color;
-    switch (row.original.severity) {
-      case 0:
-        color = "bg-lime-600";
-        break;
-      case 1:
-        color = "bg-amber-300";
-        break;
-      case 2:
-        color = "bg-amber-700";
-        break;
-      case 3:
-        color = "bg-red-700";
-        break;
-      default:
-        color = "bg-lime-600";
-        break;
-    }
+    const percentOfOptimalValue =
+      (row.original.currentStock / row.original.optimalStock) * 100;
 
-    return color;
+    if (percentOfOptimalValue > 75) {
+      return "bg-lime-600";
+    } else if (percentOfOptimalValue > 50) {
+      return "bg-amber-300";
+    } else if (percentOfOptimalValue > 25) {
+      return "bg-amber-700";
+    } else if (percentOfOptimalValue > 0) {
+      return "bg-red-700";
+    }
   };
 
   return (
@@ -61,8 +55,10 @@ export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
       style={{
         transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
       }}
-      onClick={handleRowSelection}
-      className={`flex absolute w-full hover:bg-zinc-300 ${getRowColor(row)}`}
+      onClick={handleContextMenu}
+      className={`flex absolute w-full hover:bg-zinc-300 ${getRowColor(
+        row
+      )} cursor-pointer`}
       onContextMenu={handleContextMenu}
     >
       {row.getVisibleCells().map((cell) => {
