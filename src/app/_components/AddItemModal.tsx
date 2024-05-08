@@ -18,10 +18,12 @@ export default function AddItemModal() {
     price: selectedItem?.price,
     stock: selectedItem?.currentStock,
     location: selectedItem?.location,
-    severity: selectedItem?.severity ?? "0",
+    optimalStock: selectedItem?.optimalStock,
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setValues((prevValues) => ({
       ...prevValues,
       [e.target.name]: e.target.value,
@@ -33,12 +35,12 @@ export default function AddItemModal() {
       <h2 className="text-2xl">Add Item</h2>
       <form action={FormAction}>
         <section className="flex flex-col pb-2">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="item-name">Name</label>
           <input
             onChange={handleChange}
             value={values.name}
             className="text-black rounded-sm"
-            name="name"
+            name="item-name"
           />
           <label htmlFor="stock">Stock</label>
           <input
@@ -62,50 +64,29 @@ export default function AddItemModal() {
             type="number"
             value={values.price}
           />
-          <label htmlFor="location">Location</label>
+          <label htmlFor="optimal-stock">Optimal Stock</label>
           <input
             onChange={handleChange}
             className="text-black rounded-sm"
-            name="location"
+            name="optimal-stock"
             type="text"
-            value={values.location}
+            value={values.optimalStock}
           />
-          <fieldset className="flex justify-around">
-            <input
-              onChange={handleChange}
-              name="severity"
-              id={"severity-0"}
-              type="radio"
-              value={0}
-              checked={values.severity === "0"}
-            />
-            <label htmlFor="severity-0">0</label>
-            <input
-              name="severity"
-              id={"severity-1"}
-              type="radio"
-              value={1}
-              onChange={handleChange}
-            />
-            <label htmlFor="severity-1">1</label>
-            <input
-              onChange={handleChange}
-              name="severity"
-              id={"severity-2"}
-              type="radio"
-              value={2}
-            />
-            <label htmlFor="severity-2">2</label>
-            <input
-              onChange={handleChange}
-              name="severity"
-              id={"severity-3"}
-              type="radio"
-              value={3}
-            />
-            <label htmlFor="severity-3">3</label>
-          </fieldset>
         </section>
+        <div className="flex flex-col mb-4">
+          <label htmlFor="location">Location</label>
+          <select
+            onChange={handleChange}
+            value={values.location}
+            className="text-black"
+            name="location"
+            id="location"
+          >
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+          </select>
+        </div>
         <div className="flex justify-around w-full">
           <Button buttonProps={{ type: "submit" }} handleClick={() => {}}>
             <div className="p-1 text-xl">Confirm</div>

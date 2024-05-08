@@ -1,13 +1,16 @@
 "use server";
-import type { Item } from "../utils/types";
+import type { Item, Location } from "../utils/types";
 import { writeDataToDB } from "./db-actions";
+import { convertDate } from "../utils/convertDate";
 
 const validateItem = (formData: FormData) => {
   const price = formData.get("price");
-  const name = formData.get("name") as string;
+  const name = formData.get("item-name") as string;
   const stock = formData.get("stock");
-  const location = formData.get("location") as string;
-  const severity = formData.get("severity") as "0" | "1" | "2" | "3";
+  const location = formData.get("location") as string as Location;
+  const optimalStock = formData.get("optimal-stock") as string;
+
+  console.log(name);
 
   if (Number(price) < 0) {
     return "Price must be higher than 0!";
@@ -17,7 +20,12 @@ const validateItem = (formData: FormData) => {
     return "Name is required!";
   }
 
-  if (Number(stock) < 0 || typeof stock === "undefined") {
+  if (
+    Number(stock) < 0 ||
+    typeof stock === "undefined" ||
+    Number(optimalStock) < 0 ||
+    typeof optimalStock === "undefined"
+  ) {
     return "Minimal value of stock must be 0!";
   }
 
@@ -25,7 +33,7 @@ const validateItem = (formData: FormData) => {
     return "Location is required!";
   }
 
-  return { price, name, stock, location, severity };
+  return { price, name, stock, location, optimalStock };
 };
 
 export const changeItem = async (item: Item, _: string, formData: FormData) => {
@@ -41,6 +49,7 @@ export const changeItem = async (item: Item, _: string, formData: FormData) => {
     name: validation.name,
     currentStock: Number(validation.stock),
     location: validation.location,
+    lastOrder: convertDate(new Date()),
   });
 
   return "Item changed successfully!";
@@ -61,8 +70,8 @@ export const addItem = async (_: string, formData: FormData) => {
     currentStock: Number(validation.stock),
     location: validation.location,
     id: itemId,
-    lastOrder: "2024-02-01",
-    severity: Number(validation.severity) as Item["severity"],
+    lastOrder: convertDate(new Date()),
+    optimalStock: Number(validation.optimalStock),
   });
 
   return "Item added successfully!";

@@ -52,18 +52,21 @@ const columns = [
     cell: (info) => <i>{info.getValue()}</i>,
     header: () => <span>Current Stock</span>,
   }),
+  columnHelper.accessor("optimalStock", {
+    id: "optimalStock",
+    cell: (info) => <i>{info.getValue()}</i>,
+    header: () => <span>Optimal Stock</span>,
+  }),
   columnHelper.accessor("price", {
     header: () => "Price",
     cell: (info) => info.renderValue(),
   }),
   columnHelper.accessor("lastOrder", {
     header: () => <span>Last Order</span>,
+    minSize: 200,
   }),
   columnHelper.accessor("location", {
     header: "Location",
-  }),
-  columnHelper.accessor("severity", {
-    header: "Severity",
   }),
 ];
 
@@ -79,10 +82,7 @@ const TableContext = ({ children }: TableContextProps) => {
 
     const subscription = onValue(userDataRef, (snapshot) => {
       const data = snapshot.val();
-      console.log(data);
-
       if (data) {
-        console.log(data, 111);
         setData(Object.values(data));
       } else {
         setData([]);
@@ -91,8 +91,6 @@ const TableContext = ({ children }: TableContextProps) => {
 
     () => subscription();
   }, []);
-
-  console.log(data);
 
   const table = useReactTable({
     data,

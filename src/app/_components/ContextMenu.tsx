@@ -16,9 +16,10 @@ export function ContextMenu({
     <ul
       ref={ref}
       style={{
-        top: cords.y ?? 0,
+        top: (cords.y ?? 0) - 109,
         left: cords.x ?? 0,
         display: isVisible ? "block" : "none",
+        zIndex: 1000,
       }}
       className="absolute bg-gray-500 text-white text-lg min-w-52"
     >
