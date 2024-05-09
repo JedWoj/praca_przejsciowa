@@ -55,7 +55,7 @@ export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
       style={{
         transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
       }}
-      onClick={handleContextMenu}
+      onClick={handleRowSelection}
       className={`flex absolute w-full hover:bg-zinc-300 ${getRowColor(
         row
       )} cursor-pointer`}

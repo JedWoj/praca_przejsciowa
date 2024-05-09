@@ -32,6 +32,12 @@ export function UserControll() {
       >
         Change Item
       </Button>
+      <Button
+        handleClick={() => displayModal("order_item")}
+        buttonProps={{ disabled: !table.getIsSomeRowsSelected() }}
+      >
+        Order Item
+      </Button>
     </section>
   );
 }
