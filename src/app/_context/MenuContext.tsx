@@ -66,6 +66,9 @@ const MenuContext = ({
         <ContextMenuItem action={() => displayModal("change_value")}>
           Change Value
         </ContextMenuItem>
+        <ContextMenuItem action={() => displayModal("order_item")}>
+          Order Item
+        </ContextMenuItem>
       </ContextMenu>
     </Context.Provider>
   );

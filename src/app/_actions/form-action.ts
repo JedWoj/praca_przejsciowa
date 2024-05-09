@@ -10,8 +10,6 @@ const validateItem = (formData: FormData) => {
   const location = formData.get("location") as string as Location;
   const optimalStock = formData.get("optimal-stock") as string;
 
-  console.log(name);
-
   if (Number(price) < 0) {
     return "Price must be higher than 0!";
   }
@@ -75,4 +73,20 @@ export const addItem = async (_: string, formData: FormData) => {
   });
 
   return "Item added successfully!";
+};
+
+export const orderItem = async (item: Item, _: string, formData: FormData) => {
+  const orderSize = formData.get("order-size") as string;
+
+  if (Number(orderSize) <= 0) {
+    return "Order must be higher than 0!";
+  }
+
+  writeDataToDB(`items/${item.id}`, {
+    ...item,
+    currentStock: Number(Number(orderSize) + item.currentStock),
+    lastOrder: convertDate(new Date()),
+  });
+
+  return "Item ordered successfully!";
 };

@@ -20,7 +20,11 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className="bg-gradient-to-r from-blue-500 to-green-600 rounded-md"
+      className={` rounded-md text-white p-2 ${
+        buttonProps?.disabled
+          ? "bg-slate-500 cursor-not-allowed"
+          : "bg-gradient-to-r from-blue-500 to-green-600"
+      }`}
       onClick={handleClick}
       {...buttonProps}
     >

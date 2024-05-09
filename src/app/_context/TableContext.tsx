@@ -62,7 +62,7 @@ const columns = [
     cell: (info) => info.renderValue(),
   }),
   columnHelper.accessor("lastOrder", {
-    header: () => <span>Last Order</span>,
+    header: () => <span>Last Change</span>,
     minSize: 200,
   }),
   columnHelper.accessor("location", {

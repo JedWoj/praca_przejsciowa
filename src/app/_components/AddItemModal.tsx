@@ -2,23 +2,20 @@
 import Button from "./Button";
 import { useModalContext } from "../_context/ModalContext";
 import { useFormState } from "react-dom";
-import { useTableContext } from "../_context/TableContext";
 import { ChangeEvent, useState } from "react";
 import { addItem } from "../_actions/form-action";
 
 export default function AddItemModal() {
   const { hide } = useModalContext();
-  const { table } = useTableContext();
-  const selectedItem = table.getSelectedRowModel().rows.at(0)?.original;
 
   const [formState, FormAction] = useFormState(addItem, "");
 
   const [values, setValues] = useState({
-    name: selectedItem?.name,
-    price: selectedItem?.price,
-    stock: selectedItem?.currentStock,
-    location: selectedItem?.location,
-    optimalStock: selectedItem?.optimalStock,
+    name: "",
+    price: undefined,
+    stock: undefined,
+    location: "A1",
+    optimalStock: undefined,
   });
 
   const handleChange = (

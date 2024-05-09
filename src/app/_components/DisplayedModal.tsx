@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import ChangeItemValueModal from "./ChangeItemValueModal";
 import RemoveItemModal from "./RemoveItemModal";
 import AddItemModal from "./AddItemModal";
+import OrderItemModal from "./OrderItemModal";
 
 export default function DisplayedModal() {
   const { modal } = useModalContext();
@@ -24,6 +25,9 @@ export default function DisplayedModal() {
         break;
       case "remove_item":
         component = <RemoveItemModal />;
+        break;
+      case "order_item":
+        component = <OrderItemModal />;
         break;
       default:
         component = null;
