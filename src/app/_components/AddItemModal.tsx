@@ -11,7 +11,7 @@ export default function AddItemModal() {
   const [formState, FormAction] = useFormState(addItem, "");
 
   const [values, setValues] = useState({
-    name: "",
+    "item-name": "",
     price: undefined,
     stock: undefined,
     location: "A1",
@@ -35,7 +35,7 @@ export default function AddItemModal() {
           <label htmlFor="item-name">Name</label>
           <input
             onChange={handleChange}
-            value={values.name}
+            value={values["item-name"]}
             className="text-black rounded-sm"
             name="item-name"
           />
@@ -44,7 +44,7 @@ export default function AddItemModal() {
             onChange={handleChange}
             min={0}
             max={999999}
-            step={0.1}
+            step={1}
             className="text-black rounded-sm"
             name="stock"
             type="number"
@@ -66,8 +66,10 @@ export default function AddItemModal() {
             onChange={handleChange}
             className="text-black rounded-sm"
             name="optimal-stock"
-            type="text"
+            type="number"
             value={values.optimalStock}
+            min={0}
+            max={9999999}
           />
         </section>
         <div className="flex flex-col mb-4">

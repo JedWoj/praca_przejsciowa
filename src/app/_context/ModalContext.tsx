@@ -16,7 +16,13 @@ type ModalContextType = {
   modal: ModalName | null;
 };
 
-type ModalName = "change_value" | "remove_item" | "add_item" | "order_item";
+type ModalName =
+  | "change_value"
+  | "remove_item"
+  | "add_item"
+  | "order_item"
+  | "dispatch_item"
+  | "return_item";
 
 type ModalContextProps = PropsWithChildren;
 

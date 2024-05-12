@@ -5,9 +5,12 @@ import ChangeItemValueModal from "./ChangeItemValueModal";
 import RemoveItemModal from "./RemoveItemModal";
 import AddItemModal from "./AddItemModal";
 import OrderItemModal from "./OrderItemModal";
+import DispatchItem from "./DispatchItem";
+import ReturnItemModal from "./ReturnItemModal";
 
 export default function DisplayedModal() {
   const { modal } = useModalContext();
+  console.log(modal);
 
   if (!modal) {
     return modal;
@@ -28,6 +31,12 @@ export default function DisplayedModal() {
         break;
       case "order_item":
         component = <OrderItemModal />;
+        break;
+      case "dispatch_item":
+        component = <DispatchItem />;
+        break;
+      case "return_item":
+        component = <ReturnItemModal />;
         break;
       default:
         component = null;
