@@ -1,11 +1,14 @@
+"use client";
 import type { PropsWithChildren } from "react";
-import { defaultDeliveries } from "../utils/static";
 import Link from "next/link";
+import { useDeliveryContext } from "../_context/DeliveryContext";
 
 export function DeliveryList() {
+  const { deliveries } = useDeliveryContext();
+
   return (
     <ul className="text-white">
-      {defaultDeliveries.map((delivery) => (
+      {deliveries.map((delivery) => (
         <DeliveryItem key={delivery.id}>
           <Link href={`/delivery/${delivery.id}`}>{delivery.name}</Link>
         </DeliveryItem>

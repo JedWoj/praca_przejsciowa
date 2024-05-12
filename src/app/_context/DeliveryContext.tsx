@@ -27,7 +27,6 @@ const DeliveryContext = ({ children }: DeliveryContextProps) => {
     const subscription = onValue(userDataRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        console.log(data);
         setData(Object.values(data));
       } else {
         setData([]);

@@ -9,8 +9,6 @@ export default function OrderItemModal() {
   const { hide } = useModalContext();
   const { table, setOrder, order } = useTableContext();
 
-  console.log(order);
-
   const selectedItems = table.getSelectedRowModel().rows;
   const [orderSize, setOrderSize] = useState<number>();
 
