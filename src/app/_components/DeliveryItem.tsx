@@ -1,10 +1,10 @@
 "use client";
 import { useModalContext } from "../_context/ModalContext";
-import type { Item } from "../utils/types";
+import type { ItemForDelivery } from "../utils/types";
 import Button from "./Button";
 
 type DeliveryItemProps = {
-  item: Item;
+  item: ItemForDelivery;
 };
 
 export default function DeliveryItem({ item }: DeliveryItemProps) {

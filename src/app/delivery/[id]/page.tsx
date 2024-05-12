@@ -1,14 +1,11 @@
 "use client";
-import { defaultDeliveries } from "@/app/utils/static";
 import DeliveryItem from "@/app/_components/DeliveryItem";
 import DisplayedModal from "@/app/_components/DisplayedModal";
 import { useDeliveryContext } from "@/app/_context/DeliveryContext";
 
 export default function Delivery({ params }: { params: { id: string } }) {
-  const handledDelivery = defaultDeliveries.find((it) => it.id === params.id)!;
   const { deliveries } = useDeliveryContext();
-
-  console.log(deliveries);
+  const handledDelivery = deliveries.find((it) => it.id === params.id)!;
 
   return (
     <div className="h-screen bg-gradient-to-tr from-lime-400 to-blue-600 flex flex-col px-40 pt-10 gap-5">
