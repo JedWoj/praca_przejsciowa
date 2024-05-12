@@ -7,10 +7,10 @@ import AddItemModal from "./AddItemModal";
 import OrderItemModal from "./OrderItemModal";
 import DispatchItem from "./DispatchItem";
 import ReturnItemModal from "./ReturnItemModal";
+import { MakeOrderModal } from "./MakeOrderModal";
 
 export default function DisplayedModal() {
   const { modal } = useModalContext();
-  console.log(modal);
 
   if (!modal) {
     return modal;
@@ -37,6 +37,9 @@ export default function DisplayedModal() {
         break;
       case "return_item":
         component = <ReturnItemModal />;
+        break;
+      case "make_order":
+        component = <MakeOrderModal />;
         break;
       default:
         component = null;
