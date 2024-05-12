@@ -10,19 +10,23 @@ import {
   getFilteredRowModel,
 } from "@tanstack/react-table";
 import React, {
-  HTMLProps,
+  type Dispatch,
+  type HTMLProps,
+  type SetStateAction,
   createContext,
   useContext,
   useEffect,
   useState,
   type PropsWithChildren,
 } from "react";
-import type { Item } from "../utils/types";
+import type { Delivery, Item } from "../utils/types";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { initializeApp } from "firebase/app";
 
 export type TableContextType = {
   table: Table<Item>;
+  order: Delivery | null;
+  setOrder: Dispatch<SetStateAction<Delivery | null>>;
 };
 
 type TableContextProps = PropsWithChildren;
@@ -100,6 +104,7 @@ const TableContext = ({ children }: TableContextProps) => {
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [data, setData] = useState<Item[]>([]);
+  const [order, setOrder] = useState<null | Delivery>(null);
 
   useEffect(() => {
     const db = getDatabase();
@@ -135,6 +140,8 @@ const TableContext = ({ children }: TableContextProps) => {
   });
 
   const value = {
+    order,
+    setOrder,
     table,
     setData,
   };

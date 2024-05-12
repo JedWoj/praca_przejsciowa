@@ -6,7 +6,7 @@ import {
   useState,
   type PropsWithChildren,
 } from "react";
-import type { Delivery, Item } from "../utils/types";
+import type { Delivery } from "../utils/types";
 import { getDatabase, onValue, ref } from "firebase/database";
 
 export type DeliveryContextType = {
