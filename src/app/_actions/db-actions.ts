@@ -11,11 +11,18 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-import { get, getDatabase, onValue, ref, set, remove } from "firebase/database";
-import type { Item } from "../utils/types";
+import {
+  get,
+  getDatabase,
+  onValue,
+  ref,
+  set,
+  remove,
+  update,
+} from "firebase/database";
 import { initializeApp } from "firebase/app";
 
-export const writeDataToDB = (path: string, item: Item) => {
+export const writeDataToDB = <TItem>(path: string, item: TItem) => {
   const db = getDatabase();
   const reference = ref(db, path);
   set(reference, item);
@@ -25,6 +32,14 @@ export const removeDataFromDB = async (path: string) => {
   const db = getDatabase();
   const reference = ref(db, path);
   await remove(reference);
+};
+
+export const removeMultipleRecordsFromDB = async (paths: string[]) => {
+  const db = getDatabase();
+  const updates = {} as Record<string, null>;
+  paths.forEach((path) => (updates[path] = null));
+
+  return update(ref(db), updates);
 };
 
 export const subscribeDataFromDB = <TData>(

@@ -9,7 +9,8 @@ import {
   useReactTable,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-import {
+import React, {
+  HTMLProps,
   createContext,
   useContext,
   useEffect,
@@ -43,6 +44,30 @@ const Context = createContext<TableContextType | null>(null);
 const columnHelper = createColumnHelper<Item>();
 
 const columns = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <IndeterminateCheckbox
+        {...{
+          checked: table.getIsAllRowsSelected(),
+          indeterminate: table.getIsSomeRowsSelected(),
+          onChange: table.getToggleAllRowsSelectedHandler(),
+        }}
+      />
+    ),
+    cell: ({ row }) => (
+      <div className="px-1">
+        <IndeterminateCheckbox
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: row.getToggleSelectedHandler(),
+          }}
+        />
+      </div>
+    ),
+  },
   columnHelper.accessor("name", {
     cell: (info) => info.getValue(),
     header: () => <span>Name</span>,
@@ -128,3 +153,26 @@ const useTableContext = () => {
 };
 
 export { TableContext, useTableContext };
+
+function IndeterminateCheckbox({
+  indeterminate,
+  className = "",
+  ...rest
+}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
+  const ref = React.useRef<HTMLInputElement>(null!);
+
+  React.useEffect(() => {
+    if (typeof indeterminate === "boolean") {
+      ref.current.indeterminate = !rest.checked && indeterminate;
+    }
+  }, [ref, indeterminate]);
+
+  return (
+    <input
+      type="checkbox"
+      ref={ref}
+      className={className + " cursor-pointer"}
+      {...rest}
+    />
+  );
+}

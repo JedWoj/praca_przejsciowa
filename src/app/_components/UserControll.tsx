@@ -9,6 +9,8 @@ export function UserControll() {
   const { table } = useTableContext();
   const { displayModal } = useModalContext();
 
+  const numberOfSelectedItems = table.getSelectedRowModel().rows.length;
+
   return (
     <section className="flex p-4 gap-4">
       <input
@@ -22,19 +24,19 @@ export function UserControll() {
       <Button handleClick={() => displayModal("add_item")}>Add Item</Button>
       <Button
         handleClick={() => displayModal("remove_item")}
-        buttonProps={{ disabled: !table.getIsSomeRowsSelected() }}
+        buttonProps={{ disabled: !numberOfSelectedItems }}
       >
         Remove Item
       </Button>
       <Button
         handleClick={() => displayModal("change_value")}
-        buttonProps={{ disabled: !table.getIsSomeRowsSelected() }}
+        buttonProps={{ disabled: numberOfSelectedItems !== 1 }}
       >
         Change Item
       </Button>
       <Button
         handleClick={() => displayModal("order_item")}
-        buttonProps={{ disabled: !table.getIsSomeRowsSelected() }}
+        buttonProps={{ disabled: numberOfSelectedItems !== 1 }}
       >
         Order Item
       </Button>

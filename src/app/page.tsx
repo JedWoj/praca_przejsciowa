@@ -1,15 +1,9 @@
-import ControlPanel from "./_components/ControlPanel";
-import ModalContext from "./_context/ModalContext";
-import DisplayedModal from "./_components/DisplayedModal";
+import { UserActions } from "./_components/UserActions";
 
-export default async function Home() {
+export default function Home() {
   return (
-    <main className="h-screen overflow-hidden">
-      <ModalContext>
-        <ControlPanel>
-          <DisplayedModal />
-        </ControlPanel>
-      </ModalContext>
+    <main className="h-screen overflow-hidden flex justify-center items-center">
+      <UserActions />
     </main>
   );
 }

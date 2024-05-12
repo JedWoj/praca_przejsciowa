@@ -22,10 +22,7 @@ export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
   };
 
   const handleRowSelection = () => {
-    if (!row.getIsSelected()) {
-      table.resetRowSelection();
-      row.toggleSelected();
-    }
+    table.setRowSelection({ [row.id]: true });
   };
 
   const getRowColor = (row: Row<Item>) => {
@@ -55,7 +52,7 @@ export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
       style={{
         transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
       }}
-      onClick={handleRowSelection}
+      // onClick={handleRowSelection}
       className={`flex absolute w-full hover:bg-zinc-300 ${getRowColor(
         row
       )} cursor-pointer`}
