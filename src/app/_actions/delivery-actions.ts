@@ -1,7 +1,7 @@
 "use server";
 import { redirect } from "next/navigation";
 import type { Delivery } from "../utils/types";
-import { removeDataFromDB, updateDataToDB, writeDataToDB } from "./db-actions";
+import { removeDataFromDB, writeDataToDB } from "./db-actions";
 
 export const addDelivery = async (delivery: Delivery) => {
   const id = crypto.randomUUID();

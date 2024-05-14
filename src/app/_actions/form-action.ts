@@ -27,10 +27,6 @@ const validateItem = (formData: FormData) => {
     return "Minimal value of stock must be 0!";
   }
 
-  if (!location || !location.trim().length) {
-    return "Location is required!";
-  }
-
   return { price, name, stock, location, optimalStock };
 };
 
@@ -66,7 +62,6 @@ export const addItem = async (_: string, formData: FormData) => {
     price: Number(validation.price),
     name: validation.name,
     currentStock: Number(validation.stock),
-    location: validation.location,
     id: itemId,
     lastOrder: convertDate(new Date()),
     optimalStock: Number(validation.optimalStock),

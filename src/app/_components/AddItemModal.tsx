@@ -13,8 +13,7 @@ export default function AddItemModal() {
   const [values, setValues] = useState({
     "item-name": "",
     price: undefined,
-    stock: undefined,
-    location: "A1",
+    stock: 0,
     optimalStock: undefined,
   });
 
@@ -39,17 +38,6 @@ export default function AddItemModal() {
             className="text-black rounded-sm"
             name="item-name"
           />
-          <label htmlFor="stock">Stock</label>
-          <input
-            onChange={handleChange}
-            min={0}
-            max={999999}
-            step={1}
-            className="text-black rounded-sm"
-            name="stock"
-            type="number"
-            value={values.stock}
-          />
           <label htmlFor="price">Price</label>
           <input
             onChange={handleChange}
@@ -72,20 +60,6 @@ export default function AddItemModal() {
             max={9999999}
           />
         </section>
-        <div className="flex flex-col mb-4">
-          <label htmlFor="location">Location</label>
-          <select
-            onChange={handleChange}
-            value={values.location}
-            className="text-black"
-            name="location"
-            id="location"
-          >
-            <option value="A1">A1</option>
-            <option value="A2">A2</option>
-            <option value="B1">B1</option>
-          </select>
-        </div>
         <div className="flex justify-around w-full">
           <Button buttonProps={{ type: "submit" }} handleClick={() => {}}>
             <div className="p-1 text-xl">Confirm</div>
