@@ -7,7 +7,7 @@ import type { ItemForDelivery } from "../utils/types";
 
 export default function OrderItemModal() {
   const { hide } = useModalContext();
-  const { table, setOrder, order } = useTableContext();
+  const { table, setOrder } = useTableContext();
 
   const selectedItems = table.getSelectedRowModel().rows;
   const [orderSize, setOrderSize] = useState<number>();
@@ -32,9 +32,10 @@ export default function OrderItemModal() {
 
     const newItems: ItemForDelivery[] = selectedItems.map((it) => ({
       id: it.original.id,
-      currentStock: it.original.currentStock + orderSize,
+      currentStock: it.original.currentStock,
       name: it.original.name,
       price: it.original.price,
+      orderSize: orderSize,
     }));
 
     const newIds = newItems.map((it) => it.id);
@@ -48,9 +49,9 @@ export default function OrderItemModal() {
                 newIds.includes(it.id)
                   ? {
                       ...it,
-                      currentStock:
-                        it.currentStock +
-                        newItems.find((it) => it.id === it.id)?.currentStock!,
+                      orderSize:
+                        it.orderSize +
+                        newItems.find((it) => it.id === it.id)?.orderSize!,
                     }
                   : it
               )

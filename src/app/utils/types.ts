@@ -9,7 +9,9 @@ export type Delivery = {
 export type ItemForDelivery = Omit<
   Item,
   "location" | "lastOrder" | "optimalStock"
->;
+> & {
+  orderSize: number;
+};
 
 export type Item = {
   name: string;
