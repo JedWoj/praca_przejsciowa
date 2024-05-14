@@ -1,5 +1,7 @@
 "use client";
 import { useModalContext } from "../_context/ModalContext";
+import Button from "./Button";
+import { dispatchItemFromDelivery } from "../_actions/delivery-actions";
 
 export default function DispatchItem() {
   const { hide } = useModalContext();
@@ -16,17 +18,19 @@ export default function DispatchItem() {
           </select>
         </div>
         <div className="flex gap-2">
-          <button onClick={() => console.log()}>Confirm</button>
-          <button onClick={hide}>Cancel</button>
+          <Button handleClick={() => dispatchItemFromDelivery()}>
+            Confirm
+          </Button>
+          <Button handleClick={hide}>Cancel</Button>
         </div>
       </section>
-      <section>
+      {/* <section>
         <div>Storage Info</div>
         <div className="bg-white text-purple-500 rounded-md">
           <div>Nummber of items: 23</div>
           <div>Avaiable Space 37/60</div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

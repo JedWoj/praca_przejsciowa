@@ -4,6 +4,7 @@ import "./globals.css";
 import ModalContext from "./_context/ModalContext";
 import { TableContext } from "./_context/TableContext";
 import { DeliveryContext } from "./_context/DeliveryContext";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,14 @@ export default function RootLayout({
       <body className={inter.className}>
         <TableContext>
           <DeliveryContext>
-            <ModalContext>{children}</ModalContext>
+            <ModalContext>
+              <nav className="bg-gradient-to-r from-green-600 to-blue-500 p-4 flex gap-8 text-white">
+                <Link href={"/"}>Home</Link>
+                <Link href={"/delivery"}>Deliveries</Link>
+                <Link href={"/overview"}>Overview</Link>
+              </nav>
+              {children}
+            </ModalContext>
           </DeliveryContext>
         </TableContext>
       </body>

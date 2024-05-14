@@ -60,3 +60,11 @@ export const getDataFromDB = async (path: string) => {
   const userDataRef = ref(db, path);
   return await get(userDataRef);
 };
+
+export const updateDataToDB = async <TValue>(path: string, value: TValue) => {
+  const db = getDatabase();
+
+  const updates = { [path]: value };
+
+  return update(ref(db), updates);
+};
