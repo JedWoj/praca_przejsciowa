@@ -5,8 +5,6 @@ import ChangeItemValueModal from "./ChangeItemValueModal";
 import RemoveItemModal from "./RemoveItemModal";
 import AddItemModal from "./AddItemModal";
 import OrderItemModal from "./OrderItemModal";
-import DispatchItem from "./DispatchItem";
-import ReturnItemModal from "./ReturnItemModal";
 import { MakeOrderModal } from "./MakeOrderModal";
 
 export default function DisplayedModal() {
@@ -31,12 +29,6 @@ export default function DisplayedModal() {
         break;
       case "order_item":
         component = <OrderItemModal />;
-        break;
-      case "dispatch_item":
-        component = <DispatchItem />;
-        break;
-      case "return_item":
-        component = <ReturnItemModal />;
         break;
       case "make_order":
         component = <MakeOrderModal />;
