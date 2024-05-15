@@ -21,8 +21,6 @@ type ModalName =
   | "remove_item"
   | "add_item"
   | "order_item"
-  | "dispatch_item"
-  | "return_item"
   | "make_order";
 
 type ModalContextProps = PropsWithChildren;

@@ -33,8 +33,10 @@ export default function OrderItemModal() {
     const newItems: ItemForDelivery[] = selectedItems.map((it) => ({
       id: it.original.id,
       currentStock: it.original.currentStock,
+      optimalStock: it.original.optimalStock,
       name: it.original.name,
       price: it.original.price,
+      location: it.original.location,
       orderSize: orderSize,
     }));
 

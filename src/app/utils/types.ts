@@ -11,6 +11,7 @@ export type ItemForDelivery = Omit<
   "location" | "lastOrder" | "optimalStock"
 > & {
   orderSize: number;
+  location: Location | null;
 };
 
 export type Item = {

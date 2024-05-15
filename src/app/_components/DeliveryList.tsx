@@ -7,13 +7,21 @@ export function DeliveryList() {
   const { deliveries } = useDeliveryContext();
 
   return (
-    <ul className="text-white">
-      {deliveries.map((delivery) => (
-        <DeliveryItem key={delivery.id}>
-          <Link href={`/delivery/${delivery.id}`}>{delivery.name}</Link>
-        </DeliveryItem>
-      ))}
-    </ul>
+    <section className="flex items-center justify-center h-screen">
+      {deliveries.length === 0 ? (
+        <h2 className="text-3xl text-white text-center">
+          No Deliveries Found!
+        </h2>
+      ) : (
+        <ul className="text-white">
+          {deliveries.map((delivery) => (
+            <DeliveryItem key={delivery.id}>
+              <Link href={`/delivery/${delivery.id}`}>{delivery.name}</Link>
+            </DeliveryItem>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }
 
