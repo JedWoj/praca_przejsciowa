@@ -17,9 +17,9 @@ export default function ChangeItemValueModal() {
   );
 
   const [values, setValues] = useState({
-    name: selectedItem?.name,
+    "item-name": selectedItem?.name,
     price: selectedItem?.price,
-    stock: selectedItem?.currentStock,
+    "optimal-stock": selectedItem?.optimalStock,
     location: selectedItem?.location,
   });
 
@@ -40,20 +40,20 @@ export default function ChangeItemValueModal() {
           <label htmlFor="item-name">Name</label>
           <input
             onChange={handleChange}
-            value={values.name}
+            value={values["item-name"]}
             className="text-black rounded-sm"
             name="item-name"
           />
-          <label htmlFor="stock">Stock</label>
+          <label htmlFor="optimal-stock">Optimal Stock</label>
           <input
             onChange={handleChange}
             min={0}
             max={999999}
-            step={0.1}
+            step={1}
             className="text-black rounded-sm"
-            name="stock"
+            name="optimal-stock"
             type="number"
-            value={values.stock}
+            value={values["optimal-stock"]}
           />
           <label htmlFor="price">Price</label>
           <input

@@ -19,14 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="overflow-hidden" lang="en">
+    <html lang="en">
       <body className={inter.className}>
         <TableContext>
           <DeliveryContext>
             <ModalContext>
-              <nav className="bg-gradient-to-r from-green-600 to-blue-500 p-4 flex gap-8 text-white">
+              <nav className="bg-gradient-to-r from-green-600 to-blue-500 p-4 flex gap-8 text-white h-[49px]">
                 <Link href={"/"}>Home</Link>
                 <Link href={"/delivery"}>Deliveries</Link>
+                <Link href={"/storage"}>Storage</Link>
                 <Link href={"/overview"}>Overview</Link>
               </nav>
               {children}

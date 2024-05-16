@@ -27,6 +27,7 @@ export type TableContextType = {
   table: Table<Item>;
   order: Delivery | null;
   setOrder: Dispatch<SetStateAction<Delivery | null>>;
+  data: Item[];
 };
 
 type TableContextProps = PropsWithChildren;
@@ -50,7 +51,7 @@ const columnHelper = createColumnHelper<Item>();
 const columns = [
   {
     id: "select",
-    header: ({ table }) => (
+    header: ({ table }: { table: any }) => (
       <IndeterminateCheckbox
         {...{
           checked: table.getIsAllRowsSelected(),
@@ -59,7 +60,7 @@ const columns = [
         }}
       />
     ),
-    cell: ({ row }) => (
+    cell: ({ row }: { row: any }) => (
       <div className="px-1">
         <IndeterminateCheckbox
           {...{
@@ -144,6 +145,7 @@ const TableContext = ({ children }: TableContextProps) => {
     setOrder,
     table,
     setData,
+    data,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

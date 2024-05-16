@@ -1,71 +1,17 @@
-import type { Item, Delivery } from "./types";
+import type { Item, Storage } from "./types";
 
-export const defaultDeliveries: Delivery[] = [
+export const defaultStorages: Storage[] = [
   {
-    name: "Zamówienie nr 1",
-    id: "1",
-    items: [
-      {
-        name: "Śruba M8x30",
-        currentStock: 400,
-        price: 0.6,
-        lastOrder: "2022-01-01",
-        location: "A1",
-        optimalStock: 1,
-        id: "1",
-      },
-      {
-        name: "Śruba M8x40",
-        currentStock: 700,
-        price: 0.7,
-        lastOrder: "2022-01-01",
-        location: "A1",
-        optimalStock: 1,
-        id: "2",
-      },
-      {
-        name: "Śruba M8x50",
-        currentStock: 1000,
-        price: 0.8,
-        lastOrder: "2022-01-01",
-        location: "A1",
-        optimalStock: 1,
-        id: "3",
-      },
-    ],
+    capacity: 10000,
+    name: "A1",
   },
   {
-    id: "2",
-    name: "Zamówienie nr 2",
-    items: [
-      {
-        name: "Nakrętka M10",
-        currentStock: 200,
-        price: 0.2,
-        lastOrder: "2022-01-01",
-        location: "A1",
-        optimalStock: 3,
-        id: "5",
-      },
-      {
-        name: "Podkładka M10",
-        currentStock: 300,
-        price: 0.3,
-        lastOrder: "2022-01-01",
-        location: "A1",
-        optimalStock: 3,
-        id: "6",
-      },
-      {
-        name: "Śruba M10x30",
-        currentStock: 400,
-        price: 0.8,
-        lastOrder: "2022-01-01",
-        location: "A1",
-        optimalStock: 2,
-        id: "7",
-      },
-    ],
+    capacity: 5000,
+    name: "A2",
+  },
+  {
+    capacity: 2000,
+    name: "B1",
   },
 ];
 
