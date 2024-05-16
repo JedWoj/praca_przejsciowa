@@ -20,6 +20,9 @@ export default function RemoveItemModal() {
     selectedItems.length === 1
       ? removeDataFromDB(`/items/${selectedItems.at(0)?.id}`)
       : removeMultipleRecordsFromDB(paths);
+
+    table.resetRowSelection();
+    hide();
   };
 
   return (

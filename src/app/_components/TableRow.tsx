@@ -41,6 +41,8 @@ export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
       return "bg-amber-700";
     } else if (percentOfOptimalValue > 0) {
       return "bg-red-700";
+    } else if (percentOfOptimalValue === 0) {
+      return "bg-slate-600";
     }
   };
 

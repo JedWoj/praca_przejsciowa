@@ -23,3 +23,8 @@ export type Item = {
   optimalStock: number;
   id: string;
 };
+
+export type Storage = {
+  capacity: number;
+  name: string;
+};

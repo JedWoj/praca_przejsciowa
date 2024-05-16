@@ -8,7 +8,7 @@ export default function Delivery({ params }: { params: { id: string } }) {
   const handledDelivery = deliveries.find((it) => it.id === params.id);
 
   return (
-    <div className="h-screen bg-gradient-to-tr from-lime-400 to-blue-600 flex flex-col px-40 pt-10 gap-5">
+    <div className="h-[calc(100vh-49px)] bg-gradient-to-tr from-lime-400 to-blue-600 flex flex-col px-40 pt-10 gap-5">
       <h1 className="text-3xl text-white text-center">
         {handledDelivery?.name}
       </h1>

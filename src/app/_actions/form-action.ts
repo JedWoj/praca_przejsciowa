@@ -41,7 +41,7 @@ export const changeItem = async (item: Item, _: string, formData: FormData) => {
     ...item,
     price: Number(validation.price),
     name: validation.name,
-    currentStock: Number(validation.stock),
+    optimalStock: Number(validation.optimalStock),
     location: validation.location,
     lastOrder: convertDate(new Date()),
   });

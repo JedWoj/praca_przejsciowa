@@ -34,7 +34,7 @@ export function Table() {
         style={{
           overflow: "auto", //our scrollable table container
           position: "relative", //needed for sticky header
-          height: "calc(100vh - 21px)", //should be a fixed height
+          height: "calc(100vh - 119px)", //should be a fixed height
         }}
       >
         <table className="grid overflow-hidden">
