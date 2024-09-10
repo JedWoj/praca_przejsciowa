@@ -10,9 +10,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
+
       - name: Installing dependencies
         run: npm ci
+      
       - name: Lint
         run: npm run lint
+
       - name: Build
         run: npm run build
+      
+      - name: Unit tests
+        run: npm run test
+
+      - name: E2E tests
+        run: npm run test:e2e

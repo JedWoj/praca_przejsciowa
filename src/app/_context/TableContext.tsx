@@ -9,7 +9,7 @@ import {
   useReactTable,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-import React, {
+import {
   type Dispatch,
   type HTMLProps,
   type SetStateAction,
@@ -18,6 +18,7 @@ import React, {
   useEffect,
   useState,
   type PropsWithChildren,
+  useRef,
 } from "react";
 import type { Delivery, Item } from "../utils/types";
 import { getDatabase, onValue, ref } from "firebase/database";
@@ -168,12 +169,13 @@ function IndeterminateCheckbox({
   className = "",
   ...rest
 }: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
-  const ref = React.useRef<HTMLInputElement>(null!);
+  const ref = useRef<HTMLInputElement>(null!);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof indeterminate === "boolean") {
       ref.current.indeterminate = !rest.checked && indeterminate;
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref, indeterminate]);
 
   return (
