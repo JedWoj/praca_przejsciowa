@@ -16,22 +16,20 @@ jobs:
   build_and_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "18.x"
-
-      - name: Installing dependencies
-        run: npm ci
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Configure node
+        uses: ./.github/actions/setup-node
       
       - name: Lint
         run: npm run lint
+        
+      - name: Unit tests
+        run: npm run test
+  
+      - name: E2E tests
+        run: npm run test:e2e
 
       - name: Build
         run: npm run build
-      
-      - name: Unit tests
-        run: npm run test
-
-      - name: E2E tests
-        run: npm run test:e2e
