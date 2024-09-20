@@ -1,0 +1,24 @@
+name: Check quality
+description: Check quality of the project
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Lint
+      run: npm run lint
+      shell: bash
+
+    - name: Unit tests
+      run: npm run test
+      shell: bash
+
+    - name: E2E tests
+      run: npm run test:e2e
+      shell: bash
+    
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
