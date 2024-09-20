@@ -13,8 +13,9 @@ env:
   NEXT_PUBLIC_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_AUTH_DOMAIN }}
 on:
   pull_request:
-    branches-ignore:
+    branches:
       - main
+      - master
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
