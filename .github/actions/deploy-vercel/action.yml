@@ -27,13 +27,13 @@ runs:
 
       - name: Deploy Project Artifacts to Vercel
         if: ${{ inputs.mode == 'production' }}
-        run: vercel deploy --prod --token=${{ inputs.vercel-token }}
+        run: vercel deploy --prebuilt --prod --token=${{ inputs.vercel-token }}
         shell: bash
 
       - name: Deploy Project Artifacts to Vercel
         if: ${{ inputs.mode == 'preview' }}
         run: | 
-          DEPLOY_OUTPUT="$(vercel deploy --token=${{ inputs.vercel-token }})"
+          DEPLOY_OUTPUT="$(vercel deploy --prebuilt --token=${{ inputs.vercel-token }})"
           DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | grep http | tail -n 1)
           echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_ENV
         shell: bash
