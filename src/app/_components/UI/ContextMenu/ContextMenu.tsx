@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
-import type { MenuContextType } from "../_context/MenuContext";
-import { useClickOutside } from "../hooks/useClickOutside";
+import type { MenuContextType } from "../../../_context/MenuContext";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
 export function ContextMenu({
   cords,

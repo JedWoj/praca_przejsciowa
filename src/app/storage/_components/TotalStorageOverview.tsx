@@ -1,8 +1,8 @@
 "use client";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
-import { defaultStorages } from "../utils/static";
-import { useTableContext } from "../_context/TableContext";
+import { defaultStorages } from "@/app/utils/static";
+import { useTableContext } from "@/app/_context/TableContext";
 
 Chart.register(ArcElement, Tooltip);
 

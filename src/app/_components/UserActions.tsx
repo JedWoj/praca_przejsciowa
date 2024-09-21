@@ -1,19 +1,26 @@
-"use client";
 import Link from "next/link";
 import { UserAction } from "./UserAction";
+import type { ReactNode } from "react";
+
+type Action = {
+  label: ReactNode;
+  href: string;
+};
+
+const USER_ACTIONS: Action[] = [
+  { label: "Handle deliveries!", href: "/delivery" },
+  { label: "Check storage state!", href: "/storage" },
+  { label: "Items overview!", href: "/overview" },
+];
 
 export function UserActions() {
   return (
     <section className="flex gap-4">
-      <Link href="/delivery">
-        <UserAction>Handle deliveries!</UserAction>
-      </Link>
-      <Link href="/storage">
-        <UserAction>Check storage state!</UserAction>
-      </Link>
-      <Link href="/overview">
-        <UserAction>Items overview!</UserAction>
-      </Link>
+      {USER_ACTIONS.map(({ label, href }) => (
+        <Link key={href} href={href}>
+          <UserAction>{label}</UserAction>
+        </Link>
+      ))}
     </section>
   );
 }

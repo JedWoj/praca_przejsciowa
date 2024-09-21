@@ -1,8 +1,8 @@
 "use client";
-import type { Storage } from "../utils/types";
+import type { Storage } from "@/app/utils/types";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip } from "chart.js";
-import { useTableContext } from "../_context/TableContext";
+import { useTableContext } from "@/app/_context/TableContext";
 
 type StorageOverviewProps = {
   storage: Storage;

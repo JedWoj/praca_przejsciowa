@@ -1,3 +1,4 @@
+"use client";
 import { type Row, flexRender } from "@tanstack/react-table";
 import type { VirtualItem, Virtualizer } from "@tanstack/react-virtual";
 import type { Item } from "../utils/types";
@@ -54,7 +55,6 @@ export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
       style={{
         transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
       }}
-      // onClick={handleRowSelection}
       className={`flex absolute w-full hover:bg-zinc-300 ${getRowColor(
         row
       )} cursor-pointer`}

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useTableContext } from "../_context/TableContext";
 import { useModalContext } from "../_context/ModalContext";
-import Button from "./Button";
+import Button from "./UI/Button";
 import { FaShoppingCart } from "react-icons/fa";
 
 export function UserControll() {

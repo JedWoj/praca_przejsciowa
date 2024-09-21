@@ -1,6 +1,6 @@
 "use client";
 import { PropsWithChildren } from "react";
-import { useModalContext } from "../_context/ModalContext";
+import { useModalContext } from "@/app/_context/ModalContext";
 
 export default function Modal({ children }: PropsWithChildren) {
   const { modal, hide } = useModalContext();

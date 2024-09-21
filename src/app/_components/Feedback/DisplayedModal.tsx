@@ -1,18 +1,15 @@
 "use client";
-import { useModalContext } from "../_context/ModalContext";
-import Modal from "./Modal";
-import ChangeItemValueModal from "./ChangeItemValueModal";
-import RemoveItemModal from "./RemoveItemModal";
-import AddItemModal from "./AddItemModal";
-import OrderItemModal from "./OrderItemModal";
-import { MakeOrderModal } from "./MakeOrderModal";
+import { useModalContext } from "../../_context/ModalContext";
+import OrderItemModal from "./Modal/OrderItemModal";
+import Modal from "../UI/Modal";
+import AddItemModal from "./Modal/AddItemModal";
+import AddProductModal from "./Modal/AddProductModal";
+import ChangeItemValueModal from "./Modal/ChangeItemValueModal";
+import MakeOrderModal from "./Modal/MakeOrderModal";
+import RemoveItemModal from "./Modal/RemoveItemModal";
 
 export default function DisplayedModal() {
   const { modal } = useModalContext();
-
-  if (!modal) {
-    return modal;
-  }
 
   const getModal = () => {
     let component;
@@ -32,6 +29,9 @@ export default function DisplayedModal() {
         break;
       case "make_order":
         component = <MakeOrderModal />;
+        break;
+      case "add_product":
+        component = <AddProductModal />;
         break;
       default:
         component = null;

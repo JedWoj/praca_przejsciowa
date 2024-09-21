@@ -1,10 +1,10 @@
 "use client";
-import Button from "./Button";
-import { useModalContext } from "../_context/ModalContext";
+import Button from "../../UI/Button";
+import { useModalContext } from "@/app/_context/ModalContext";
 import { useFormState } from "react-dom";
-import { useTableContext } from "../_context/TableContext";
+import { useTableContext } from "@/app/_context/TableContext";
 import { ChangeEvent, useState } from "react";
-import { changeItem } from "../_actions/form-action";
+import { changeItem } from "@/app/_actions/form-action";
 
 export default function ChangeItemValueModal() {
   const { hide } = useModalContext();

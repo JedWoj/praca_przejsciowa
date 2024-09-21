@@ -1,10 +1,10 @@
-import Button from "./Button";
+import Button from "../../UI/Button";
 import {
   removeDataFromDB,
   removeMultipleRecordsFromDB,
-} from "../_actions/db-actions";
-import { useModalContext } from "../_context/ModalContext";
-import { useTableContext } from "../_context/TableContext";
+} from "@/app/_actions/db-actions";
+import { useModalContext } from "@/app/_context/ModalContext";
+import { useTableContext } from "@/app/_context/TableContext";
 
 export default function RemoveItemModal() {
   const { hide } = useModalContext();
