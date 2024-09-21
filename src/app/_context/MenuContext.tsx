@@ -8,8 +8,8 @@ import {
   type SetStateAction,
   type Dispatch,
 } from "react";
-import { ContextMenu } from "../_components/ContextMenu";
-import { ContextMenuItem } from "../_components/ContextMenuItem";
+import { ContextMenu } from "../_components/UI/ContextMenu/ContextMenu";
+import { ContextMenuItem } from "../_components/UI/ContextMenu/ContextMenuItem";
 import { useModalContext } from "./ModalContext";
 
 export type MenuContextType = {

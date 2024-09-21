@@ -1,9 +1,9 @@
 "use client";
-import Button from "./Button";
-import { useModalContext } from "../_context/ModalContext";
+import Button from "../../UI/Button";
+import { useModalContext } from "@/app/_context/ModalContext";
 import { useFormState } from "react-dom";
 import { ChangeEvent, useState } from "react";
-import { addItem } from "../_actions/form-action";
+import { addItem } from "@/app/_actions/form-action";
 
 export default function AddItemModal() {
   const { hide } = useModalContext();

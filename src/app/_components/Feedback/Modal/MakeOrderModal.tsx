@@ -1,12 +1,12 @@
 "use client";
 import { FaTrashCan } from "react-icons/fa6";
-import { useTableContext } from "../_context/TableContext";
-import type { ItemForDelivery } from "../utils/types";
-import Button from "./Button";
-import { useModalContext } from "../_context/ModalContext";
-import { addDelivery } from "../_actions/delivery-actions";
+import { useTableContext } from "@/app/_context/TableContext";
+import type { ItemForDelivery } from "@/app/utils/types";
+import Button from "../../UI/Button";
+import { useModalContext } from "@/app/_context/ModalContext";
+import { addDelivery } from "@/app/_actions/delivery-actions";
 
-export function MakeOrderModal() {
+export default function MakeOrderModal() {
   const { order, setOrder } = useTableContext();
   const { hide } = useModalContext();
 

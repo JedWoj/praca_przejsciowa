@@ -1,9 +1,9 @@
 "use client";
-import Button from "./Button";
-import { useModalContext } from "../_context/ModalContext";
+import Button from "../../UI/Button";
+import { useModalContext } from "../../../_context/ModalContext";
 import { type FormEvent, useState } from "react";
-import { useTableContext } from "../_context/TableContext";
-import type { ItemForDelivery } from "../utils/types";
+import { useTableContext } from "../../../_context/TableContext";
+import type { ItemForDelivery } from "../../../utils/types";
 
 export default function OrderItemModal() {
   const { hide } = useModalContext();

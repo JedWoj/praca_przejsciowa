@@ -1,6 +1,5 @@
 "use client";
 import DeliveryItem from "@/app/_components/DeliveryItem";
-import DisplayedModal from "@/app/_components/DisplayedModal";
 import { useDeliveryContext } from "@/app/_context/DeliveryContext";
 
 export default function Delivery({ params }: { params: { id: string } }) {
@@ -20,7 +19,6 @@ export default function Delivery({ params }: { params: { id: string } }) {
           <DeliveryItem key={it.id} item={it} />
         ))}
       </section>
-      <DisplayedModal />
     </div>
   );
 }

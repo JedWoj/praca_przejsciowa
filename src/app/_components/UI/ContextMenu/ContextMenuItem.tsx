@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { useMenuContext } from "../_context/MenuContext";
+import { useMenuContext } from "@/app/_context/MenuContext";
 
 type ContextMenuItemProps = PropsWithChildren<{ action: () => void }>;
 

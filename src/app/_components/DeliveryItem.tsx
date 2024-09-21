@@ -3,7 +3,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useDeliveryContext } from "../_context/DeliveryContext";
 import type { ItemForDelivery, Location } from "../utils/types";
-import Button from "./Button";
+import Button from "./UI/Button";
 import { updateDataToDB } from "../_actions/db-actions";
 import { removeDelivery } from "../_actions/delivery-actions";
 import { convertDate } from "../utils/convertDate";
