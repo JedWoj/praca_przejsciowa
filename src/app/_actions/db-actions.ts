@@ -1,16 +1,4 @@
 "use server";
-const firebaseConfig = {
-  apiKey: process.env.FIREBASE_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  databaseURL: process.env.DATABASE_URL,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-};
-
-initializeApp(firebaseConfig);
-
 import {
   get,
   getDatabase,
@@ -20,7 +8,6 @@ import {
   remove,
   update,
 } from "firebase/database";
-import { initializeApp } from "firebase/app";
 
 export const writeDataToDB = <TItem>(path: string, item: TItem) => {
   const db = getDatabase();
@@ -56,6 +43,7 @@ export const subscribeDataFromDB = <TData>(
 };
 
 export const getDataFromDB = async (path: string) => {
+  console.log();
   const db = getDatabase();
   const userDataRef = ref(db, path);
   return await get(userDataRef);
