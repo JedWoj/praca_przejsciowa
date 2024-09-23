@@ -2,11 +2,12 @@
 import type {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
+  MouseEvent,
   PropsWithChildren,
 } from "react";
 
 type ButtonProps = PropsWithChildren<{
-  handleClick: () => void;
+  handleClick: (e: MouseEvent<HTMLButtonElement>) => void;
   buttonProps?: DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
@@ -25,7 +26,7 @@ export default function Button({
           ? "bg-slate-500 cursor-not-allowed"
           : "bg-gradient-to-r from-blue-500 to-green-600"
       }`}
-      onClick={handleClick}
+      onClick={(e) => handleClick(e)}
       {...buttonProps}
     >
       {children}

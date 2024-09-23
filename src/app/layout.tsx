@@ -1,11 +1,13 @@
+import { type FirebaseApp, getApps, initializeApp } from "firebase/app";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import DisplayedModal from "./_components/Feedback/DisplayedModal";
+import { DeliveryContext } from "./_context/DeliveryContext";
 import ModalContext from "./_context/ModalContext";
 import { TableContext } from "./_context/TableContext";
-import { DeliveryContext } from "./_context/DeliveryContext";
-import Link from "next/link";
-import DisplayedModal from "./_components/Feedback/DisplayedModal";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,12 +27,25 @@ const ROUTS: Route[] = [
   { name: "Storage", value: "/storage" },
   { name: "Overview", value: "/overview" },
   { name: "Products", value: "/products" },
+  { name: "Parts", value: "/parts" },
 ];
+
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+};
+
+initializeApp(firebaseConfig);
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">

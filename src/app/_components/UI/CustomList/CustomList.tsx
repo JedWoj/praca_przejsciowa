@@ -5,7 +5,7 @@ function DefaultListItem({ name }: ItemBase) {
   return <li key={name}>{name}</li>;
 }
 
-export function CustomList<T extends ItemBase>({
+export default function CustomList<T extends ItemBase>({
   children,
   listItems,
   footer,
