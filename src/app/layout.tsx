@@ -1,12 +1,12 @@
-import { type FirebaseApp, getApps, initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import DisplayedModal from "./_components/Feedback/DisplayedModal";
-import { DeliveryContext } from "./_context/DeliveryContext";
-import ModalContext from "./_context/ModalContext";
-import { TableContext } from "./_context/TableContext";
+import DisplayedModal from "./components/Feedback/DisplayedModal";
+import { DeliveryContext } from "./context/DeliveryContext";
+import ModalContext from "./context/ModalContext";
+import { TableContext } from "./context/TableContext";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
