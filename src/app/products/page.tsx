@@ -1,5 +1,5 @@
-import AddProductBtn from "./_components/AddProductBtn";
-import ProductsList from "./_components/ProductsList";
+import AddProductBtn from "./components/AddProductBtn";
+import ProductsList from "./components/ProductsList";
 
 export const dynamic = "force-dynamic";
 

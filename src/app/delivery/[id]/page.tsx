@@ -1,6 +1,6 @@
 "use client";
-import DeliveryItem from "@/app/_components/DeliveryItem";
-import { useDeliveryContext } from "@/app/_context/DeliveryContext";
+import DeliveryItem from "@/app/components/DeliveryItem";
+import { useDeliveryContext } from "@/app/context/DeliveryContext";
 
 export default function Delivery({ params }: { params: { id: string } }) {
   const { deliveries } = useDeliveryContext();

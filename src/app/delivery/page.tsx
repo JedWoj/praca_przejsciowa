@@ -1,4 +1,4 @@
-import { DeliveryList } from "../_components/DeliveryList";
+import { DeliveryList } from "../components/DeliveryList";
 
 export default function Delivery() {
   return (

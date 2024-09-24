@@ -1,4 +1,4 @@
-import ControlPanel from "./_components/ControlPanel";
+import ControlPanel from "./components/ControlPanel";
 
 export default function Overview() {
   return (
