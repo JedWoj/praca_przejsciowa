@@ -11,13 +11,14 @@ export default function CustomList<T extends ItemBase>({
   footer,
   header,
   onClick,
+  ...props
 }: CustomListProps<T>) {
   return (
     <div>
       {header}
-      <ul onClick={onClick}>
+      <ul {...props} onClick={onClick}>
         {listItems.map((item, index) =>
-          children({ item, index, ListItem: DefaultListItem })
+          children({ item, index, ListItem: DefaultListItem }),
         )}
       </ul>
       {footer}

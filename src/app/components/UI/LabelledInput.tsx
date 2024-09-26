@@ -25,6 +25,7 @@ export default function LabelledInput<TVal extends string | number>({
         onChange={(e) => onChange(e.target.value, uniqueName)}
         className="border-2 border-cyan-400 rounded-lg p-1 text-black"
         id={uniqueName}
+        name={uniqueName}
         {...buttonProps}
       />
     </div>

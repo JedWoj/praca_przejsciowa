@@ -1,7 +1,14 @@
-import { useRouter } from "next/navigation";
-import { type HTMLProps, type MouseEvent, useState } from "react";
+"use client";
+import { type HTMLProps, useEffect, useState } from "react";
 
+import { addProduct } from "@/app/actions/add-product-form";
+import { parts as partsAPI } from "@/app/api/parts";
+import { useFetch } from "@/app/hooks/useFetch";
+import PartsSelection from "@/app/products/components/PartsSelection";
+import type { MapppedPart } from "@/app/products/utils/convertPartsToArray";
+import { useFormState } from "react-dom";
 import Button from "../../UI/Button";
+import FetchWrapper from "../../UI/FetchWrapper";
 import LabelledInput from "../../UI/LabelledInput";
 
 type FormEntry<TVal extends string | number> = {
@@ -18,7 +25,6 @@ type FormEntries = {
 };
 
 export default function AddProductModal() {
-  const router = useRouter();
   const [formVal, setFormVal] = useState<FormEntries>({
     name: { label: "Name", uniqueName: "name", value: "" },
     price: {
@@ -28,16 +34,22 @@ export default function AddProductModal() {
       inputProps: { type: "number" },
     },
   });
+  const [parts, setParts] = useState<
+    Map<string, MapppedPart & { quantity: number }>
+  >(new Map());
 
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    router.refresh();
-  };
+  const { fetchData, status, data } = useFetch(partsAPI.get_all);
+
+  const [state, FormAction] = useFormState(addProduct.bind(null, parts), "");
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <div>
-      <form className="flex flex-col gap-4">
-        <div>
+      <form action={FormAction} className="flex gap-4">
+        <div className="gap-2 flex flex-col">
           {Object.values(formVal).map((entry) => (
             <LabelledInput
               key={entry.uniqueName}
@@ -53,11 +65,22 @@ export default function AddProductModal() {
               }
             />
           ))}
+          <Button
+            buttonProps={{ type: "submit", style: { width: "100%" } }}
+            handleClick={() => {}}
+          >
+            Add
+          </Button>
         </div>
-        <Button buttonProps={{ type: "submit" }} handleClick={handleClick}>
-          Add
-        </Button>
+        <FetchWrapper status={status}>
+          <PartsSelection
+            parts={data ?? {}}
+            selectionState={parts}
+            handleSelection={setParts}
+          />
+        </FetchWrapper>
       </form>
+      {state}
     </div>
   );
 }
