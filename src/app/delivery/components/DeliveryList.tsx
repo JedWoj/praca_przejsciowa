@@ -1,7 +1,7 @@
 "use client";
 import type { PropsWithChildren } from "react";
 import Link from "next/link";
-import { useDeliveryContext } from "../context/DeliveryContext";
+import { useDeliveryContext } from "@/app/context/DeliveryContext";
 
 export function DeliveryList() {
   const { deliveries } = useDeliveryContext();

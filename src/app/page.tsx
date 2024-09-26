@@ -1,4 +1,4 @@
-import { UserActions } from "./components/UserActions";
+import { UserActions } from "./overview/components/UserActions";
 
 export default function Home() {
   return (

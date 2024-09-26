@@ -24,7 +24,7 @@ export default function PartsSelection({
     <CustomList
       header={<h2 className="text-xl">Parts selection</h2>}
       listItems={convertPartsToArray(parts)}
-      className="p-4 rounded-md bg-slate-200 text-black gap-1 flex flex-col max-h-40vh"
+      className="p-4 rounded-md bg-slate-200 text-black gap-1 flex flex-col max-h-[40vh] overflow-auto"
     >
       {({ item }) => (
         <PartItem

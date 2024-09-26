@@ -3,49 +3,49 @@ description: Deploy the project to Vercel
 
 inputs:
   vercel-token:
-    description: 'Vercel token'
+    description: Vercel token
     required: true
   mode:
-    description: 'Deployment mode'
+    description: Deployment mode
     required: true
-    default: 'production'
+    default: production
 
 runs:
   using: composite
   steps:
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-        shell: bash
+    - name: Install Vercel CLI
+      run: npm install --global vercel@latest
+      shell: bash
 
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=${{ inputs.mode }} --token=${{ inputs.vercel-token }}
-        shell: bash
+    - name: Pull Vercel Environment Information
+      run: vercel pull --yes --environment=${{ inputs.mode }} --token=${{ inputs.vercel-token }}
+      shell: bash
 
-      - name: Build Project Artifacts
-        run: vercel build --token=${{ inputs.vercel-token }}
-        shell: bash
+    - name: Build Project Artifacts
+      run: vercel build --token=${{ inputs.vercel-token }}
+      shell: bash
 
-      - name: Deploy Project Artifacts to Vercel
-        if: ${{ inputs.mode == 'production' }}
-        run: vercel deploy --prebuilt --prod --token=${{ inputs.vercel-token }}
-        shell: bash
+    - name: Deploy Project Artifacts to Vercel
+      if: ${{ inputs.mode == 'production' }}
+      run: vercel deploy --prebuilt --prod --token=${{ inputs.vercel-token }}
+      shell: bash
 
-      - name: Deploy Project Artifacts to Vercel
-        if: ${{ inputs.mode == 'preview' }}
-        run: | 
-          DEPLOY_OUTPUT="$(vercel deploy --prebuilt --token=${{ inputs.vercel-token }})"
-          DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | grep http | tail -n 1)
-          echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_ENV
-        shell: bash
-      
-      - name: Comment with preview URL
-        uses: actions/github-script@v7
-        if: ${{ inputs.mode == 'preview' }}
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `Preview deployment is ready! [Check it out](${process.env.DEPLOY_URL})`
-            })
+    - name: Deploy Project Artifacts to Vercel
+      if: ${{ inputs.mode == 'preview' }}
+      run: |
+        DEPLOY_OUTPUT="$(vercel deploy --prebuilt --token=${{ inputs.vercel-token }})"
+        DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | grep http | tail -n 1)
+        echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Comment with preview URL
+      uses: actions/github-script@v7
+      if: ${{ inputs.mode == 'preview' }}
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `Preview deployment is ready! [Check it out](${process.env.DEPLOY_URL})`
+          })

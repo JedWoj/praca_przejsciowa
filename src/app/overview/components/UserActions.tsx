@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { UserAction } from "./UserAction";
-import type { ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
 type Action = {
   label: ReactNode;
@@ -22,5 +21,13 @@ export function UserActions() {
         </Link>
       ))}
     </section>
+  );
+}
+
+export function UserAction({ children }: PropsWithChildren) {
+  return (
+    <button className="text-white p-4 bg-gradient-to-r from-green-400 to-blue-500 cursor-pointer rounded-lg text-2xl">
+      {children}
+    </button>
   );
 }

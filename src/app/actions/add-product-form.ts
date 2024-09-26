@@ -3,6 +3,7 @@ import { writeDataToDB } from "./db-actions";
 import { ProductSchema } from "../api/products/models/Product";
 import { ZodError } from "zod";
 import type { MapppedPart } from "../products/utils/convertPartsToArray";
+import { DEFAULT_ERROR_MESSAGE, SUCCESS_MESSAGES } from "./messages";
 
 export async function addProduct(
   parts: Map<string, MapppedPart & { quantity: number }>,
@@ -12,10 +13,6 @@ export async function addProduct(
   try {
     const id = crypto.randomUUID();
 
-    if (!parts.size) {
-      throw new Error("Product must have at least one part!");
-    }
-
     const product = ProductSchema.parse({
       name: formData.get("name"),
       price: formData.get("price"),
@@ -23,14 +20,14 @@ export async function addProduct(
       id,
     });
 
-    writeDataToDB(`products/${id}`, product);
+    await writeDataToDB(`products/${id}`, product);
 
-    return "Product added successfully!";
+    return SUCCESS_MESSAGES.product;
   } catch (error) {
     if (error instanceof ZodError) {
       return error.errors.map((err) => err.message).join("\n");
     }
 
-    return (error as { message: string }).message ?? "An error occurred!";
+    return DEFAULT_ERROR_MESSAGE;
   }
 }

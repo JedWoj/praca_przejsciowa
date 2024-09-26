@@ -2,8 +2,10 @@
 import { type HTMLProps, useEffect, useState } from "react";
 
 import { addProduct } from "@/app/actions/add-product-form";
+import { SUCCESS_MESSAGES } from "@/app/actions/messages";
 import { parts as partsAPI } from "@/app/api/parts";
 import { useFetch } from "@/app/hooks/useFetch";
+import useRefreshPageAfterAction from "@/app/hooks/useRefreshPageAfterAction";
 import PartsSelection from "@/app/products/components/PartsSelection";
 import type { MapppedPart } from "@/app/products/utils/convertPartsToArray";
 import { useFormState } from "react-dom";
@@ -46,25 +48,35 @@ export default function AddProductModal() {
     fetchData();
   }, [fetchData]);
 
+  useRefreshPageAfterAction({
+    state,
+    successMessage: SUCCESS_MESSAGES.product,
+  });
+
   return (
     <div>
       <form action={FormAction} className="flex gap-4">
-        <div className="gap-2 flex flex-col">
-          {Object.values(formVal).map((entry) => (
-            <LabelledInput
-              key={entry.uniqueName}
-              label={entry.label}
-              value={entry.value}
-              uniqueName={entry.uniqueName}
-              buttonProps={entry.inputProps}
-              onChange={(val, name) =>
-                setFormVal({
-                  ...formVal,
-                  [name]: { ...formVal[name as keyof FormEntries], value: val },
-                })
-              }
-            />
-          ))}
+        <div className="flex flex-col justify-between">
+          <div>
+            {Object.values(formVal).map((entry) => (
+              <LabelledInput
+                key={entry.uniqueName}
+                label={entry.label}
+                value={entry.value}
+                uniqueName={entry.uniqueName}
+                buttonProps={entry.inputProps}
+                onChange={(val, name) =>
+                  setFormVal({
+                    ...formVal,
+                    [name]: {
+                      ...formVal[name as keyof FormEntries],
+                      value: val,
+                    },
+                  })
+                }
+              />
+            ))}
+          </div>
           <Button
             buttonProps={{ type: "submit", style: { width: "100%" } }}
             handleClick={() => {}}

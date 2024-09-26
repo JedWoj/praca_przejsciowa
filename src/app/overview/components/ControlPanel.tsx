@@ -1,5 +1,5 @@
-import { Table } from "@/app/components/Table";
-import { UserControll } from "@/app/components/UserControll";
+import { Table } from "@/app/overview/components/Table";
+import { UserControll } from "./UserControll";
 
 export default function ControlPanel() {
   return (
