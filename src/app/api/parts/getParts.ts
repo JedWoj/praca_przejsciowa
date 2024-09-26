@@ -1,4 +1,4 @@
-import { getDataFromDB } from "@/app/actions/db-actions";
+import { getDataFromDB } from "../utils/getDataFromDB";
 import { Parts } from "@/app/api/parts/models/Parts";
 
 export const getParts = async (): Promise<Parts> => {

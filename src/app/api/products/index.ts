@@ -1,5 +1,5 @@
 import { getProducts } from "./getProducts";
 
 export const products = {
-  get: getProducts,
+  get_all: getProducts,
 };
