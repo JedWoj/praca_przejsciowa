@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { useDeliveryContext } from "../context/DeliveryContext";
-import type { ItemForDelivery, Location } from "../utils/types";
-import Button from "./UI/Button";
-import { updateDataToDB } from "../actions/db-actions";
-import { removeDelivery } from "../actions/delivery-actions";
-import { convertDate } from "../utils/convertDate";
+import { useDeliveryContext } from "../../../context/DeliveryContext";
+import type { ItemForDelivery, Location } from "../../../utils/types";
+import Button from "../../../components/UI/Button";
+import { updateDataToDB } from "../../../actions/db-actions";
+import { removeDelivery } from "../../../actions/delivery-actions";
+import { convertDate } from "../../../utils/convertDate";
 
 type DeliveryItemProps = {
   item: ItemForDelivery;

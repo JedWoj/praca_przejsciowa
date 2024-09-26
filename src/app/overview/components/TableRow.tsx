@@ -1,10 +1,10 @@
 "use client";
 import { type Row, flexRender } from "@tanstack/react-table";
 import type { VirtualItem, Virtualizer } from "@tanstack/react-virtual";
-import type { Item } from "../utils/types";
+import type { Item } from "../../utils/types";
 import type { MouseEvent } from "react";
-import { useMenuContext } from "../context/MenuContext";
-import { useTableContext } from "../context/TableContext";
+import { useMenuContext } from "../../context/MenuContext";
+import { useTableContext } from "../../context/TableContext";
 
 type TableRowProps = {
   virtualRow: VirtualItem;

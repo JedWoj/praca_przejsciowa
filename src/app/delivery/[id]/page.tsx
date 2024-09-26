@@ -1,5 +1,5 @@
 "use client";
-import DeliveryItem from "@/app/components/DeliveryItem";
+import DeliveryItem from "./components/DeliveryItem";
 import { useDeliveryContext } from "@/app/context/DeliveryContext";
 
 export default function Delivery({ params }: { params: { id: string } }) {

@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { useTableContext } from "../context/TableContext";
-import { useModalContext } from "../context/ModalContext";
-import Button from "./UI/Button";
+import { useTableContext } from "@/app/context/TableContext";
+import { useModalContext } from "@/app/context/ModalContext";
+import Button from "@/app/components/UI/Button";
 import { FaShoppingCart } from "react-icons/fa";
 
 export function UserControll() {

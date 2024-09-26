@@ -22,10 +22,10 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-export const writeDataToDB = <TItem>(path: string, item: TItem) => {
+export const writeDataToDB = async <TItem>(path: string, item: TItem) => {
   const db = getDatabase();
   const reference = ref(db, path);
-  set(reference, item);
+  await set(reference, item);
 };
 
 export const removeDataFromDB = async (path: string) => {
@@ -44,7 +44,7 @@ export const removeMultipleRecordsFromDB = async (paths: string[]) => {
 
 export const subscribeDataFromDB = <TData>(
   path: string,
-  onChange: (data: TData) => void
+  onChange: (data: TData) => void,
 ) => {
   const db = getDatabase();
   const userDataRef = ref(db, path);
