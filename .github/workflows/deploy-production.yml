@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ./github/actions/deploy-vercel
+      - uses: ./.github/actions/deploy-vercel
         with:
-         vercel-token: ${{ secrets.VERCEL_TOKEN }}
-         mode: production
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          mode: production
