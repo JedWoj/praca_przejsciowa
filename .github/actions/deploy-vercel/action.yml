@@ -27,7 +27,7 @@ runs:
 
     - name: Deploy Project Artifacts to Vercel
       if: ${{ inputs.mode == 'production' }}
-      run: vercel deploy --prebuilt --prod --token=${{ inputs.vercel-token }}
+      run: vercel deploy --prod --token=${{ inputs.vercel-token }}
       shell: bash
 
     - name: Deploy Project Artifacts to Vercel
