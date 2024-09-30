@@ -26,7 +26,7 @@ export default function Button({
           ? "bg-slate-500 cursor-not-allowed"
           : "bg-gradient-to-r from-blue-500 to-green-600"
       }`}
-      onClick={(e) => handleClick(e)}
+      onClick={handleClick}
       {...buttonProps}
     >
       {children}

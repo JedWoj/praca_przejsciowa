@@ -4,6 +4,7 @@ export type MapppedPart = {
   id: string;
   name: string;
   price: number;
+  quantity: number;
 };
 
 export const convertPartsToArray = (parts: Parts): MapppedPart[] => {

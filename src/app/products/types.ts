@@ -1,6 +1,7 @@
 type Part = {
   name: string;
   price: number;
+  quantity: number;
 };
 
 export type Product = {
