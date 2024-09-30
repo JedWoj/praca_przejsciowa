@@ -1,5 +1,6 @@
 import Card from "@/app/components/UI/Card";
 import { products } from "@/app/api/products";
+import OrderProductBtn from "./OrderProductBtn";
 import Link from "next/link";
 
 export default async function ProductsList() {
@@ -23,6 +24,7 @@ export default async function ProductsList() {
               >
                 Go to product
               </Link>
+              <OrderProductBtn product={product} />
             </Card.Footer>
           </Card>
         </li>

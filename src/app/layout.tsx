@@ -8,6 +8,7 @@ import { DeliveryContext } from "./context/DeliveryContext";
 import ModalContext from "./context/ModalContext";
 import { TableContext } from "./context/TableContext";
 import "./globals.css";
+import CartContext from "./context/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,8 +45,10 @@ initializeApp(firebaseConfig);
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: ReactNode;
+  modal: ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -53,15 +56,18 @@ export default function RootLayout({
         <TableContext>
           <DeliveryContext>
             <ModalContext>
-              <nav className="bg-gradient-to-r from-green-600 to-blue-500 p-4 flex gap-8 text-white h-[49px]">
-                {ROUTS.map((route) => (
-                  <Link key={route.value} href={route.value}>
-                    {route.name}
-                  </Link>
-                ))}
-              </nav>
-              {children}
-              <DisplayedModal />
+              <CartContext>
+                <nav className="bg-gradient-to-r from-green-600 to-blue-500 p-4 flex gap-8 text-white h-[49px]">
+                  {ROUTS.map((route) => (
+                    <Link key={route.value} href={route.value}>
+                      {route.name}
+                    </Link>
+                  ))}
+                </nav>
+                {modal}
+                {children}
+                <DisplayedModal />
+              </CartContext>
             </ModalContext>
           </DeliveryContext>
         </TableContext>
