@@ -1,3 +1,4 @@
+import Link from "next/link";
 import AddProductBtn from "./components/AddProductBtn";
 import ProductsList from "./components/ProductsList";
 
@@ -8,7 +9,8 @@ export default async function ProductsPage() {
     <div className="min-h-[calc(100vh-49px)]">
       <section className="flex justify-between items-center p-6">
         <h1 className="text-2xl">Products</h1>
-        <AddProductBtn />
+        {/* <AddProductBtn /> */}
+        <Link href="/products/add">Add Product</Link>
       </section>
       <section className="flex justify-center">
         <ProductsList />

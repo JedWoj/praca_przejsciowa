@@ -1,4 +1,8 @@
+import { firebaseConfig } from "@/app/utils/firebaseConfig";
+import { initializeApp } from "firebase/app";
 import { get, getDatabase, ref } from "firebase/database";
+
+initializeApp(firebaseConfig);
 
 export const getDataFromDB = async (path: string) => {
   const db = getDatabase();

@@ -8,6 +8,7 @@ import type {
 
 type ButtonProps = PropsWithChildren<{
   handleClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  variant?: "primary" | "secondary";
   buttonProps?: DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
@@ -17,14 +18,20 @@ type ButtonProps = PropsWithChildren<{
 export default function Button({
   buttonProps,
   handleClick,
+  variant = "primary",
   children,
 }: ButtonProps) {
+  const gradient =
+    variant === "primary"
+      ? "from-blue-500 to-green-600"
+      : "from-red-500 to-yellow-600";
+
   return (
     <button
       className={` rounded-md text-white p-2 ${
         buttonProps?.disabled
           ? "bg-slate-500 cursor-not-allowed"
-          : "bg-gradient-to-r from-blue-500 to-green-600"
+          : `bg-gradient-to-r ${gradient}`
       }`}
       onClick={handleClick}
       {...buttonProps}
