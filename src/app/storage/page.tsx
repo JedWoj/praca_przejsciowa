@@ -1,6 +1,6 @@
+import { defaultStorages } from "../utils/static";
 import StorageOverview from "./components/StorageOverview";
 import TotalStorageOverview from "./components/TotalStorageOverview";
-import { defaultStorages } from "../utils/static";
 
 export default function StoragePage() {
   return (

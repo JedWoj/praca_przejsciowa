@@ -1,7 +1,6 @@
-import Card from "@/app/components/UI/Card";
 import { products } from "@/app/api/products";
-import OrderProductBtn from "./OrderProductBtn";
-import Link from "next/link";
+import Card from "@/app/components/UI/Card";
+import ProductBtns from "./ProductBtns";
 
 export default async function ProductsList() {
   const productList = await products.get_all();
@@ -12,19 +11,8 @@ export default async function ProductsList() {
         <li key={product.id}>
           <Card>
             <Card.Header>{product.name}</Card.Header>
-            <div className="p-2">
-              {Object.values(product.parts).map((part) => (
-                <p key={part.name}>{part.name}</p>
-              ))}
-            </div>
-            <Card.Footer className="flex justify-end">
-              <Link
-                className="text-sm bg-white text-cyan-400 p-1 rounded-md"
-                href={`/products/${product.id}`}
-              >
-                Go to product
-              </Link>
-              <OrderProductBtn product={product} />
+            <Card.Footer>
+              <ProductBtns product={product} />
             </Card.Footer>
           </Card>
         </li>
