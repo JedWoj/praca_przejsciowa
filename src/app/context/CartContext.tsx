@@ -7,7 +7,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Product } from "../api/products/models/Product";
+import type { Product } from "../api/products/models/Product";
 
 type Id = string;
 
@@ -22,6 +22,7 @@ type CartContextType = {
   items: Map<Id, CartItem>;
   addItem: (item: Product) => void;
   removeItem: (id: Id) => void;
+  clearCart: () => void;
 };
 
 type CartContextProps = PropsWithChildren;
@@ -56,13 +57,18 @@ export default function CartContext({ children }: CartContextProps) {
     });
   }, []);
 
+  const clearCart = useCallback(() => {
+    setItems(new Map());
+  }, []);
+
   const value = useMemo<CartContextType>(
     () => ({
       items,
       addItem,
       removeItem,
+      clearCart,
     }),
-    [items, addItem, removeItem]
+    [items, addItem, removeItem, clearCart]
   );
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
