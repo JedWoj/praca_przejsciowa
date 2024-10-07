@@ -1,5 +1,6 @@
 import { Suspense } from "react";
-import AddPartBtn from "./components/AddPartBtn";
+import LinkButton from "../components/UI/LinkButton";
+import Spinner from "../components/UI/Spinner/Spinner";
 import PartsList from "./components/PartsList";
 
 export const dynamic = "force-dynamic";
@@ -9,10 +10,10 @@ export default async function PartsPage() {
     <div className="min-h-[calc(100vh-49px)]">
       <section className="flex justify-between items-center p-6">
         <h1 className="text-2xl">Parts</h1>
-        <AddPartBtn />
+        <LinkButton href="/parts/add">Add Part</LinkButton>
       </section>
       <section className="flex justify-center">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner />}>
           <PartsList />
         </Suspense>
       </section>

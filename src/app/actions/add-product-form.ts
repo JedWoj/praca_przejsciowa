@@ -3,7 +3,7 @@ import { writeDataToDB } from "./db-actions";
 import { ProductSchema } from "../api/products/models/Product";
 import { ZodError } from "zod";
 import type { MapppedPart } from "../products/utils/convertPartsToArray";
-import { DEFAULT_ERROR_MESSAGE, SUCCESS_MESSAGES } from "./messages";
+import { DEFAULT_ERROR_MESSAGE, SUCCESS_MESSAGES } from "./utils/messages";
 
 export async function addProduct(
   parts: Map<string, MapppedPart & { quantity: number }>,

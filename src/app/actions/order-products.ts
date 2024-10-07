@@ -1,21 +1,20 @@
 "use server";
-import { ZodError } from "zod";
-import { PartSchema } from "../api/parts/models/Part";
 import { writeDataToDB } from "./db-actions";
+import { OrderSchema, type Order } from "../api/orders/models/Order";
+import { ZodError } from "zod";
 import { DEFAULT_ERROR_MESSAGE, SUCCESS_MESSAGES } from "./utils/messages";
 
-export async function addPart(_: string, formData: FormData) {
+export async function orderProducts(order: Order) {
   try {
     const id = crypto.randomUUID();
 
-    const part = PartSchema.parse({
-      name: formData.get("name"),
-      price: formData.get("price"),
+    const validatedOrder = OrderSchema.parse({
+      products: order.products,
     });
 
-    await writeDataToDB(`parts/${id}`, part);
+    await writeDataToDB(`orders/${id}`, validatedOrder);
 
-    return SUCCESS_MESSAGES.part;
+    return SUCCESS_MESSAGES.order;
   } catch (error) {
     if (error instanceof ZodError) {
       return error.errors.map((err) => err.message).join("\n");

@@ -29,6 +29,7 @@ const ROUTS: Route[] = [
   { name: "Overview", value: "/overview" },
   { name: "Products", value: "/products" },
   { name: "Parts", value: "/parts" },
+  { name: "Orders", value: "/orders" },
 ];
 
 const firebaseConfig = {

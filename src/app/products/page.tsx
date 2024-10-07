@@ -1,5 +1,4 @@
-import Link from "next/link";
-import AddProductBtn from "./components/AddProductBtn";
+import LinkButton from "../components/UI/LinkButton";
 import ProductsList from "./components/ProductsList";
 
 export const dynamic = "force-dynamic";
@@ -9,8 +8,7 @@ export default async function ProductsPage() {
     <div className="min-h-[calc(100vh-49px)]">
       <section className="flex justify-between items-center p-6">
         <h1 className="text-2xl">Products</h1>
-        {/* <AddProductBtn /> */}
-        <Link href="/products/add">Add Product</Link>
+        <LinkButton href="/products/add">Add Product</LinkButton>
       </section>
       <section className="flex justify-center">
         <ProductsList />
