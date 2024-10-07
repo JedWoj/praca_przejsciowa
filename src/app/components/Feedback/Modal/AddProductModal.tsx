@@ -2,7 +2,7 @@
 import { type HTMLProps, useEffect, useState } from "react";
 
 import { addProduct } from "@/app/actions/add-product-form";
-import { SUCCESS_MESSAGES } from "@/app/actions/messages";
+import { SUCCESS_MESSAGES } from "@/app/actions/utils/messages";
 import { parts as partsAPI } from "@/app/api/parts";
 import { useFetch } from "@/app/hooks/useFetch";
 import useRefreshPageAfterAction from "@/app/hooks/useRefreshPageAfterAction";

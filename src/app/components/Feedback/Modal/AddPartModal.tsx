@@ -2,7 +2,7 @@
 import { type HTMLProps, useState } from "react";
 
 import { addPart } from "@/app/actions/add-part-form";
-import { SUCCESS_MESSAGES } from "@/app/actions/messages";
+import { SUCCESS_MESSAGES } from "@/app/actions/utils/messages";
 import useRefreshPageAfterAction from "@/app/hooks/useRefreshPageAfterAction";
 import { useFormState } from "react-dom";
 import Button from "../../UI/Button";
