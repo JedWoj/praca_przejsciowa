@@ -1,5 +1,7 @@
+import { getOrder } from "./getOrder";
 import { getOrders } from "./getOrders";
 
 export const orders = {
-  get: getOrders,
+  get_all: getOrders,
+  get: getOrder,
 };

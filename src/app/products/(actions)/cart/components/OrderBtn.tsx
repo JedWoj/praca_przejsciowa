@@ -15,6 +15,8 @@ export default function OrderBtn() {
         id,
         quantity: item.quantity,
       })),
+      status: "pending",
+      orderDate: new Date(),
     });
     clearCart();
     router.back();
