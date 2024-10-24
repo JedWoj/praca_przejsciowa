@@ -1,6 +1,7 @@
 import { UserActions } from "./overview/components/UserActions";
+import prisma from "../lib/db";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main
       data-testid="home-page"

@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Operation {
+  id               String             @id @default(cuid())
+  name             String
+  time             Int
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  ProductOperation ProductOperation[]
+}
+
+model ProductOperation {
+  id          String    @id @default(cuid())
+  productId   String
+  operationId String
+  sequence    Int
+  product     Product   @relation(fields: [productId], references: [id])
+  operation   Operation @relation(fields: [operationId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([productId, operationId])
+}
+
+model Product {
+  id               String             @id @default(cuid())
+  name             String
+  description      String?
+  timeToProduce    Int
+  price            Float
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  parts            ProductPart[]
+  orders           OrderProduct[]
+  ProductOperation ProductOperation[]
+}
+
+model Part {
+  id                String        @id @default(cuid())
+  name              String
+  description       String?
+  timeToBeProduced  Int?
+  timeToBeDelivered Int?
+  price             Float
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  usedIn            ProductPart[]
+}
+
+enum OrderStatus {
+  IDLE
+  PROCESSING
+  COMPLETED
+  CANCELLED
+}
+
+model Order {
+  id        String         @id @default(cuid())
+  products  OrderProduct[]
+  status    OrderStatus    @default(IDLE)
+  dueDate   DateTime
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+model ProductPart {
+  id        String   @id @default(cuid())
+  productId String
+  partId    String
+  quantity  Int
+  product   Product  @relation(fields: [productId], references: [id])
+  part      Part     @relation(fields: [partId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productId, partId])
+}
+
+model OrderProduct {
+  id        String   @id @default(cuid())
+  orderId   String
+  productId String
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([orderId, productId])
+}
