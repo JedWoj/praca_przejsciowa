@@ -1,5 +1,5 @@
 "use client";
-import type { Product } from "@/app/api/products/models/Product";
+import type { Product } from "@prisma/client";
 import Button from "@/app/components/UI/Button";
 import { useCartContext } from "@/app/context/CartContext";
 import { FaMinus, FaPlus } from "react-icons/fa";

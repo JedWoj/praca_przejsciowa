@@ -1,14 +1,14 @@
-import { orders } from "../api/orders";
+import prisma from "@/lib/db";
 import { OrderPreview } from "./components/OrderPreview";
 
 export default async function OrdersPage() {
-  const data = await orders.get_all();
+  const orders = await prisma.order.findMany();
 
   return (
     <div className="h-[calc(100vh-49px)] flex justify-center items-center">
       <ul className="flex-col">
-        {Object.entries(data).map(([id, data]) => (
-          <OrderPreview key={id} order={{ [id]: data }} />
+        {orders.map((order) => (
+          <OrderPreview key={order.id} order={order} />
         ))}
       </ul>
     </div>

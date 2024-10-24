@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Product } from "../types";
+import type { Product } from "@prisma/client";
 import OrderProductBtns from "./OrderProductBtns";
 
 type ProductBtnsProps = {

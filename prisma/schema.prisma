@@ -30,19 +30,6 @@ model ProductOperation {
   @@unique([productId, operationId])
 }
 
-model Product {
-  id               String             @id @default(cuid())
-  name             String
-  description      String?
-  timeToProduce    Int
-  price            Float
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  parts            ProductPart[]
-  orders           OrderProduct[]
-  ProductOperation ProductOperation[]
-}
-
 model Part {
   id                String        @id @default(cuid())
   name              String
@@ -71,6 +58,32 @@ model Order {
   updatedAt DateTime       @updatedAt
 }
 
+model OrderProduct {
+  id        String   @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([orderId, productId])
+}
+
+model Product {
+  id               String             @id @default(cuid())
+  name             String
+  description      String?
+  timeToProduce    Int
+  price            Float
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  parts            ProductPart[]
+  orders           OrderProduct[]
+  ProductOperation ProductOperation[]
+}
+
 model ProductPart {
   id        String   @id @default(cuid())
   productId String
@@ -82,16 +95,4 @@ model ProductPart {
   updatedAt DateTime @updatedAt
 
   @@unique([productId, partId])
-}
-
-model OrderProduct {
-  id        String   @id @default(cuid())
-  orderId   String
-  productId String
-  order     Order    @relation(fields: [orderId], references: [id])
-  product   Product  @relation(fields: [productId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@unique([orderId, productId])
 }

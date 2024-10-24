@@ -1,3 +1,5 @@
+import { Prisma } from "@prisma/client";
+
 type Part = {
   name: string;
   price: number;

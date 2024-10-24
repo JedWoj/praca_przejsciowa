@@ -1,20 +1,16 @@
-import type { Order } from "@/app/api/orders/models/Order";
-import type { Product } from "@/app/products/types";
+import { getOrder } from "./utils/getOrder";
 
 type OrderStatsProps = {
-  order: Order;
-  products: Product[];
+  id: string;
 };
 
-export function OrderStats({ order, products }: OrderStatsProps) {
-  const totalPrice = products.reduce(
-    (acc, it) =>
-      (acc +=
-        it.price *
-        (order.products.find((prod) => prod.id === it.id)?.quantity ?? 0)),
+export async function OrderStats({ id }: OrderStatsProps) {
+  const order = await getOrder(id);
+  const totalPrice = order?.products.reduce(
+    (acc, it) => (acc += it.product.price * it.quantity),
     0
   );
-  const totalProducts = order.products.reduce(
+  const totalProducts = order?.products.reduce(
     (acc, it) => (acc += it.quantity),
     0
   );
