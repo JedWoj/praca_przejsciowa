@@ -1,9 +1,13 @@
-import { parts } from "@/app/api/parts";
+import prisma from "@/lib/db";
 
 export default async function PartPage({ params }: { params: { id: string } }) {
-  const part = await parts.get(params.id);
+  const part = await prisma.part.findUnique({
+    where: {
+      id: params.id,
+    },
+  });
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-49px)]">{part.name}</div>
+    <div className="flex flex-col min-h-[calc(100vh-49px)]">{part?.name}</div>
   );
 }

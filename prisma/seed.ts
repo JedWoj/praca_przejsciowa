@@ -105,8 +105,8 @@ const initialOrders: Prisma.OrderCreateInput[] = [
     id: "order1",
     products: {
       create: [
-        { product: { connect: { id: "product1" } } },
-        { product: { connect: { id: "product2" } } },
+        { productId: "product1", quantity: 2 },
+        { productId: "product2", quantity: 1 },
       ],
     },
   },
@@ -114,7 +114,7 @@ const initialOrders: Prisma.OrderCreateInput[] = [
     id: "order2",
     dueDate: new Date(),
     products: {
-      create: [{ product: { connect: { id: "product2" } } }],
+      create: [{ productId: "product2", quantity: 3 }],
     },
   },
 ];

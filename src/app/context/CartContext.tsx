@@ -7,7 +7,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import type { Product } from "../api/products/models/Product";
+import type { Product } from "@prisma/client";
 
 type Id = string;
 
