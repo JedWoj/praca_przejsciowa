@@ -1,7 +1,7 @@
 "use server";
+import prisma from "@/lib/db";
 import { ZodError } from "zod";
 import { PartSchema } from "../api/parts/models/Part";
-import { writeDataToDB } from "./db-actions";
 import { DEFAULT_ERROR_MESSAGE, SUCCESS_MESSAGES } from "./utils/messages";
 
 export async function addPart(_: string, formData: FormData) {
@@ -13,7 +13,13 @@ export async function addPart(_: string, formData: FormData) {
       price: formData.get("price"),
     });
 
-    await writeDataToDB(`parts/${id}`, part);
+    await prisma.part.create({
+      data: {
+        id,
+        name: part.name,
+        price: Number(part.price),
+      },
+    });
 
     return SUCCESS_MESSAGES.part;
   } catch (error) {

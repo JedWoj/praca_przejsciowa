@@ -1,3 +1,5 @@
+import { ProductCreateInputSchema } from "@/models/Product";
+import { PartCreateInputSchema } from "@/models/Part/PartCreateInput";
 import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {
@@ -10,6 +12,21 @@ declare const globalThis: {
 
 const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
 
-export default prisma;
+export default prisma.$extends({
+  query: {
+    product: {
+      create({ args, query }) {
+        args.data = ProductCreateInputSchema.parse(args.data);
+        return query(args);
+      },
+    },
+    part: {
+      create({ args, query }) {
+        args.data = PartCreateInputSchema.parse(args.data);
+        return query(args);
+      },
+    },
+  },
+});
 
 if (process.env.NODE_ENV !== "production") globalThis.prismaGlobal = prisma;
