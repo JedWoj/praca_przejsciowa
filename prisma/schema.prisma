@@ -75,13 +75,12 @@ model Product {
   id               String             @id @default(cuid())
   name             String
   description      String?
-  timeToProduce    Int
   price            Float
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   parts            ProductPart[]
   orders           OrderProduct[]
-  ProductOperation ProductOperation[]
+  productOperation ProductOperation[]
 }
 
 model ProductPart {

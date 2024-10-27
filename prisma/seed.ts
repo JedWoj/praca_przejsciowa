@@ -6,7 +6,6 @@ const initialProducts: Prisma.ProductCreateInput[] = [
     name: "Product 1",
     description: "Description for Product 1",
     price: 100.0,
-    timeToProduce: 1,
     id: "product1",
     parts: {
       create: [
@@ -48,7 +47,6 @@ const initialProducts: Prisma.ProductCreateInput[] = [
     id: "product2",
     description: "Description for Product 2",
     price: 200.0,
-    timeToProduce: 2,
     parts: {
       create: [
         {
