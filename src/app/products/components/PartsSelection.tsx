@@ -1,14 +1,11 @@
-import type { Parts } from "@/app/api/parts/models/Parts";
 import CustomList from "@/app/components/UI/CustomList/CustomList";
+import { Prisma } from "@prisma/client";
 import type { Dispatch, SetStateAction } from "react";
-import {
-  convertPartsToArray,
-  type MapppedPart,
-} from "../utils/convertPartsToArray";
+import { type MapppedPart } from "../utils/convertPartsToArray";
 import PartItem from "./PartItem";
 
 type PartsSelectionProps = {
-  parts: Parts;
+  parts: Prisma.PartGetPayload<null>[];
   selectionState: Map<string, MapppedPart & { quantity: number }>;
   handleSelection: Dispatch<
     SetStateAction<Map<string, MapppedPart & { quantity: number }>>
@@ -23,7 +20,7 @@ export default function PartsSelection({
   return (
     <CustomList
       header={<h2 className="text-xl">Parts selection</h2>}
-      listItems={convertPartsToArray(parts)}
+      listItems={parts}
       className="p-4 rounded-md bg-slate-200 text-black gap-1 flex flex-col max-h-[40vh] overflow-auto"
     >
       {({ item }) => (

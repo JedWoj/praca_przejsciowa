@@ -28,3 +28,7 @@ export type Storage = {
   capacity: number;
   name: string;
 };
+
+export type DynamicPageProps<T extends Record<string, unknown>> = {
+  params: Promise<T>;
+};

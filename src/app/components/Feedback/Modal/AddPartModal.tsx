@@ -4,7 +4,7 @@ import { type HTMLProps, useState } from "react";
 import { addPart } from "@/app/actions/add-part-form";
 import { SUCCESS_MESSAGES } from "@/app/actions/utils/messages";
 import useRefreshPageAfterAction from "@/app/hooks/useRefreshPageAfterAction";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import Button from "../../UI/Button";
 import LabelledInput from "../../UI/LabelledInput";
 
@@ -32,7 +32,7 @@ export default function AddPartModal() {
     },
   });
 
-  const [state, FormAction] = useFormState(addPart, "");
+  const [state, FormAction] = useActionState(addPart, "");
 
   useRefreshPageAfterAction({ state, successMessage: SUCCESS_MESSAGES.part });
 

@@ -1,14 +1,6 @@
 "use server";
 import { initializeApp } from "firebase/app";
-import {
-  get,
-  getDatabase,
-  onValue,
-  ref,
-  set,
-  remove,
-  update,
-} from "firebase/database";
+import { get, getDatabase, ref, remove, set, update } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
@@ -40,19 +32,6 @@ export const removeMultipleRecordsFromDB = async (paths: string[]) => {
   paths.forEach((path) => (updates[path] = null));
 
   return update(ref(db), updates);
-};
-
-export const subscribeDataFromDB = <TData>(
-  path: string,
-  onChange: (data: TData) => void,
-) => {
-  const db = getDatabase();
-  const userDataRef = ref(db, path);
-
-  onValue(userDataRef, (snapshot) => {
-    const data = snapshot.val() as TData;
-    onChange(data);
-  });
 };
 
 export const getDataFromDB = async (path: string) => {

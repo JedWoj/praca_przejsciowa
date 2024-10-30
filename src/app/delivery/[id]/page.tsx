@@ -1,10 +1,14 @@
 "use client";
+import { use } from "react";
 import DeliveryItem from "./components/DeliveryItem";
 import { useDeliveryContext } from "@/app/context/DeliveryContext";
+import { DynamicPageProps } from "@/app/utils/types";
 
-export default function Delivery({ params }: { params: { id: string } }) {
+export default function Delivery({ params }: DynamicPageProps<{ id: string }>) {
+  const { id } = use(params);
+
   const { deliveries } = useDeliveryContext();
-  const handledDelivery = deliveries.find((it) => it.id === params.id);
+  const handledDelivery = deliveries.find((it) => it.id === id);
 
   return (
     <div className="h-[calc(100vh-49px)] bg-gradient-to-tr from-lime-400 to-blue-600 flex flex-col px-40 pt-10 gap-5">

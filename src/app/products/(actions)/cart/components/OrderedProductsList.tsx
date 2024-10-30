@@ -22,7 +22,7 @@ export default function OrderedProductsList() {
       }
     >
       {({ item }) => (
-        <div className="p-2 bg-white gap-1 rounded-lg">
+        <div className="p-2 bg-white gap-1 rounded-lg" key={item.id}>
           <div>Name: {item.name}</div>
           <div>Quantity: {item.quantity}</div>
           <div>Single item price: {item.price}</div>
