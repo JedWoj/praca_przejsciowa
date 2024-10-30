@@ -75,7 +75,7 @@ export default function DeliveryItem({ item }: DeliveryItemProps) {
           name="item-location"
           value={location}
         >
-          <option disabled selected value={"SELECT"}>
+          <option disabled value={"SELECT"}>
             location
           </option>
           <option value="A1">A1</option>

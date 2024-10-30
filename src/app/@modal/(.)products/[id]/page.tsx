@@ -1,16 +1,15 @@
-import { products } from "@/app/api/products";
 import Dialog from "@/app/components/UI/Dialog";
-import { convertPartsToArray } from "@/app/products/utils/convertPartsToArray";
 import prisma from "@/lib/db";
+import type { DynamicPageProps } from "@/app/utils/types";
 
 export default async function ProductPage({
   params,
-}: {
-  params: { id: string };
-}) {
+}: DynamicPageProps<{ id: string }>) {
+  const { id } = await params;
+
   const product = await prisma.product.findUnique({
     where: {
-      id: params.id,
+      id,
     },
     include: {
       parts: {
@@ -24,20 +23,45 @@ export default async function ProductPage({
           },
         },
       },
+      productOperation: {
+        include: {
+          operation: true,
+        },
+      },
     },
   });
 
   return (
     <Dialog>
-      <div>Name: {product?.name}</div>
-      <div>Price: {product?.price}</div>
-      <ul>
-        {product?.parts.map((part) => (
-          <li key={part.id}>
-            {part.part.name} - {part.quantity}
-          </li>
-        ))}
-      </ul>
+      <div className="p-4 bg-white rounded-lg text-black min-w-96">
+        <p className="text-2xl">Name: {product?.name}</p>
+        <p className="text-xl">Price: {product?.price}$</p>
+        <p className="text-xl">
+          Total production time:{" "}
+          {product?.productOperation.reduce(
+            (acc, it) => acc + it.operation.time,
+            0
+          )}{" "}
+          min
+        </p>
+        <p className="text-xl mt-2">Parts: (name - quantity)</p>
+        <ul>
+          {product?.parts.map((part) => (
+            <li key={part.id}>
+              {part.part.name} - {part.quantity}
+            </li>
+          ))}
+        </ul>
+        <p className="text-xl mt-2">Operations: (sequence: name - time)</p>
+        <ul>
+          {product?.productOperation.map((operation) => (
+            <li key={operation.id}>
+              {operation.sequence}: {operation.operation.name} -{" "}
+              {operation.operation.time} min
+            </li>
+          ))}
+        </ul>
+      </div>
     </Dialog>
   );
 }

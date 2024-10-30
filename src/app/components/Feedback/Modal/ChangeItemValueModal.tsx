@@ -1,17 +1,16 @@
 "use client";
-import Button from "../../UI/Button";
-import { useModalContext } from "@/app/context/ModalContext";
-import { useFormState } from "react-dom";
-import { useTableContext } from "@/app/context/TableContext";
-import { type ChangeEvent, useState } from "react";
 import { changeItem } from "@/app/actions/form-action";
+import { useModalContext } from "@/app/context/ModalContext";
+import { useTableContext } from "@/app/context/TableContext";
+import { type ChangeEvent, useActionState, useState } from "react";
+import Button from "../../UI/Button";
 
 export default function ChangeItemValueModal() {
   const { hide } = useModalContext();
   const { table } = useTableContext();
   const selectedItem = table.getSelectedRowModel().rows.at(0)?.original!;
 
-  const [formState, FormAction] = useFormState(
+  const [formState, FormAction] = useActionState(
     changeItem.bind(null, selectedItem),
     ""
   );

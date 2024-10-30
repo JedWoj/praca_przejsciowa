@@ -31,9 +31,9 @@ export default function DisplayedModal() {
       case "make_order":
         component = <MakeOrderModal />;
         break;
-      case "add_product":
-        component = <AddProductModal />;
-        break;
+      // case "add_product":
+      //   component = <AddProductModal />;
+      //   break;
       case "add_part":
         component = <AddPartModal />;
         break;
