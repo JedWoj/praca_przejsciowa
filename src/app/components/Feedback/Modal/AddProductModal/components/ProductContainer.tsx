@@ -7,9 +7,10 @@ import PartsSelection from "@/app/products/components/PartsSelection";
 import type { MapppedPart } from "@/app/products/utils/convertPartsToArray";
 import { Prisma } from "@prisma/client";
 import { useActionState, useState } from "react";
-import ProductInfoInputs, { type FormEntry } from "./ProductInfoInputs";
+import FormInputsGroup from "../../components/FormInputsGroup";
+import type { FormEntry } from "../../components/types";
 
-export type ProductFormEntries = {
+type ProductFormEntries = {
   name: FormEntry<string>;
   price: FormEntry<number>;
 };
@@ -46,7 +47,10 @@ export default function ProductContainer({ parts }: ProductContainerProps) {
     <div>
       <form action={FormAction} className="flex gap-4">
         <div className="flex flex-col justify-between">
-          <ProductInfoInputs formVal={formVal} setFormVal={setFormVal} />
+          <FormInputsGroup<ProductFormEntries>
+            formVal={formVal}
+            setFormVal={setFormVal}
+          />
           <Button
             buttonProps={{ type: "submit", style: { width: "100%" } }}
             handleClick={() => {}}

@@ -12,8 +12,8 @@ export async function OrderProductsList({ id }: OrderProductsListProps) {
       {order?.products.map((it) => (
         <li className="bg-green-400 p-2 rounded-md" key={it.product.id}>
           <p>Product Info:</p>
-          <p>Name: {it.product.id}</p>
-          <p>Single Product Price: {it.quantity}</p>
+          <p>Name: {it.product.name}</p>
+          <p>Single Product Price: {it.product.price}</p>
           <p>Quantity: {it.quantity}</p>
           <p>Total Price: {it.product.price * it.quantity}</p>
         </li>
