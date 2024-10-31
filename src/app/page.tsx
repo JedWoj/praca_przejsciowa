@@ -1,5 +1,4 @@
 import { UserActions } from "./overview/components/UserActions";
-import prisma from "../lib/db";
 
 export default async function Home() {
   return (

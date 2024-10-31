@@ -40,6 +40,7 @@ model Part {
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
   usedIn            ProductPart[]
+  StoragePart       StoragePart[]
 }
 
 enum OrderStatus {
@@ -81,6 +82,7 @@ model Product {
   parts            ProductPart[]
   orders           OrderProduct[]
   productOperation ProductOperation[]
+  StorageProduct   StorageProduct[]
 }
 
 model ProductPart {
@@ -94,4 +96,40 @@ model ProductPart {
   updatedAt DateTime @updatedAt
 
   @@unique([productId, partId])
+}
+
+model Storage {
+  id        String           @id @default(cuid())
+  name      String
+  address   String?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  products  StorageProduct[]
+  parts     StoragePart[]
+}
+
+model StorageProduct {
+  id        String   @id @default(cuid())
+  storageId String
+  productId String
+  quantity  Int
+  storage   Storage  @relation(fields: [storageId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([storageId, productId])
+}
+
+model StoragePart {
+  id        String   @id @default(cuid())
+  storageId String
+  partId    String
+  quantity  Int
+  storage   Storage  @relation(fields: [storageId], references: [id])
+  part      Part     @relation(fields: [partId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([storageId, partId])
 }
