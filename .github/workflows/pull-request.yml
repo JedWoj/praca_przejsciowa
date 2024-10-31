@@ -11,6 +11,14 @@ env:
   NEXT_PUBLIC_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_PROJECT_ID }}
   NEXT_PUBLIC_DATABASE_URL: ${{ secrets.NEXT_PUBLIC_DATABASE_URL }}
   NEXT_PUBLIC_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_AUTH_DOMAIN }}
+  POSTGRES_DATABASE: ${{ secrets.POSTGRES_DATABASE }}
+  POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+  POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
+  POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+  POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
+  POSTGRES_URL_NO_SSL: ${{ secrets.POSTGRES_URL_NO_SSL }}
+  POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
 on:
   pull_request:
     branches:
@@ -24,7 +32,7 @@ jobs:
 
       - name: Configure node
         uses: ./.github/actions/setup-node
-      
+
       - name: Check quality
         uses: ./.github/actions/check-quality
 
@@ -36,4 +44,3 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           mode: preview
-        

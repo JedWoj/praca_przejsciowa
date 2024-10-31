@@ -135,6 +135,51 @@ const initialProductOperations: Prisma.ProductOperationCreateInput[] = [
   },
 ];
 
+const initialStorage: Prisma.StorageCreateInput[] = [
+  {
+    id: "storage1",
+    name: "Storage 1",
+    products: {
+      connectOrCreate: [
+        {
+          where: { id: "product1" },
+          create: {
+            product: {
+              connectOrCreate: {
+                where: { id: "product1" },
+                create: {
+                  id: "product1",
+                  name: "Product 1",
+                  description: "Description for Product 1",
+                  price: 100.0,
+                },
+              },
+            },
+            quantity: 10,
+          },
+        },
+        {
+          where: { id: "product2" },
+          create: {
+            product: {
+              connectOrCreate: {
+                where: { id: "product2" },
+                create: {
+                  id: "product2",
+                  name: "Product 2",
+                  description: "Description for Product 2",
+                  price: 200.0,
+                },
+              },
+            },
+            quantity: 5,
+          },
+        },
+      ],
+    },
+  },
+];
+
 async function main() {
   for (const product of initialProducts) {
     await prisma.product.create({ data: product });
@@ -147,6 +192,9 @@ async function main() {
   }
   for (const productOperation of initialProductOperations) {
     await prisma.productOperation.create({ data: productOperation });
+  }
+  for (const storage of initialStorage) {
+    await prisma.storage.create({ data: storage });
   }
 }
 

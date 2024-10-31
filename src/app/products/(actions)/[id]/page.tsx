@@ -1,13 +1,14 @@
+import { DynamicPageProps } from "@/app/utils/types";
 import prisma from "@/lib/db";
 
 export default async function ProductPage({
   params,
-}: {
-  params: { id: string };
-}) {
+}: DynamicPageProps<{ id: string }>) {
+  const { id } = await params;
+
   const product = await prisma.product.findUnique({
     where: {
-      id: params.id,
+      id,
     },
   });
 

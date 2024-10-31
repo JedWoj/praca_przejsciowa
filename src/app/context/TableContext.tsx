@@ -1,4 +1,5 @@
 "use client";
+import { Prisma } from "@prisma/client";
 import {
   RowSelectionState,
   SortingState,
@@ -9,8 +10,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref } from "firebase/database";
 import {
   type Dispatch,
   type HTMLProps,
@@ -19,6 +18,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -32,18 +32,6 @@ export type TableContextType = {
 };
 
 type TableContextProps = PropsWithChildren;
-
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
-  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-  databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
-};
-
-initializeApp(firebaseConfig);
 
 const Context = createContext<TableContextType | null>(null);
 
@@ -101,31 +89,58 @@ const columns = [
   }),
 ];
 
+type Storage = Prisma.StorageGetPayload<{
+  include: { _count: true; parts: true; products: true };
+}>;
+
 const TableContext = ({ children }: TableContextProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [data, setData] = useState<Item[]>([]);
   const [order, setOrder] = useState<null | Delivery>(null);
+  const [storage, setStorage] = useState<null | { data: Storage[] }>(null);
+
+  const storageItems: Item[] = useMemo(
+    () =>
+      storage?.data.flatMap(
+        (it) =>
+          it.parts
+            ?.map((it) => ({
+              currentStock: it.quantity,
+              id: it.id,
+              lastOrder: String(it.updatedAt),
+              location: "A1" as const,
+              name: it.id,
+              optimalStock: 100,
+              price: 100,
+            }))
+            .concat(
+              it.products.map((prod) => ({
+                currentStock: prod.quantity,
+                id: prod.id,
+                lastOrder: String(prod.updatedAt),
+                location: "A1",
+                name: prod.id,
+                optimalStock: 100,
+                price: 100,
+              })),
+            ) || [],
+      ) ?? [],
+    [storage],
+  );
 
   useEffect(() => {
-    const db = getDatabase();
-    const userDataRef = ref(db, "/items");
-
-    const subscription = onValue(userDataRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setData(Object.values(data));
-      } else {
-        setData([]);
-      }
-    });
-
-    () => subscription();
+    const fetchData = async () => {
+      const data = await fetch("/api/storage");
+      const res = await data.json();
+      setStorage(res);
+    };
+    fetchData();
   }, []);
 
   const table = useReactTable({
-    data,
+    data: storageItems,
     columns,
     globalFilterFn: "includesString",
     getCoreRowModel: getCoreRowModel(),

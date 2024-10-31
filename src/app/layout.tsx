@@ -1,14 +1,12 @@
-import { initializeApp } from "firebase/app";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import DisplayedModal from "./components/Feedback/DisplayedModal";
-import { DeliveryContext } from "./context/DeliveryContext";
+import CartContext from "./context/CartContext";
 import ModalContext from "./context/ModalContext";
 import { TableContext } from "./context/TableContext";
 import "./globals.css";
-import CartContext from "./context/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,25 +22,13 @@ type Route = {
 
 const ROUTS: Route[] = [
   { name: "Home", value: "/" },
-  { name: "Deliveries", value: "/delivery" },
   { name: "Storage", value: "/storage" },
   { name: "Overview", value: "/overview" },
   { name: "Products", value: "/products" },
   { name: "Parts", value: "/parts" },
   { name: "Orders", value: "/orders" },
+  { name: "Operations", value: "/operations" },
 ];
-
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
-  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-  databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
-};
-
-initializeApp(firebaseConfig);
 
 export default function RootLayout({
   children,
@@ -55,22 +41,20 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <TableContext>
-          <DeliveryContext>
-            <ModalContext>
-              <CartContext>
-                <nav className="bg-gradient-to-r from-green-600 to-blue-500 p-4 flex gap-8 text-white h-[49px]">
-                  {ROUTS.map((route) => (
-                    <Link key={route.value} href={route.value}>
-                      {route.name}
-                    </Link>
-                  ))}
-                </nav>
-                {modal}
-                {children}
-                <DisplayedModal />
-              </CartContext>
-            </ModalContext>
-          </DeliveryContext>
+          <ModalContext>
+            <CartContext>
+              <nav className="bg-gradient-to-r from-green-600 to-blue-500 p-4 flex gap-8 text-white h-[49px]">
+                {ROUTS.map((route) => (
+                  <Link key={route.value} href={route.value}>
+                    {route.name}
+                  </Link>
+                ))}
+              </nav>
+              {modal}
+              {children}
+              <DisplayedModal />
+            </CartContext>
+          </ModalContext>
         </TableContext>
       </body>
     </html>
