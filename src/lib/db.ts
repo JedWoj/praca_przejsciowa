@@ -1,6 +1,7 @@
 import { ProductCreateInputSchema } from "@/models/Product";
 import { PartCreateInputSchema } from "@/models/Part/PartCreateInput";
 import { PrismaClient } from "@prisma/client";
+import { OrderCreateInputSchema } from "@/models/Order/OrderCreateInput";
 
 const prismaClientSingleton = () => {
   return new PrismaClient();

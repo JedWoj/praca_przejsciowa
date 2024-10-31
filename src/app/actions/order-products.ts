@@ -1,18 +1,26 @@
 "use server";
-import { writeDataToDB } from "./db-actions";
-import { OrderSchema, type Order } from "../api/orders/models/Order";
+import prisma from "@/lib/db";
 import { ZodError } from "zod";
+import { type Order } from "../api/orders/models/Order";
 import { DEFAULT_ERROR_MESSAGE, SUCCESS_MESSAGES } from "./utils/messages";
 
 export async function orderProducts(order: Order) {
   try {
-    const id = crypto.randomUUID();
-
-    const validatedOrder = OrderSchema.parse({
-      products: order.products,
+    await prisma.order.create({
+      data: {
+        dueDate: order.orderDate,
+        products: {
+          create: order.products.map((product) => ({
+            quantity: product.quantity,
+            product: {
+              connect: {
+                id: product.id,
+              },
+            },
+          })),
+        },
+      },
     });
-
-    await writeDataToDB(`orders/${id}`, validatedOrder);
 
     return SUCCESS_MESSAGES.order;
   } catch (error) {
