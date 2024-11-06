@@ -7,8 +7,9 @@ import type {
 } from "react";
 
 type ButtonProps = PropsWithChildren<{
-  handleClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   variant?: "primary" | "secondary";
+  className?: string;
   buttonProps?: DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
@@ -18,6 +19,7 @@ type ButtonProps = PropsWithChildren<{
 export default function Button({
   buttonProps,
   handleClick,
+  className,
   variant = "primary",
   children,
 }: ButtonProps) {
@@ -32,7 +34,7 @@ export default function Button({
         buttonProps?.disabled
           ? "bg-slate-500 cursor-not-allowed"
           : `bg-gradient-to-r ${gradient}`
-      }`}
+      } ${className}`}
       onClick={handleClick}
       {...buttonProps}
     >

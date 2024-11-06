@@ -90,7 +90,11 @@ const columns = [
 ];
 
 type Storage = Prisma.StorageGetPayload<{
-  include: { _count: true; parts: true; products: true };
+  include: {
+    _count: true;
+    parts: { include: { part: true } };
+    products: { include: { product: true } };
+  };
 }>;
 
 const TableContext = ({ children }: TableContextProps) => {
@@ -124,10 +128,10 @@ const TableContext = ({ children }: TableContextProps) => {
                 name: prod.id,
                 optimalStock: 100,
                 price: 100,
-              })),
-            ) || [],
+              }))
+            ) || []
       ) ?? [],
-    [storage],
+    [storage]
   );
 
   useEffect(() => {

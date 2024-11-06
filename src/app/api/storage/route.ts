@@ -5,8 +5,16 @@ export async function GET() {
   const storage = await prisma.storage.findMany({
     include: {
       _count: true,
-      parts: true,
-      products: true,
+      parts: {
+        include: {
+          part: true,
+        },
+      },
+      products: {
+        include: {
+          product: true,
+        },
+      },
     },
   });
 

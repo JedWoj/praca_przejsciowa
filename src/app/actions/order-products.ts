@@ -1,8 +1,8 @@
 "use server";
 import prisma from "@/lib/db";
 import { ZodError } from "zod";
-import { type Order } from "../api/orders/models/Order";
 import { DEFAULT_ERROR_MESSAGE, SUCCESS_MESSAGES } from "./utils/messages";
+import type { Order } from "../api/orders/models/Order";
 
 export async function orderProducts(order: Order) {
   try {
