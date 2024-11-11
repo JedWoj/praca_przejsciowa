@@ -45,7 +45,7 @@ export default function PartItem({
   };
 
   return (
-    <li className="p-2 flex items-center justify-between gap-4 bg-pink-300 min-w-96 rounded-md">
+    <li className="p-2 flex items-center justify-between gap-4 bg-pink-300 min-w-60 rounded-md">
       <div className="flex flex-col">
         <span>Name: {name}</span>
         <span>Price: {price}$</span>

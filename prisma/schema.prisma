@@ -9,12 +9,12 @@ datasource db {
 }
 
 model Operation {
-  id               String             @id @default(cuid())
-  name             String
-  time             Int
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  ProductOperation ProductOperation[]
+  id        String             @id @default(cuid())
+  name      String
+  time      Int
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  products  ProductOperation[]
 }
 
 model ProductOperation {
@@ -81,7 +81,7 @@ model Product {
   updatedAt        DateTime           @updatedAt
   parts            ProductPart[]
   orders           OrderProduct[]
-  productOperation ProductOperation[]
+  ProductOperation ProductOperation[]
   StorageProduct   StorageProduct[]
 }
 

@@ -10,6 +10,9 @@ export default async function ProductPage({
     where: {
       id,
     },
+    include: {
+      ProductOperation: true,
+    },
   });
 
   return (
