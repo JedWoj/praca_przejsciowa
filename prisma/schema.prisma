@@ -27,7 +27,7 @@ model ProductOperation {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  @@unique([productId, operationId])
+  @@unique([productId, operationId, sequence])
 }
 
 model Part {

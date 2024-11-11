@@ -20,15 +20,15 @@ export function useAddProductState() {
     },
   });
   const [mappedParts, setMappedParts] = useState<Map<string, MapppedPart>>(
-    new Map()
+    new Map(),
   );
   const [productsOperations, setProductsOperations] = useState<
     Array<{ operation: Prisma.OperationGetPayload<null>; parts: MapppedPart[] }>
   >([]);
 
   const [state, FormAction] = useActionState(
-    addProduct.bind(null, mappedParts, productsOperations),
-    ""
+    addProduct.bind(null, productsOperations),
+    "",
   );
 
   return {
