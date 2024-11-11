@@ -23,7 +23,7 @@ export default async function ProductPage({
           },
         },
       },
-      productOperation: {
+      ProductOperation: {
         include: {
           operation: true,
         },
@@ -38,7 +38,7 @@ export default async function ProductPage({
         <p className="text-xl">Price: {product?.price}$</p>
         <p className="text-xl">
           Total production time:{" "}
-          {product?.productOperation.reduce(
+          {product?.ProductOperation.reduce(
             (acc, it) => acc + it.operation.time,
             0
           )}{" "}
@@ -54,7 +54,7 @@ export default async function ProductPage({
         </ul>
         <p className="text-xl mt-2">Operations: (sequence: name - time)</p>
         <ul>
-          {product?.productOperation.map((operation) => (
+          {product?.ProductOperation.map((operation) => (
             <li key={operation.id}>
               {operation.sequence}: {operation.operation.name} -{" "}
               {operation.operation.time} min

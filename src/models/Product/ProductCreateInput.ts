@@ -2,6 +2,7 @@ import { z } from "zod";
 import { ProductSchema } from "./Product";
 import { Prisma } from "@prisma/client";
 import { PartCreateInputSchema } from "../Part/PartCreateInput";
+import { ProductOperationSchema } from "../ProductOperation";
 
 export const ProductCreateInputSchema = ProductSchema.omit({
   id: true,
@@ -23,6 +24,11 @@ export const ProductCreateInputSchema = ProductSchema.omit({
           quantity: z.number(),
         }),
       ),
+    })
+    .optional(),
+  ProductOperation: z
+    .object({
+      create: z.array(ProductOperationSchema),
     })
     .optional(),
 }) satisfies z.Schema<Prisma.ProductCreateInput>;

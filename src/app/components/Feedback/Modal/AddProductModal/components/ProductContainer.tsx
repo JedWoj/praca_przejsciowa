@@ -1,42 +1,43 @@
 "use client";
-import { addProduct } from "@/app/actions/add-product-form";
 import { SUCCESS_MESSAGES } from "@/app/actions/utils/messages";
 import Button from "@/app/components/UI/Button";
 import useRefreshPageAfterAction from "@/app/hooks/useRefreshPageAfterAction";
+import OrderSelection from "@/app/products/components/OrderSelection";
 import PartsSelection from "@/app/products/components/PartsSelection";
-import type { MapppedPart } from "@/app/products/utils/convertPartsToArray";
+import ProductOperationsList from "@/app/products/components/ProductOperationsList";
 import { Prisma } from "@prisma/client";
-import { useActionState, useState } from "react";
 import FormInputsGroup from "../../components/FormInputsGroup";
-import type { FormEntry } from "../../components/types";
-
-type ProductFormEntries = {
-  name: FormEntry<string>;
-  price: FormEntry<number>;
-};
+import { useAddProductState } from "../hooks/useAddProductState";
 
 type ProductContainerProps = {
   parts: Prisma.PartGetPayload<null>[];
+  operations: Prisma.OperationGetPayload<null>[];
 };
 
-export default function ProductContainer({ parts }: ProductContainerProps) {
-  const [formVal, setFormVal] = useState<ProductFormEntries>({
-    name: { label: "Name", uniqueName: "name", value: "" },
-    price: {
-      label: "Price",
-      uniqueName: "price",
-      value: 0,
-      inputProps: { type: "number" },
-    },
-  });
-  const [mappedParts, setMappedParts] = useState<Map<string, MapppedPart>>(
-    new Map()
-  );
+export default function ProductContainer({
+  parts,
+  operations,
+}: ProductContainerProps) {
+  const {
+    FormAction,
+    formVal,
+    mappedParts,
+    productsOperations,
+    setFormVal,
+    setMappedParts,
+    setProductsOperations,
+    state,
+  } = useAddProductState();
 
-  const [state, FormAction] = useActionState(
-    addProduct.bind(null, mappedParts),
-    ""
-  );
+  const handleSelection = (id: string) => {
+    setProductsOperations((prev) =>
+      prev.concat({
+        operation: operations.find((op) => op.id === id)!,
+        parts: Array.from(mappedParts.values()),
+      })
+    );
+    setMappedParts(new Map());
+  };
 
   useRefreshPageAfterAction({
     state,
@@ -47,13 +48,16 @@ export default function ProductContainer({ parts }: ProductContainerProps) {
     <div>
       <form action={FormAction} className="flex gap-4">
         <div className="flex flex-col justify-between">
-          <FormInputsGroup<ProductFormEntries>
-            formVal={formVal}
-            setFormVal={setFormVal}
-          />
+          <FormInputsGroup formVal={formVal} setFormVal={setFormVal} />
+          {!!productsOperations.length ? (
+            <ProductOperationsList operations={productsOperations} />
+          ) : null}
           <Button
-            buttonProps={{ type: "submit", style: { width: "100%" } }}
-            handleClick={() => {}}
+            buttonProps={{
+              type: "submit",
+              style: { width: "100%" },
+              disabled: !!mappedParts.size,
+            }}
           >
             Add
           </Button>
@@ -63,6 +67,12 @@ export default function ProductContainer({ parts }: ProductContainerProps) {
           selectionState={mappedParts}
           handleSelection={setMappedParts}
         />
+        {!!mappedParts.size ? (
+          <OrderSelection
+            operations={operations}
+            handleSelection={handleSelection}
+          />
+        ) : null}
       </form>
       {state}
     </div>
