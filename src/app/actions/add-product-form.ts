@@ -6,7 +6,6 @@ import { DEFAULT_ERROR_MESSAGE, SUCCESS_MESSAGES } from "./utils/messages";
 import { Prisma } from "@prisma/client";
 
 export async function addProduct(
-  parts: Map<string, MapppedPart>,
   operations: Array<{
     operation: Prisma.OperationGetPayload<null>;
     parts: MapppedPart[];
@@ -15,13 +14,27 @@ export async function addProduct(
   formData: FormData,
 ) {
   try {
+    const parts = operations.flatMap((op) => op.parts);
+    const uniqueParts = parts.reduce((acc, curr) => {
+      const existing = acc.get(curr.id);
+      if (existing) {
+        acc.set(curr.id, {
+          ...existing,
+          quantity: existing.quantity + curr.quantity,
+        });
+      } else {
+        acc.set(curr.id, curr);
+      }
+      return acc;
+    }, new Map<string, MapppedPart>());
+
     const { name, price } = Object.fromEntries(formData);
 
     const product: Prisma.ProductCreateInput = {
       name: name as string,
       price: Number(price),
       parts: {
-        create: Array.from(parts.values()).map((part) => ({
+        create: Array.from(uniqueParts.values()).map((part) => ({
           part: {
             connectOrCreate: {
               where: { id: part.id },
