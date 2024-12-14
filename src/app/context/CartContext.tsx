@@ -1,6 +1,8 @@
 "use client";
 import {
+  Dispatch,
   type PropsWithChildren,
+  SetStateAction,
   createContext,
   useCallback,
   useContext,
@@ -23,6 +25,8 @@ type CartContextType = {
   addItem: (item: Product) => void;
   removeItem: (id: Id) => void;
   clearCart: () => void;
+  setDueDate: Dispatch<SetStateAction<Date | undefined>>;
+  dueDate: Date | undefined;
 };
 
 type CartContextProps = PropsWithChildren;
@@ -31,6 +35,7 @@ const Context = createContext<CartContextType | null>(null);
 
 export default function CartContext({ children }: CartContextProps) {
   const [items, setItems] = useState<Map<Id, CartItem>>(new Map());
+  const [dueDate, setDueDate] = useState<Date>();
 
   const addItem = useCallback((item: Product) => {
     setItems((prevItems) => {
@@ -67,8 +72,10 @@ export default function CartContext({ children }: CartContextProps) {
       addItem,
       removeItem,
       clearCart,
+      dueDate,
+      setDueDate,
     }),
-    [items, addItem, removeItem, clearCart]
+    [items, addItem, removeItem, clearCart, dueDate, setDueDate]
   );
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

@@ -7,21 +7,21 @@ export type Delivery = {
 };
 
 export type ItemForDelivery = Omit<
-  Item,
+  StorageItem,
   "location" | "lastOrder" | "optimalStock"
 > & {
   orderSize: number;
   location: Location | null;
 };
 
-export type Item = {
+export type StorageItem = {
   name: string;
-  currentStock: number;
-  price: number;
-  lastOrder: string;
-  location: Location;
-  optimalStock: number;
   id: string;
+  type: "product" | "part";
+  quantity: number;
+  price: number;
+  updatedAt: Date;
+  createdAt: Date;
 };
 
 export type Storage = {

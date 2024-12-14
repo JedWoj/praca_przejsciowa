@@ -22,20 +22,20 @@ import {
   useRef,
   useState,
 } from "react";
-import type { Delivery, Item } from "../utils/types";
+import type { Delivery, StorageItem } from "../utils/types";
 
 export type TableContextType = {
-  table: Table<Item>;
+  table: Table<StorageItem>;
   order: Delivery | null;
   setOrder: Dispatch<SetStateAction<Delivery | null>>;
-  data: Item[];
+  data: StorageItem[];
 };
 
 type TableContextProps = PropsWithChildren;
 
 const Context = createContext<TableContextType | null>(null);
 
-const columnHelper = createColumnHelper<Item>();
+const columnHelper = createColumnHelper<StorageItem>();
 
 const columns = [
   {
@@ -66,26 +66,26 @@ const columns = [
     cell: (info) => info.getValue(),
     header: () => <span>Name</span>,
   }),
-  columnHelper.accessor((row) => row.currentStock, {
-    id: "currentStock",
+  columnHelper.accessor((row) => row.type, {
+    id: "type",
     cell: (info) => <i>{info.getValue()}</i>,
-    header: () => <span>Current Stock</span>,
+    header: () => <span>Type</span>,
   }),
-  columnHelper.accessor("optimalStock", {
-    id: "optimalStock",
+  columnHelper.accessor("quantity", {
+    id: "quantity",
     cell: (info) => <i>{info.getValue()}</i>,
-    header: () => <span>Optimal Stock</span>,
+    header: () => <span>Quantity</span>,
   }),
   columnHelper.accessor("price", {
     header: () => "Price",
     cell: (info) => info.renderValue(),
   }),
-  columnHelper.accessor("lastOrder", {
-    header: () => <span>Last Change</span>,
+  columnHelper.accessor("updatedAt", {
+    header: () => <span>Last Update</span>,
     minSize: 200,
   }),
-  columnHelper.accessor("location", {
-    header: "Location",
+  columnHelper.accessor("id", {
+    header: "id",
   }),
 ];
 
@@ -101,38 +101,38 @@ const TableContext = ({ children }: TableContextProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-  const [data, setData] = useState<Item[]>([]);
+  const [data, setData] = useState<StorageItem[]>([]);
   const [order, setOrder] = useState<null | Delivery>(null);
   const [storage, setStorage] = useState<null | { data: Storage[] }>(null);
 
-  const storageItems: Item[] = useMemo(
+  const storageItems: StorageItem[] = useMemo(
     () =>
       storage?.data.flatMap(
         (it) =>
           it.parts
             ?.map((it) => ({
-              currentStock: it.quantity,
+              createdAt: it.createdAt,
               id: it.id,
-              lastOrder: String(it.updatedAt),
-              location: "A1" as const,
-              name: it.id,
-              optimalStock: 100,
-              price: 100,
+              name: it.part.name,
+              price: it.part.price,
+              quantity: it.quantity,
+              type: "part",
+              updatedAt: it.updatedAt,
             }))
             .concat(
               it.products.map((prod) => ({
-                currentStock: prod.quantity,
+                createdAt: prod.createdAt,
                 id: prod.id,
-                lastOrder: String(prod.updatedAt),
-                location: "A1",
-                name: prod.id,
-                optimalStock: 100,
-                price: 100,
+                name: prod.product.name,
+                price: prod.product.price,
+                quantity: prod.quantity,
+                type: "product",
+                updatedAt: prod.updatedAt,
               }))
             ) || []
       ) ?? [],
     [storage]
-  );
+  ) as StorageItem[];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -143,7 +143,7 @@ const TableContext = ({ children }: TableContextProps) => {
     fetchData();
   }, []);
 
-  const table = useReactTable({
+  const table = useReactTable<StorageItem>({
     data: storageItems,
     columns,
     globalFilterFn: "includesString",

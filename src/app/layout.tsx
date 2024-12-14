@@ -22,7 +22,6 @@ type Route = {
 
 const ROUTS: Route[] = [
   { name: "Home", value: "/" },
-  { name: "Storage", value: "/storage" },
   { name: "Overview", value: "/overview" },
   { name: "Products", value: "/products" },
   { name: "Parts", value: "/parts" },
