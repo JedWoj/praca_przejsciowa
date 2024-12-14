@@ -1,11 +1,11 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { orderProducts } from "@/app/actions/order-products";
 import Button from "@/app/components/UI/Button";
 import { useCartContext } from "@/app/context/CartContext";
+import { useRouter } from "next/navigation";
 
 export default function OrderBtn() {
-  const { items, clearCart } = useCartContext();
+  const { items, clearCart, dueDate } = useCartContext();
 
   const router = useRouter();
 
@@ -16,15 +16,18 @@ export default function OrderBtn() {
         quantity: item.quantity,
       })),
       status: "pending",
-      orderDate: new Date(),
+      orderDate: dueDate!,
     });
     clearCart();
     router.back();
   };
 
   return (
-    <Button buttonProps={{ disabled: !items.size }} handleClick={handleClick}>
-      Order
+    <Button
+      buttonProps={{ disabled: !items.size || !dueDate }}
+      handleClick={handleClick}
+    >
+      Place an order
     </Button>
   );
 }

@@ -9,11 +9,17 @@ export const getOrder = unstable_cache(async (id: string) => {
     },
     include: {
       products: {
-        select: {
-          quantity: true,
-          product: true,
+        include: {
+          product: {
+            include: {
+              parts: true,
+              ProductOperation: { include: { operation: true } },
+            },
+          },
         },
       },
     },
   });
 });
+
+export type Order = Exclude<Awaited<ReturnType<typeof getOrder>>, null>;

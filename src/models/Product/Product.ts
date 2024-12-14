@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { PartsSchema } from "../Part/Part";
+import { ProductOperationSchema } from "../ProductOperation";
 
 export const ProductSchema = z.object({
   id: z.string().cuid(),
@@ -12,6 +13,7 @@ export const ProductSchema = z.object({
   parts: PartsSchema,
   createdAt: z.date(),
   updatedAt: z.date(),
+  ProductOperation: z.array(ProductOperationSchema),
 });
 
 export type Product = z.infer<typeof ProductSchema>;

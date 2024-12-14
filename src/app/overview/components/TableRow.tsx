@@ -1,7 +1,7 @@
 "use client";
 import { type Row, flexRender } from "@tanstack/react-table";
 import type { VirtualItem, Virtualizer } from "@tanstack/react-virtual";
-import type { Item } from "../../utils/types";
+import type { StorageItem } from "../../utils/types";
 import type { MouseEvent } from "react";
 import { useMenuContext } from "../../context/MenuContext";
 import { useTableContext } from "../../context/TableContext";
@@ -9,7 +9,7 @@ import { useTableContext } from "../../context/TableContext";
 type TableRowProps = {
   virtualRow: VirtualItem;
   rowVirtualizer: Virtualizer<HTMLDivElement, Element>;
-  row: Row<Item>;
+  row: Row<StorageItem>;
 };
 
 export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
@@ -26,25 +26,12 @@ export function TableRow({ virtualRow, rowVirtualizer, row }: TableRowProps) {
     table.setRowSelection({ [row.id]: true });
   };
 
-  const getRowColor = (row: Row<Item>) => {
+  const getRowColor = (row: Row<StorageItem>) => {
     if (row.getIsSelected()) {
       return "bg-slate-50";
     }
 
-    const percentOfOptimalValue =
-      (row.original.currentStock / row.original.optimalStock) * 100;
-
-    if (percentOfOptimalValue > 75) {
-      return "bg-lime-600";
-    } else if (percentOfOptimalValue > 50) {
-      return "bg-amber-300";
-    } else if (percentOfOptimalValue > 25) {
-      return "bg-amber-700";
-    } else if (percentOfOptimalValue > 0) {
-      return "bg-red-700";
-    } else if (percentOfOptimalValue === 0) {
-      return "bg-slate-600";
-    }
+    return row.getValue("type") === "product" ? "bg-green-300" : "bg-blue-300";
   };
 
   return (

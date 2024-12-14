@@ -7,7 +7,8 @@ type Action = {
 };
 
 const USER_ACTIONS: Action[] = [
-  { label: "Check storage state!", href: "/storage" },
+  { label: "Order products!", href: "/products" },
+  { label: "Check parts!", href: "/parts" },
   { label: "Items overview!", href: "/overview" },
 ];
 
