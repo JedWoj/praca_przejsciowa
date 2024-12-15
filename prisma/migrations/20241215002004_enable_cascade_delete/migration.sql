@@ -121,7 +121,7 @@ CREATE TABLE "StoragePart" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "ProductOperation_productId_operationId_key" ON "ProductOperation"("productId", "operationId");
+CREATE UNIQUE INDEX "ProductOperation_productId_operationId_sequence_key" ON "ProductOperation"("productId", "operationId", "sequence");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "OrderProduct_orderId_productId_key" ON "OrderProduct"("orderId", "productId");
@@ -142,7 +142,7 @@ ALTER TABLE "ProductOperation" ADD CONSTRAINT "ProductOperation_productId_fkey" 
 ALTER TABLE "ProductOperation" ADD CONSTRAINT "ProductOperation_operationId_fkey" FOREIGN KEY ("operationId") REFERENCES "Operation"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "OrderProduct" ADD CONSTRAINT "OrderProduct_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Order"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "OrderProduct" ADD CONSTRAINT "OrderProduct_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Order"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "OrderProduct" ADD CONSTRAINT "OrderProduct_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

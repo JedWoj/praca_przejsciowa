@@ -6,7 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { format } from "date-fns";
+import { addMinutes, format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useCartContext } from "@/app/context/CartContext";
 
@@ -18,7 +18,7 @@ export default function OrderCalendar() {
       <PopoverTrigger asChild>
         <Button>
           {dueDate ? (
-            format(dueDate.toISOString(), "PPP")
+            format(dueDate, "yyyy-MM-dd")
           ) : (
             <span>Set order due date</span>
           )}
@@ -31,11 +31,7 @@ export default function OrderCalendar() {
           selected={dueDate}
           onSelect={setDueDate}
           disabled={(date) =>
-            date < new Date() ||
-            date >
-              new Date(
-                new Date().setMinutes(new Date().getMinutes() + 60 * 24 * 30)
-              )
+            date < new Date() || date > addMinutes(new Date(), 60 * 24 * 30)
           }
         />
       </PopoverContent>

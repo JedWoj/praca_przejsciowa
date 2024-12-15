@@ -1,6 +1,7 @@
 import { getOrder } from "./utils/getOrder";
 import { calculateRequiredTimeToProduceProducts } from "@/app/utils/calculateRequiredTimeToProduceProducts";
 import { prepareProductsFromOrder } from "@/app/utils/prepareProductsFromOrder";
+import { format, addMinutes } from "date-fns";
 
 type OrderStatsProps = {
   id: string;
@@ -22,10 +23,11 @@ export async function OrderStats({ id }: OrderStatsProps) {
   const reqTime = calculateRequiredTimeToProduceProducts(products);
 
   const getFastestProductionCompletionDate = () => {
-    const currentDate = new Date();
-    const time = reqTime;
-    currentDate.setMinutes(currentDate.getMinutes() + time + 60 + 2);
-    return currentDate.toISOString();
+    const fastestProductionCompletionDate = addMinutes(
+      new Date(),
+      reqTime + 60
+    );
+    return format(fastestProductionCompletionDate, "yyyy-MM-dd HH:mm");
   };
 
   return (
@@ -38,6 +40,19 @@ export async function OrderStats({ id }: OrderStatsProps) {
         <p>
           Fastest production completion date:{" "}
           {getFastestProductionCompletionDate()}
+        </p>
+        <p>
+          Due date:{" "}
+          {order?.dueDate
+            ? format(order.dueDate, "yyyy-MM-dd HH:mm")
+            : "Not set"}
+        </p>
+        <p>
+          Planned components delivery:{" "}
+          {format(
+            addMinutes(order?.dueDate!, -reqTime - 60),
+            "yyyy-MM-dd HH:mm"
+          )}
         </p>
       </div>
     </div>

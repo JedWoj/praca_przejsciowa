@@ -50,7 +50,7 @@ export default async function OrdersPage() {
   console.log(reqTime);
 
   return (
-    <div className="h-[calc(100vh-49px)] flex justify-center items-center bg-blue-400">
+    <div className="h-[calc(100vh-49px)] flex justify-center items-center">
       <ul className="flex-col">
         {orders.map((order) => (
           <OrderPreview key={order.id} order={order} />
