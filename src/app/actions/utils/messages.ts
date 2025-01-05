@@ -5,6 +5,8 @@ export const SUCCESS_MESSAGES = {
   operation: "Operation added successfully!",
   acceptOrder: "Order accepted successfully!",
   rejectOrder: "Order rejected successfully!",
+  changeItem: "Item changed successfully!",
+  removeItem: "Item removed successfully!",
 } as const;
 
 export const DEFAULT_ERROR_MESSAGE = "Something went wrong!" as const;

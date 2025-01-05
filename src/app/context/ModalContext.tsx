@@ -17,9 +17,8 @@ type ModalContextType = {
 };
 
 type ModalName =
-  | "change_value"
   | "remove_item"
-  | "add_item"
+  | "change_item"
   | "order_item"
   | "make_order"
   | "add_product"

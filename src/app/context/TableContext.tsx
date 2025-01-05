@@ -29,6 +29,7 @@ export type TableContextType = {
   order: Delivery | null;
   setOrder: Dispatch<SetStateAction<Delivery | null>>;
   data: StorageItem[];
+  refetch: () => void;
 };
 
 type TableContextProps = PropsWithChildren;
@@ -104,6 +105,7 @@ const TableContext = ({ children }: TableContextProps) => {
   const [data, setData] = useState<StorageItem[]>([]);
   const [order, setOrder] = useState<null | Delivery>(null);
   const [storage, setStorage] = useState<null | { data: Storage[] }>(null);
+  const [refetchKey, setRefetchKey] = useState(0);
 
   const storageItems: StorageItem[] = useMemo(
     () =>
@@ -134,6 +136,8 @@ const TableContext = ({ children }: TableContextProps) => {
     [storage]
   ) as StorageItem[];
 
+  const refetch = () => setRefetchKey((prev) => prev + 1);
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetch("/api/storage");
@@ -141,7 +145,7 @@ const TableContext = ({ children }: TableContextProps) => {
       setStorage(res);
     };
     fetchData();
-  }, []);
+  }, [refetchKey]);
 
   const table = useReactTable<StorageItem>({
     data: storageItems,
@@ -166,6 +170,7 @@ const TableContext = ({ children }: TableContextProps) => {
     table,
     setData,
     data,
+    refetch,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

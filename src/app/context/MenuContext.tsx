@@ -63,11 +63,8 @@ const MenuContext = ({
         <ContextMenuItem action={() => displayModal("remove_item")}>
           Remove Item
         </ContextMenuItem>
-        <ContextMenuItem action={() => displayModal("change_value")}>
-          Change Value
-        </ContextMenuItem>
-        <ContextMenuItem action={() => displayModal("order_item")}>
-          Order Item
+        <ContextMenuItem action={() => displayModal("change_item")}>
+          Change Item
         </ContextMenuItem>
       </ContextMenu>
     </Context.Provider>

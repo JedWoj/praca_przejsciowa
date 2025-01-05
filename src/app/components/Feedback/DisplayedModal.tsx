@@ -1,9 +1,7 @@
 "use client";
 import { useModalContext } from "../../context/ModalContext";
 import Modal from "../UI/Modal";
-import AddItemModal from "./Modal/AddItemModal";
-import ChangeItemValueModal from "./Modal/ChangeItemValueModal";
-import OrderItemModal from "./Modal/OrderItemModal";
+import ChangeItemModal from "./Modal/ChangeItemModal";
 import RemoveItemModal from "./Modal/RemoveItemModal";
 
 export default function DisplayedModal() {
@@ -13,17 +11,11 @@ export default function DisplayedModal() {
     let component;
 
     switch (modal) {
-      case "change_value":
-        component = <ChangeItemValueModal />;
-        break;
-      case "add_item":
-        component = <AddItemModal />;
+      case "change_item":
+        component = <ChangeItemModal />;
         break;
       case "remove_item":
         component = <RemoveItemModal />;
-        break;
-      case "order_item":
-        component = <OrderItemModal />;
         break;
       default:
         component = null;
