@@ -4,6 +4,7 @@ import { calculateRequiredTimeToProduceProducts } from "@/app/utils/calculateReq
 import { calculateRequiredMaterialsFromMappedOrders } from "@/app/utils/calculateRequiredMaterialsFromMappedOrders";
 import prisma from "@/lib/db";
 import { filterMappedOrdersToBeHandled } from "@/app/utils/filterMappedOrdersToBeHandled";
+import { calculateMissingMaterialsinStorage } from "@/app/utils/calculateMissingMaterialsInStorage";
 
 export type MappedOrders = Array<{
   products: Array<{
@@ -21,6 +22,7 @@ export type MappedOrders = Array<{
 
 export async function GET() {
   const orders = await prisma.order.findMany({
+    // where: { status: "IDLE" },
     include: {
       products: {
         include: {
@@ -68,8 +70,37 @@ export async function GET() {
 
   const ordersToBeHandled = filterMappedOrdersToBeHandled(mappedOrders);
 
+  await prisma.order.updateMany({
+    where: {
+      id: {
+        in: ordersToBeHandled.map((it) => it.id),
+      },
+    },
+    data: {
+      status: "PROCESSING",
+    },
+  });
+
   const requiredMaterials =
     calculateRequiredMaterialsFromMappedOrders(ordersToBeHandled);
+
+  const currentStorage = await prisma.storage.findMany({
+    where: {
+      parts: {
+        some: {
+          id: {
+            in: requiredMaterials.map((it) => it.id),
+          },
+        },
+      },
+    },
+    include: { parts: true },
+  });
+
+  const missingMaterials = calculateMissingMaterialsinStorage(
+    requiredMaterials,
+    currentStorage
+  );
 
   return NextResponse.json({ mappedOrders });
 }
