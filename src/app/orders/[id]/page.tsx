@@ -3,10 +3,18 @@ import { OrderPreviewBtns } from "../components/OrderPreviewBtns";
 import { OrderProductsList } from "./components/OrderProductsList";
 import { OrderStats } from "./components/OrderStats";
 
+const getOrders = async () => {
+  const response = await fetch(`${process.env.BASE_URL}/api/check-orders`);
+  const data = await response.json();
+  return data;
+};
+
 export default async function OrderPage({
   params,
 }: DynamicPageProps<{ id: string }>) {
   const { id } = await params;
+
+  const data = await getOrders();
 
   return (
     <div className="h-[calc(100vh-49px)] relative bg-blue-400">
