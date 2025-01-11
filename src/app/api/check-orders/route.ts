@@ -3,6 +3,7 @@ import { calculateRequiredMaterialsFromOrder } from "@/app/utils/calculateRequir
 import { calculateRequiredTimeToProduceProducts } from "@/app/utils/calculateRequiredTimeToProduceProducts";
 import { calculateRequiredMaterialsFromMappedOrders } from "@/app/utils/calculateRequiredMaterialsFromMappedOrders";
 import prisma from "@/lib/db";
+import { filterMappedOrdersToBeHandled } from "@/app/utils/filterMappedOrdersToBeHandled";
 
 export type MappedOrders = Array<{
   products: Array<{
@@ -59,16 +60,16 @@ export async function GET() {
       id: order.id,
       totalRequiredTime: products.reduce(
         (acc, product) => acc + product.requiredTime,
-        0,
+        0
       ),
       dueDate: order.dueDate,
     };
   });
 
-  const requiredMaterials =
-    calculateRequiredMaterialsFromMappedOrders(mappedOrders);
+  const ordersToBeHandled = filterMappedOrdersToBeHandled(mappedOrders);
 
-  console.log(requiredMaterials);
+  const requiredMaterials =
+    calculateRequiredMaterialsFromMappedOrders(ordersToBeHandled);
 
   return NextResponse.json({ mappedOrders });
 }
