@@ -23,8 +23,6 @@ export default async function OrdersPage() {
     },
   });
 
-  console.log(orders);
-
   await handleOrders();
 
   const groupedOrdersByStatus = Object.groupBy(orders, ({ status }) => status);

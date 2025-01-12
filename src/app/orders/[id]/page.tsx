@@ -15,9 +15,6 @@ export default async function OrderPage({
         <OrderProductsList id={id} />
         <OrderStats id={id} />
       </section>
-      <div className="fixed bottom-5 right-1/2 translate-x-1/2">
-        <OrderPreviewBtns orderId={id} />
-      </div>
     </div>
   );
 }

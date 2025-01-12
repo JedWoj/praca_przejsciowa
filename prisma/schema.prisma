@@ -31,20 +31,18 @@ model ProductOperation {
 }
 
 model Part {
-  id                String        @id @default(cuid())
-  name              String
-  description       String?
-  timeToBeProduced  Int?
-  timeToBeDelivered Int?
-  price             Float
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
-  usedIn            ProductPart[]
-  StoragePart       StoragePart[]
+  id          String        @id @default(cuid())
+  name        String
+  price       Float
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  usedIn      ProductPart[]
+  StoragePart StoragePart[]
 }
 
 enum OrderStatus {
   IDLE
+  ORDERED
   PROCESSING
   COMPLETED
   CANCELLED

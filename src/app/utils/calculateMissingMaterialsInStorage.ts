@@ -2,25 +2,18 @@ import type { RequiredMaterial } from "./calculateRequiredMaterialsFromMappedOrd
 
 export function calculateMissingMaterialsinStorage(
   requiredMaterials: RequiredMaterial[],
-  availableMaterials: RequiredMaterial[]
+  availableMaterials: RequiredMaterial[],
 ): RequiredMaterial[] {
-  console.log("requiredMaterials", requiredMaterials);
-  console.log("availableMaterials", availableMaterials);
-
   const missingMaterials = requiredMaterials.map((requiredMaterial) => {
     const availableMaterial = availableMaterials.find(
-      (it) => it.id === requiredMaterial.id
+      (it) => it.id === requiredMaterial.id,
     );
     if (!availableMaterial) {
-      console.log("no availableMaterial", availableMaterial);
-
       return {
         id: requiredMaterial.id,
         value: requiredMaterial.value,
       };
     }
-
-    console.log("availableMaterial", availableMaterial);
 
     const neededMaterial =
       (requiredMaterial.value ?? 0) - (availableMaterial.value ?? 0);

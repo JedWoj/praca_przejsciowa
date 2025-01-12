@@ -1,6 +1,6 @@
 import type { MappedOrders } from "../api/check-orders/route";
 
-export function filterMappedOrdersToBeHandled(orders: MappedOrders) {
+export function filterMappedOrdersToOrderMaterials(orders: MappedOrders) {
   const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
   const now = new Date();
 
@@ -13,12 +13,9 @@ export function filterMappedOrdersToBeHandled(orders: MappedOrders) {
       order.dueDate.getTime() - timeToProduceOrder,
     );
     const partsDeliveryTime = new Date(
-      latestProductionStartTime.getTime() - oneDayInMilliseconds,
+      latestProductionStartTime.getTime() - oneDayInMilliseconds * 2,
     );
 
-    return (
-      (partsDeliveryTime <= now && latestProductionStartTime > now) ||
-      order.dueDate < now
-    );
+    return partsDeliveryTime <= now;
   });
 }
