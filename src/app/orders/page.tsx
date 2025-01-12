@@ -1,12 +1,6 @@
 import prisma from "@/lib/db";
 import { OrderPreview } from "./components/OrderPreview";
 
-const handleOrders = async () => {
-  const response = await fetch(`${process.env.BASE_URL}/api/check-orders`);
-  const data = await response.json();
-  return data;
-};
-
 export default async function OrdersPage() {
   const orders = await prisma.order.findMany({
     include: {
@@ -22,8 +16,6 @@ export default async function OrdersPage() {
       },
     },
   });
-
-  await handleOrders();
 
   const groupedOrdersByStatus = Object.groupBy(orders, ({ status }) => status);
 
