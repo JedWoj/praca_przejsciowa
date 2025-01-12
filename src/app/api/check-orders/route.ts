@@ -33,14 +33,6 @@ export type MappedOrders = Array<{
   status: OrderStatus;
 }>;
 
-/*
-  check if the orders are ready to be handled with status IDLE
-  if they are, update the status to ORDERED and order missing materials so they are in the storage day before production start
-  if they are not, do nothing
-  if some have status ORDERED, and have less than 1 day after time to produce to dueDate, update the status to PROCESSING
-  remove processed materials from storage
-*/
-
 export async function GET() {
   const orders = await prisma.order.findMany({
     where: {
@@ -217,6 +209,33 @@ export async function GET() {
   }
 
   const finishedOrders = getFinishedOrders(mappedOrders);
+
+  await prisma.order.updateMany({
+    where: {
+      id: {
+        in: finishedOrders.map((it) => it.id),
+      },
+    },
+    data: {
+      status: "COMPLETED",
+    },
+  });
+
+  const productsInFinishedOrders = calculateAllProductsInOrder(finishedOrders);
+
+  for (const product of productsInFinishedOrders) {
+    await prisma.storageProduct.updateMany({
+      where: {
+        storageId: "storage1",
+        productId: product.id,
+      },
+      data: {
+        quantity: {
+          decrement: product.value ?? 0,
+        },
+      },
+    });
+  }
 
   return NextResponse.json({ mappedOrders });
 }
