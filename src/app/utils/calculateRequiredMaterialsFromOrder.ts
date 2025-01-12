@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 
-export function calculateRequiredMaterials(
+export function calculateRequiredMaterialsFromOrder(
   orders: Prisma.OrderGetPayload<{
     include: {
       products: { include: { product: { include: { parts: true } } } };
@@ -25,7 +25,7 @@ export function calculateRequiredMaterials(
 
   const summedTotalPartRequirements = Object.entries(groupedParts).map(
     ([key, value]) => ({
-      name: key,
+      id: key,
       value: value?.reduce((curr, acc) => curr + acc.quantity, 0),
     }),
   );

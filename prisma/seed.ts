@@ -1,6 +1,29 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+const initialParts: Prisma.PartCreateInput[] = [
+  {
+    id: "part1",
+    name: "Part 1",
+    price: 10.0,
+  },
+  {
+    id: "part2",
+    name: "Part 2",
+    price: 20.0,
+  },
+  {
+    id: "part3",
+    name: "Part 3",
+    price: 30.0,
+  },
+  {
+    id: "part4",
+    name: "Part 4",
+    price: 40.0,
+  },
+];
+
 const initialProducts: Prisma.ProductCreateInput[] = [
   {
     name: "Product 1",
@@ -10,33 +33,11 @@ const initialProducts: Prisma.ProductCreateInput[] = [
     parts: {
       create: [
         {
-          part: {
-            connectOrCreate: {
-              where: { id: "part1" },
-              create: {
-                id: "part1",
-                name: "Part 1",
-                description: "Description for Part 1",
-                price: 10.0,
-                timeToBeDelivered: 1,
-              },
-            },
-          },
+          part: { connect: { id: "part1" } },
           quantity: 2,
         },
         {
-          part: {
-            connectOrCreate: {
-              where: { id: "part2" },
-              create: {
-                id: "part2",
-                name: "Part 2",
-                description: "Description for Part 2",
-                timeToBeProduced: 2,
-                price: 20.0,
-              },
-            },
-          },
+          part: { connect: { id: "part2" } },
           quantity: 3,
         },
       ],
@@ -50,33 +51,11 @@ const initialProducts: Prisma.ProductCreateInput[] = [
     parts: {
       create: [
         {
-          part: {
-            connectOrCreate: {
-              where: { id: "part3" },
-              create: {
-                id: "part3",
-                name: "Part 3",
-                description: "Description for Part 3",
-                timeToBeProduced: 3,
-                price: 30.0,
-              },
-            },
-          },
+          part: { connect: { id: "part3" } },
           quantity: 1,
         },
         {
-          part: {
-            connectOrCreate: {
-              where: { id: "part4" },
-              create: {
-                id: "part4",
-                name: "Part 4",
-                description: "Description for Part 4",
-                timeToBeProduced: 2,
-                price: 40.0,
-              },
-            },
-          },
+          part: { connect: { id: "part4" } },
           quantity: 4,
         },
       ],
@@ -181,6 +160,9 @@ const initialStorage: Prisma.StorageCreateInput[] = [
 ];
 
 async function main() {
+  for (const part of initialParts) {
+    await prisma.part.create({ data: part });
+  }
   for (const product of initialProducts) {
     await prisma.product.create({ data: product });
   }
