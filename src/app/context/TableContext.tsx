@@ -98,6 +98,14 @@ type Storage = Prisma.StorageGetPayload<{
   };
 }>;
 
+const checkOrdersForMRP = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/check-orders`
+  );
+  const data = await response.json();
+  return data;
+};
+
 const TableContext = ({ children }: TableContextProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState<string>("");
@@ -106,6 +114,12 @@ const TableContext = ({ children }: TableContextProps) => {
   const [order, setOrder] = useState<null | Delivery>(null);
   const [storage, setStorage] = useState<null | { data: Storage[] }>(null);
   const [refetchKey, setRefetchKey] = useState(0);
+
+  useEffect(() => {
+    const mrpInterval = setInterval(checkOrdersForMRP, 1000 * 15);
+
+    return () => clearInterval(mrpInterval);
+  }, []);
 
   const storageItems: StorageItem[] = useMemo(
     () =>
