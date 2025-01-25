@@ -33,8 +33,13 @@ type CartContextProps = PropsWithChildren;
 
 const Context = createContext<CartContextType | null>(null);
 
-export default function CartContext({ children }: CartContextProps) {
-  const [items, setItems] = useState<Map<Id, CartItem>>(new Map());
+export default function CartContext({
+  children,
+  initialItems,
+}: PropsWithChildren<{ initialItems?: Map<Id, CartItem> }>) {
+  const [items, setItems] = useState<Map<Id, CartItem>>(
+    initialItems ?? new Map()
+  );
   const [dueDate, setDueDate] = useState<Date>();
 
   const addItem = useCallback((item: Product) => {

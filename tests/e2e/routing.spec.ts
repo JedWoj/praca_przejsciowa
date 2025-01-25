@@ -3,28 +3,25 @@ import { test, expect } from "@playwright/test";
 test.describe("Routing check", () => {
   test("Navigating through pages", async ({ page }) => {
     await page.goto("/");
-    const buttons = await page.getByRole("button").all();
-    expect(buttons).toHaveLength(2);
+    const buttons = await page.getByRole("link").all();
+    expect(buttons).toHaveLength(9);
 
-    // const storageBtn = page.getByRole("button", {
-    //   name: "Check storage state",
-    // });
-    // const homePageLink = page.getByRole("link", { name: "Home" });
+    const checkParts = page.getByRole("button", {
+      name: "Check parts!",
+    });
 
-    // await homePageLink.click();
+    await checkParts.click();
+    await page.waitForURL("/parts");
+    expect(page).toHaveURL("/parts");
 
-    // await page.waitForURL("/");
+    await (await page.getByRole("link", { name: "Go to part" }).all())
+      .at(0)
+      ?.click();
 
-    // expect(page).toHaveURL("/");
+    expect(page.getByRole("heading", { name: "Part Info" })).toBeTruthy();
 
-    // await storageBtn.click();
-    // await page.waitForURL("/storage");
-    // expect(page).toHaveURL("/storage");
-
-    // await page.waitForSelector("canvas");
-
-    // const graphs = await page.getByRole("img").all();
-
-    // expect(graphs).toHaveLength(4);
+    await page.getByRole("link", { name: "Orders" }).click();
+    await page.waitForURL("/orders");
+    expect(page).toHaveURL("/orders");
   });
 });
