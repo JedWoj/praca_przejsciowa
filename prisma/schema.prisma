@@ -18,26 +18,28 @@ model Operation {
 }
 
 model ProductOperation {
-  id          String    @id @default(cuid())
-  productId   String
-  operationId String
-  sequence    Int
-  product     Product   @relation(fields: [productId], references: [id])
-  operation   Operation @relation(fields: [operationId], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id                   String                 @id @default(cuid())
+  productId            String
+  operationId          String
+  sequence             Int
+  product              Product                @relation(fields: [productId], references: [id])
+  operation            Operation              @relation(fields: [operationId], references: [id])
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  ProductOperationPart ProductOperationPart[]
 
   @@unique([productId, operationId, sequence])
 }
 
 model Part {
-  id          String        @id @default(cuid())
-  name        String
-  price       Float
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  usedIn      ProductPart[]
-  StoragePart StoragePart[]
+  id                   String                 @id @default(cuid())
+  name                 String
+  price                Float
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  usedIn               ProductPart[]
+  StoragePart          StoragePart[]
+  ProductOperationPart ProductOperationPart[]
 }
 
 enum OrderStatus {
@@ -130,4 +132,19 @@ model StoragePart {
   updatedAt DateTime @updatedAt
 
   @@unique([storageId, partId])
+}
+
+model ProductOperationPart {
+  id                 String @id @default(cuid())
+  productOperationId String
+  partId             String
+  quantity           Int
+
+  productOperation ProductOperation @relation(fields: [productOperationId], references: [id])
+  part             Part             @relation(fields: [partId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productOperationId, partId])
 }

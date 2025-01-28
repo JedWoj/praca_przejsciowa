@@ -80,7 +80,7 @@ export async function GET() {
       id: order.id,
       totalRequiredTime: products.reduce(
         (acc, product) => acc + product.requiredTime,
-        0,
+        0
       ),
       dueDate: order.dueDate,
       status: order.status,
@@ -88,7 +88,7 @@ export async function GET() {
   });
 
   const ordersToOrderMaterials = filterMappedOrdersToOrderMaterials(
-    mappedOrders.filter((order) => order.status === "IDLE"),
+    mappedOrders.filter((order) => order.status === "IDLE")
   );
 
   await prisma.order.updateMany({
@@ -103,7 +103,7 @@ export async function GET() {
   });
 
   const requiredMaterials = calculateRequiredMaterialsFromMappedOrders(
-    ordersToOrderMaterials,
+    ordersToOrderMaterials
   );
 
   const currentStorage = await prisma.storage.findMany({
@@ -121,7 +121,7 @@ export async function GET() {
 
   const missingMaterials = calculateMissingMaterialsinStorage(
     requiredMaterials,
-    currentStorage,
+    currentStorage
   );
 
   for (const material of missingMaterials) {
@@ -153,8 +153,8 @@ export async function GET() {
 
   const ordersToBeProcessed = filterMappedOrdersToBeHandled(
     mappedOrders.filter((order) =>
-      ordersWithOrderedParts.some((it) => it.id === order.id),
-    ),
+      ordersWithOrderedParts.some((it) => it.id === order.id)
+    )
   );
 
   await prisma.order.updateMany({
